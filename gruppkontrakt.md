@@ -1,8 +1,8 @@
-# 🤝 Gruppkontrakt: [TEAMNAMN] TBA
+# 🤝 Gruppkontrakt: Hero Component One
 
-**Projekt:** [Projektnamn] TBA
+**Projekt:** Emergency Store
 **Period:** 4-5 veckor (v. 13 - v. 17)  
-**Motto:** Preliminärt: Lärande framför prestige? TBA
+**Motto:** Preliminärt: Vi förverkligar orimlig planering 🌟
 
 ---
 
@@ -12,7 +12,7 @@ För att undvika missförstånd kring förväntningar har vi kommit överens om 
 * **Daily Standup:** Vi ses varje dag kl. **[09:15]** via **[Teams]**. Max 15 minuter. "Det här har jag gjort, det här ska jag göra, det här är mina blockers"
 * **Kärntid:** Vi förväntas vara tillgängliga för samarbete och frågor mellan kl. **[08:00]** och **[17:00]**. Vi taggar personer när de behöver nås specifikt.
 * **Frånvaro:** Om någon blir sjuk eller får förhinder meddelas gruppen i **[Teams]** senast kl. **[08:30]** om möjligt, annars så fort som möjligt.
-* **Ambitionsnivå:** (T.ex. "Vi siktar på att klara alla krav med hög kodkvalitet" eller "Vi prioriterar att lära oss nya tekniker även om det tar längre tid"). TBA
+* **Ambitionsnivå:** "Det viktigaste är gemensam utveckling, gott samarbete och att vi får lära oss nya tekniker på egen hand samt av varandra."
 
 ---
 
@@ -23,7 +23,7 @@ Vi jobbar strukturerat för att behålla överblicken:
 * **Sprint Planning:** Varje måndag kl. **[9:15]** går vi igenom backloggen och fördelar uppgifter. Längre möte än 15 minuter på måndagar är alltså OK.
 * **Retrospective:** Varje fredag kl **[9:15** har vi en sprint retrospective efter dagens standup. Längre möte är även här OK.
 * **Issues:** Inget arbete påbörjas utan en tillhörande Issue på GitHub. 
-    * Varje Issue ska ha en tydlig beskrivning och en "Definition of Done".
+    * Varje Issue ska ha en tydlig beskrivning, bestå av Epic och Sub-issues samt en "Definition of Done".
 * **Projektbräde:** Vi använder **[GitHub Projects]** och håller statusen (Backlog, To Do, In Progress, Review, Done) uppdaterad i realtid.
 
 ---
