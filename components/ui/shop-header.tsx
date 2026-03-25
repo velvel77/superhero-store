@@ -8,7 +8,7 @@ export default function ShopHeader() {
         <div className="flex justify-between p-4 w-full max-w-260 items-center">
           <section className="flex items-center gap-1">
             <Zap className="size-6 text-white bg-(--color-effect-red) p-1 rounded-sm border border-white " />
-            <h1 className="text-white font-bold italic">Hero Vault</h1>
+            <h1 className="text-white font-bold uppercase italic">Hero Vault</h1>
           </section>
 
           {/* NAVIGATION */}
