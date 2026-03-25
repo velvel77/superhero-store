@@ -9,9 +9,9 @@ const stats = [
 
 export default function ShopBanner() {
   return (
-    <section className="relative flex items-center h-140">
+    <section className="relative flex items-center border-b-2 border-white h-140">
       <Image
-        className="absolute -z-10 w-full object-cover bg-cover border-b-2 border-white h-140"
+        className="absolute -z-10 w-full object-cover bg-cover  h-140"
         src={'/hero-landing.jpg'}
         alt="A caped hero standing on a rooftop, looking out over a city towards a lightningstorm in the distance"
         width={1920}
@@ -20,10 +20,10 @@ export default function ShopBanner() {
       {/* Benday dots overlay on image*/}
       <div className="absolute inset-0 benday-dots z-10" aria-hidden="true"></div>
 
-      {/* Gradient overlat on image */}
+      {/* Gradient overlay on image */}
       <div className="absolute inset-0 bg-linear-to-r from-(--color-effect-blue) via-(--color-effect-blue)/85 to-(--color-effect-blue)/40"></div>
 
-      {/* Info on image */}
+      {/* Info overlay on image */}
       <div className="flex flex-col p-4 gap-4 w-full max-w-260 mx-auto z-10">
         <span className="px-4 tracking-[.2rem] text-[.6rem] uppercase text-(--color-effect-red)">
           /// Kinetic voltage collection - 2026 ///
@@ -38,6 +38,8 @@ export default function ShopBanner() {
             Premium heroic equipment & tactical gear for the modern vigilante
           </small>
         </div>
+
+        {/* Buttons */}
         <div className="text-white italic font-bold flex gap-2 px-4">
           <button className="group hover:cursor-pointer uppercase bg-(--color-effect-red) flex gap-2 p-4 border-2 border-white">
             <Zap className="" /> Shop Now{' '}
