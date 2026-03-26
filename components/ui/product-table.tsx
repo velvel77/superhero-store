@@ -10,6 +10,7 @@ import {
 import { getProductsFromParams } from "@/lib/db";
 import { ProductActions } from "@/components/ui/delete-actions";
 import { API_URL } from "@/lib/config";
+import { getProducts } from "@/lib/queries/products";
 
 const thStyle = "p-4 text-sm font-semibold text-gray-500";
 const tdStyle =
@@ -33,27 +34,19 @@ function titleCaseWord(word: string) {
   return word[0].toUpperCase() + word.substring(1).toLowerCase();
 }
 
-export default async function ProductTable({searchParams, total}: {searchParams: Promise<{ [key: string]: string | string[] | undefined}>; total: number}) {
+export default async function ProductTable({ searchParams, total }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }>; total: number }) {
   const { page = "1", limit = "5", q = "" } = await searchParams;
 
-  const totalPages = Math.ceil((total)/5);
+  const totalPages = Math.ceil((total) / 5);
 
   const currentLimit = getSearchParamsAsString(limit);
   const currentPage = getSearchParamsAsString(page);
   const currentQuery = getSearchParamsAsString(q);
   console.log(currentLimit, currentPage, q);
 
-  
-    const { products, pages } = await getProductsFromParams(
-    currentLimit ?? "",
-    currentPage ?? "",
-    currentQuery ?? "",
-  );
-  
 
-  
-  const categories: Category[] = await fetch(`${API_URL}/categories`)
-    .then((res) => res.json());
+  const products = await getProducts();
+
 
   return (
     <div className="border border-gray-300 rounded-2xl">
@@ -79,53 +72,47 @@ export default async function ProductTable({searchParams, total}: {searchParams:
                     unoptimized={true}
                     width={50}
                     height={50}
-                    src={product.thumbnail}
+                    src={product.image_url || "https://placehold.co/50x50"}
                   ></Image>
                   <div>
                     <span className="block font-medium">{product.title}</span>
                     <span className="block font-normal text-gray-400 text-sm">
-                      {`SKU: ${product.sku}`}
+                      {`SKU: ${product.id}`}
                     </span>
                   </div>
                 </div>
               </td>
 
 
-              <td className={`${tdStyle}`}>
-                {
-                  categories.find(cat => cat.id === product.categoryId)?.name
-                  ?? titleCaseWord(product.tags![0])
-                  ?? ""
-                }
-              </td>
+              <td className={`${tdStyle}`}>{product.rarity}</td>
               <td className={`${tdStyle}`}> {`${product.price} kr`}</td>
               <td className={`${tdStyle}`}>{product.stock}</td>
-         
-            <td
-              className={`${tdStyle} ${getColourFromAvailabilityStatus(product.stock ?? 0)}`}
-            >
-              {(product.stock ?? 0) === 0
-                ? "Out of Stock"
-                : (product.stock ?? 0) < 45
-                ? "Low Stock"
-                : "In Stock"}
-            </td>
+
+              <td
+                className={`${tdStyle} ${getColourFromAvailabilityStatus(product.stock ?? 0)}`}
+              >
+                {(product.stock ?? 0) === 0
+                  ? "Out of Stock"
+                  : (product.stock ?? 0) < 45
+                    ? "Low Stock"
+                    : "In Stock"}
+              </td>
               <td className={`${tdStyle}`}>
-              
+
                 <Link href={`/products/edit/${product.id}`}>
                   <button type="button" className="mr-1">
                     <FilePenLine color="purple" size={24} />
                   </button>
                 </Link>
 
-                 <ProductActions id={String(product.id)} />
+                <ProductActions id={String(product.id)} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="p-4 bg-gray-50 border-t border-t-gray-300 rounded-b-2xl">
-        <ProductTablePagination totalPages={pages}></ProductTablePagination>
+        {/* <ProductTablePagination totalPages={pages}></ProductTablePagination> */}
       </div>
     </div>
   );
