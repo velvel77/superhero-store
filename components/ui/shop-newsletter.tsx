@@ -12,7 +12,7 @@ export default function ShopNewsLetter() {
           </div>
         </div>
         <form className="flex border-2 border-white/80" action="">
-          <input className="outline-0 p-2 text-sm text-white" type="email" placeholder="hero@email.com" />
+          <input className="outline-0 p-2 text-sm text-white" required type="email" placeholder="hero@email.com" />
           <button
             className="p-2 flex items-center gap-2 hover:bg-white/90 bg-white text-(--color-effect-red)"
             type="submit"
