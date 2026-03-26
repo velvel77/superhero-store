@@ -25,8 +25,8 @@ export default function SearchWidget() {
   };
 
   return (
-    <section className="flex bg-white rounded-2xl p-3 gap-10 border border-gray-300 items-center">
-      <div className="flex gap-3 relative w-full p-1.5 border border-gray-300 rounded-xl focus-within:border-purple-700 focus-within:border">
+    <section className="flex bg-basic-800 rounded-2xl p-3 gap-10 border border-ui-border items-center">
+      <div className="flex gap-3 relative w-full p-1.5 border border-ui-border rounded-xl focus-within:border-primary-500 focus-within:border">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
         <input
           type="text"
@@ -38,7 +38,7 @@ export default function SearchWidget() {
         />
       </div>
 
-      <div className="flex p-1.5 border border-gray-300 rounded-xl">
+      <div className="flex p-1.5 border border-ui-border rounded-xl">
         <button
           className="flex whitespace-nowrap gap-4 px-2 items-center"
           type="button"
@@ -48,7 +48,7 @@ export default function SearchWidget() {
         </button>
       </div>
 
-      <div className="flex p-1.5 border border-gray-300 rounded-xl">
+      <div className="flex p-1.5 border border-ui-border rounded-xl">
         <button
           className="flex whitespace-nowrap gap-4 px-2 items-center"
           type="button"
@@ -58,9 +58,9 @@ export default function SearchWidget() {
         </button>
       </div>
 
-      <div className="flex p-1.5 border border-gray-300 rounded-xl">
+      <div className="flex p-1.5 border border-ui-border rounded-xl">
         <button className="flex gap-2 px-2 items-center" type="button">
-          <Funnel className="w-4 h-4 fill-black stroke-black" />
+          <Funnel className="w-4 h-4 fill-basic-100 stroke-basic-100" />
           Filter
         </button>
       </div>

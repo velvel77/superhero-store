@@ -1,34 +1,55 @@
 @import "tailwindcss";
 
-/* @theme { */
-:root{
-  /* ── Brand ───────────────────────── */
-  --color-primary:        #5b21b6; /* purple-800 */
+@theme {
+  /* ================= PRIMARY (YELLOW / ENERGY) ================= */
+  --color-primary-100: #fff9db;
+  --color-primary-300: #ffe066;
+  --color-primary-400: #ffd43b;
+  --color-primary-500: #ffcc00; /* main yellow */
 
-  /* ── Text ────────────────────────── */
-  --color-text-strong:    #000000; /* black      */
-  --color-text-body:      #374151; /* gray-700   */
-  --color-text-secondary: #4b5563; /* gray-600   */
-  --color-text-muted:     #6b7280; /* gray-500   */
-  --color-text-faint:     #9ca3af; /* gray-400   */
-  --color-text-inverted:  #ffffff; /* white      */
+  /* ================= SECONDARY (RED / ACTION) ================= */
+  --color-secondary-100: #ffe3e3;
+  --color-secondary-200: #ffc9c9;
+  --color-secondary-500: #dc2626; /* strong red */
+  --color-secondary-600: #b91c1c;
 
-  /* ── Backgrounds ─────────────────── */
-  --color-bg:             #ffffff; /* white      */
-  --color-bg-muted:       #f9fafb; /* gray-50    */
 
-  /* ── Border ──────────────────────── */
-  --color-border:         #d1d5db; /* gray-300   */
 
-  /* ── Status ──────────────────────── */
-  --color-success:        #22c55e; /* green-500  */
-  --color-warning:        #f97316; /* orange-500 */
-  --color-danger:         #ef4444; /* red-500    */
+  /* ================= BASIC (DARK THEME) ================= */
+  --color-basic-100: #f8f9fa;
+  --color-basic-200: #e9ecef;
+  --color-basic-300: #adb5bd;
+  --color-basic-400: #868e96;
+
+  --color-basic-700: #1c1f26; /* cards */
+  --color-basic-800: #14171c; /* surfaces */
+  --color-basic-900: #0b0f14; /* main background */
+
+  /* ================= WARNING ================= */
+  --color-warning-500: #ff4d4f;
+
+  /* ================= GOLD / PREMIUM ================= */
+  --color-info-brown-100: #fff3bf;
+  --color-info-brown-500: #c9a227;
+  --color-info-brown-900: #7a5c00;
+
+  /* ================= SOFT YELLOW ================= */
+  --color-info-yellow-100: #fff9db;
+  --color-info-yellow-200: #fff3bf;
+
+  /* ================= TECH BLUE (ACCENT) ================= */
+  --color-info-blue-100: #e7f0ff;
+  --color-info-blue-500: #4dabf7;
+
+  /* ================= BORDER (DARK THEME) ================= */
+    --color-ui-border: #232833; /* subtle default border */
+    --color-ui-border-strong: #2e3440; /* stronger borders (cards, sections) */
 }
-
 
 body {
   font-family: var(--font-inter); 
+  background-color: var(--color-basic-900);
+  color: var(--color-basic-100);
 }
 
 button {
@@ -38,38 +59,45 @@ button {
 
 
 
-/* 
 
+
+/* @theme { */
 :root {
-  --color-body-bg: #F9FAFB;
-  --color-accent: #764994;
-  --color-accent-hover: #5B3276;
-  --color-accent-soft: #F2DBFF;
-  --color-danger: #E1456C;
-  --color-danger-soft: #FEE2F7;
-  --color-warning: #C2440F;
-  --color-warning-soft: #FFEDD5;
-  --color-success: #238848;
-  --color-success-soft: #DCFCE6;
+  /* ── Brand ───────────────────────── */
+  --color-primary: #5b21b6;
+  /* purple-800 */
+
+  /* ── Text ────────────────────────── */
+  --color-text-strong: #000000;
+  /* black      */
+  --color-text-body: #374151;
+  /* gray-700   */
+  --color-text-secondary: #4b5563;
+  /* gray-600   */
+  --color-text-muted: #6b7280;
+  /* gray-500   */
+  --color-text-faint: #9ca3af;
+  /* gray-400   */
+  --color-text-inverted: #ffffff;
+  /* white      */
+
+  /* ── Backgrounds ─────────────────── */
+  --color-bg: #ffffff;
+  /* white      */
+  --color-bg-muted: #f9fafb;
+  /* gray-50    */
+
+  /* ── Border ──────────────────────── */
+  --color-border: #d1d5db;
+  /* gray-300   */
+
+  /* ── Status ──────────────────────── */
+  --color-success: #22c55e;
+  /* green-500  */
+  --color-warning: #f97316;
+  /* orange-500 */
+  --color-danger: #ef4444;
+  /* red-500    */
 }
 
-@theme inline {
-  --color-background: var(--color-body-bg);
-  --color-accent: var(--color-accent);
-  --color-accent-hover: var(--color-accent-hover);
-  --color-accent-soft: var(--color-accent-soft);
-  --color-danger: var(--color-danger);
-  --color-danger-soft: var(--color-danger-soft);
-  --color-warning: var(--color-warning);
-  --color-warning-soft: var(--color-warning-soft);
-  --color-success: var(--color-success);
-  --color-success-soft: var(--color-success-soft);
-}
 
-body {
-  background-color: var(--color-body-bg);
-}
-
-button {
-  cursor: pointer;
-} */

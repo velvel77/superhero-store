@@ -8,7 +8,7 @@ import { useState } from "react";
 const NavItem = ({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) => {
   return (
     <Link href={href}>
-      <li className="flex flex-row items-center gap-4 hover:bg-purple-800 hover:text-white p-2 rounded-md">
+      <li className="flex flex-row items-center gap-4 hover:bg-primary-500 hover:text-basic-900 p-2 rounded-md">
         {icon}
         {label}
       </li>
@@ -27,13 +27,13 @@ export default function Sidebar() {
     { href: "/settings", icon: <Settings width={18} height={18}/>, label: "Settings" },
   ];
   return (
-    <section className="flex flex-col gap-6 sticky left-0 top-0 h-screen shadow-md border-r  border-gray-300">
-      <header className="p-6 pb-2 border-b  border-gray-300 ">
-        <h1 className="text-gray-900 font-bold text-2xl mb-2">Future Store</h1>
-        <span className="text-gray-500">Admin Panel</span>
+    <section className="flex flex-col gap-6 sticky left-0 top-0 h-screen shadow-md border-r border-ui-border">
+      <header className="p-6 pb-2 border-b border-ui-border">
+        <h1 className="text-basic-100 font-bold text-2xl mb-2">Future Store</h1>
+        <span className="text-basic-300">Admin Panel</span>
       </header>
       <nav className="p-6 flex-1">
-        <ul className="flex flex-col gap-4 text-gray-600 text-sm">
+        <ul className="flex flex-col gap-4 text-basic-300 text-sm">
           {links.map((link) => (
             <NavItem
               key={link.href}
@@ -44,21 +44,21 @@ export default function Sidebar() {
           ))}
         </ul>
       </nav>
-      <footer className="p-6 border-t border-gray-300">
-        <button type="button" className={`hover:bg-gray-100 p-4 rounded-md flex flex-row gap-2 items-center text-left cursor-pointer relative ${isProfileDropdownOpen ? 'bg-gray-200 hover:bg-gray-200' : ''}`} onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}>
+      <footer className="p-6 border-t border-ui-border">
+        <button type="button" className={`hover:bg-basic-800 p-4 rounded-md flex flex-row gap-2 items-center text-left cursor-pointer relative ${isProfileDropdownOpen ? 'bg-basic-800 hover:bg-basic-800' : ''}`} onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}>
         {isProfileDropdownOpen && (
              <ProfileDropdown/>
         )}
         <User
           height={52}
           width={52}
-          className={`bg-purple-800 rounded-full p-3 text-white`}
+          className={`bg-primary-500 rounded-full p-3 text-basic-900`}
         />
         <div className="flex flex-col">
-          <span className="text-sm font-semibold text-gray-700">
+          <span className="text-sm font-semibold text-basic-300">
             Admin user
           </span>
-          <span className="text-gray-500 text-xs">admin@futurestore.com</span>
+          <span className="text-basic-400 text-xs">admin@futurestore.com</span>
         </div>
         </button>
       </footer>
