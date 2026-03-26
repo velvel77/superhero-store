@@ -5,15 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "mock-server": "json-server --watch server/products.json --middlewares server/middleware.js --port 4000",
-    "dev:full": "concurrently \"npm run dev\" \"npm run mock-server\"",
+    "dev:full": "concurrently \"npm run dev\" \"npm run mock-server\" \"npm run dev --prefix api\"",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
+    "next-auth": "^4.24.13",
+    "pg": "^8.20.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hot-toast": "^2.6.0"
@@ -21,12 +25,16 @@
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/node": "^20",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "concurrently": "^9.2.1",
     "json-server": "^0.17.4",
+    "supabase": "^2.83.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
