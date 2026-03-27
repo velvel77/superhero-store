@@ -55,13 +55,14 @@ export default function ShopCategories() {
               href={'/'}
             >
               <Image
-                className="object-cover hover:scale-110 transition-transform duration-500"
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
                 src={item.image}
                 alt={item.name}
                 width={500}
                 height={500}
                 loading="lazy"
               />
+              <div className="absolute inset-0 bg-linear-to-t from-(--color-effect-blue) via-(--color-effect-blue)/40 to-transparent"></div>
               <span className="absolute bottom-4 left-4">
                 <small className={`uppercase  ${item.textColor}`}>{item.count} items</small>
                 <h3 className="text-white font-bold italic">{item.name}</h3>
