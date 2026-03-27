@@ -11,16 +11,16 @@ import { getProductsFromParams } from "@/lib/db";
 import { ProductActions } from "@/components/ui/delete-actions";
 import { API_URL } from "@/lib/config";
 
-const thStyle = "p-4 text-sm font-semibold text-gray-500";
+const thStyle = "p-4 text-sm font-semibold text-basic-300";
 const tdStyle =
-  "border-t border-gray-300 text-center p-4 text-ellipsis truncate";
+  "border-t border-ui-border text-center p-4 text-ellipsis truncate";
 
 
 const getColourFromAvailabilityStatus = (
   stock: number,
 ): string => {
   if (stock === 0) {
-    return "text-red-500";
+    return "text-secondary-500";
   } else if ((stock ?? 0) < 45) {
     return "text-orange-500";
   } else {
@@ -56,9 +56,9 @@ export default async function ProductTable({searchParams, total}: {searchParams:
     .then((res) => res.json());
 
   return (
-    <div className="border border-gray-300 rounded-2xl">
+    <div className="border border-ui-border rounded-2xl">
       <table className="w-full overflow-hidden rounded-2xl table-fixed">
-        <thead className="bg-gray-50">
+        <thead className="bg-basic-700">
           <tr className="">
             <th className={`${thStyle} w-[30%]`}>Product</th>
             <th className={`${thStyle}`}>Category</th>
@@ -70,7 +70,7 @@ export default async function ProductTable({searchParams, total}: {searchParams:
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product.id} className="bg-white">
+            <tr key={product.id} className="bg-basic-800">
               <td className={`${tdStyle} text-start`}>
                 <div className="flex">
                   <Image
@@ -83,7 +83,7 @@ export default async function ProductTable({searchParams, total}: {searchParams:
                   ></Image>
                   <div>
                     <span className="block font-medium">{product.title}</span>
-                    <span className="block font-normal text-gray-400 text-sm">
+                    <span className="block font-normal text-basic-300 text-sm">
                       {`SKU: ${product.sku}`}
                     </span>
                   </div>
@@ -114,7 +114,7 @@ export default async function ProductTable({searchParams, total}: {searchParams:
               
                 <Link href={`/products/edit/${product.id}`}>
                   <button type="button" className="mr-1">
-                    <FilePenLine color="purple" size={24} />
+                    <FilePenLine color="yellow" size={24} />
                   </button>
                 </Link>
 
@@ -124,7 +124,7 @@ export default async function ProductTable({searchParams, total}: {searchParams:
           ))}
         </tbody>
       </table>
-      <div className="p-4 bg-gray-50 border-t border-t-gray-300 rounded-b-2xl">
+      <div className="p-4 bg-basic-700 border-t border-t-border rounded-b-2xl">
         <ProductTablePagination totalPages={pages}></ProductTablePagination>
       </div>
     </div>
