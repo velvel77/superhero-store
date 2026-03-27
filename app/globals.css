@@ -3,7 +3,7 @@
 /* @theme { */
 :root {
   /* ── Brand ───────────────────────── */
-  --color-primary:        #5b21b6; /* purple-800 */
+  --color-primary: #5b21b6; /* purple-800 */
 
   /* ── Text ────────────────────────── */
   --color-text-strong: #000000; /* black      */
@@ -31,6 +31,7 @@
   --color-effect-yellow: #fcdb1d;
   --color-effect-benday: #f5f2eb0f;
   --color-effect-gray: #282c33;
+  --color-effect-light-blue: #4d80e6;
 }
 
 @utility icon-hover {
@@ -65,6 +66,42 @@
   }
 }
 
+@utility testimonial-hover {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-effect-light-blue);
+    box-shadow: 0px 0px 15px var(--color-effect-light-blue);
+  }
+}
+
+@utility glow-blue {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-effect-light-blue);
+    box-shadow: 0px 0px 15px var(--color-effect-light-blue);
+  }
+}
+
+@utility glow-red {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-effect-red);
+    box-shadow: 0px 0px 15px var(--color-effect-red);
+  }
+}
+
+@utility glow-yellow {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-effect-yellow);
+    box-shadow: 0px 0px 15px var(--color-effect-yellow);
+  }
+}
+
 body {
   font-family: var(--font-inter);
 }
@@ -72,9 +109,6 @@ body {
 button {
   cursor: pointer;
 }
-
-
-
 
 /* 
 
