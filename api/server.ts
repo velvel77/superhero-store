@@ -7,7 +7,7 @@ import statsRouter from "./routes/stats.js";
 import superheroRouter from "./routes/superheroes.js";
 
 const app = express();
-const PORT = 5001;
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
