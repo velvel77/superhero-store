@@ -3,6 +3,8 @@ import express from "express";
 import usersRouter from "./routes/users.js";
 import productsRouter from "./routes/products.js";
 import categoryRouter from "./routes/categories.js";
+import statsRouter from "./routes/stats.js";
+import superheroRouter from "./routes/superheroes.js";
 
 const app = express();
 const PORT = 5001;
@@ -14,6 +16,8 @@ app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/categories", categoryRouter);
+app.use("/stats", statsRouter);
+app.use("/superheroes", superheroRouter)
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         const { rows } = await pool.query(
-            `SELECT * FROM categories ORDER BY id DESC`
+            `SELECT * FROM categories ORDER BY id`
         );
         res.json(rows);
         res.json({ message: "Category route works" });
