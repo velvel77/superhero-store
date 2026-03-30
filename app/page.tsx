@@ -19,7 +19,7 @@ export default async function Home(params: PageProps<"/">) {
     <main className="flex flex-row min-h-screen">
       <Sidebar />
 
-      <section className="flex flex-col w-full gap-4 bg-gray-100">
+      <section className="flex flex-col w-full gap-4 bg-basic-900">
         <Header />
         <div className="pr-4 pl-4 pb-4 flex flex-col gap-4">
           <InventoryWidget />
