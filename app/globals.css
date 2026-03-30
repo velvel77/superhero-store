@@ -52,40 +52,8 @@
   --color-rarity-rare: #0070dd;
   --color-rarity-epic: #a335ee;
   --color-rarity-legendary: #ff8000;
-}
 
-body {
-  font-family: var(--font-inter);
-  background-color: var(--color-basic-900);
-  color: var(--color-basic-100);
-}
-
-/* @theme { */
-:root {
-  /* ── Brand ───────────────────────── */
-  --color-primary: #5b21b6; /* purple-800 */
-
-  /* ── Text ────────────────────────── */
-  --color-text-strong: #000000; /* black      */
-  --color-text-body: #374151; /* gray-700   */
-  --color-text-secondary: #4b5563; /* gray-600   */
-  --color-text-muted: #6b7280; /* gray-500   */
-  --color-text-faint: #9ca3af; /* gray-400   */
-  --color-text-inverted: #ffffff; /* white      */
-
-  /* ── Backgrounds ─────────────────── */
-  --color-bg: #ffffff; /* white      */
-  --color-bg-muted: #f9fafb; /* gray-50    */
-
-  /* ── Border ──────────────────────── */
-  --color-border: #d1d5db; /* gray-300   */
-
-  /* ── Status ──────────────────────── */
-  --color-success: #22c55e; /* green-500  */
-  --color-warning: #f97316; /* orange-500 */
-  --color-danger: #ef4444; /* red-500    */
-
-  /* ── Effect colors ──────────────────────── */
+  /* ================= EFFECT COLORS ================= */
   --color-effect-red: #e62e2e;
   --color-effect-blue: #161a1e;
   --color-effect-yellow: #fcdb1d;
@@ -95,6 +63,13 @@ body {
 
   --color-effect-gray-20: #5a5a5a2c;
   --color-effect-dark-20: #2e2e2e17;
+  --color-effect-dark: #29292c;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--color-basic-900);
+  color: var(--color-basic-100);
 }
 
 @utility icon-hover {
@@ -172,6 +147,15 @@ body {
   &:hover {
     border-color: var(--color-effect-yellow);
     box-shadow: 0px 0px 15px var(--color-effect-yellow);
+  }
+}
+
+@utility focus-red {
+  transition: all 100ms ease-in;
+
+  &:focus {
+    border-color: var(--color-effect-red);
+    box-shadow: 0px 0px 8px var(--color-effect-red);
   }
 }
 
