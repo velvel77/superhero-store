@@ -47,7 +47,7 @@ export default function ShopCategories() {
           <small className="px-4 text-(--color-text-muted)">Browse by division</small>
         </div>
 
-        <div className="gap-6 place-items-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4">
+        <div className="gap-6 place-items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 p-4">
           {categories.map((item) => (
             <Link
               className={`group relative overflow-hidden aspect-square grid border-2 ${item.accent}`}
