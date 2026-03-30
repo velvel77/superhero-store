@@ -13,7 +13,9 @@
   --color-secondary-500: #dc2626; /* strong red */
   --color-secondary-600: #b91c1c;
 
-
+  /* ================= BASIC ================= */
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
 
   /* ================= BASIC (DARK THEME) ================= */
   --color-basic-100: #f8f9fa;
@@ -42,15 +44,22 @@
   --color-info-blue-500: #4dabf7;
 
   /* ================= BORDER (DARK THEME) ================= */
-    --color-ui-border: #232833; /* subtle default border */
-    --color-ui-border-strong: #2e3440; /* stronger borders (cards, sections) */
+  --color-ui-border: #232833; /* subtle default border */
+  --color-ui-border-strong: #2e3440; /* stronger borders (cards, sections) */
+
+  /* ================= GEAR RARITY ================= */
+  --color-rarity-uncommon: #1eff00;
+  --color-rarity-rare: #0070dd;
+  --color-rarity-epic: #a335ee;
+  --color-rarity-legendary: #ff8000;
 }
 
 body {
-  font-family: var(--font-inter); 
+  font-family: var(--font-inter);
   background-color: var(--color-basic-900);
   color: var(--color-basic-100);
 }
+
 /* @theme { */
 :root {
   /* ── Brand ───────────────────────── */
@@ -83,6 +92,9 @@ body {
   --color-effect-benday: #f5f2eb0f;
   --color-effect-gray: #282c33;
   --color-effect-light-blue: #4d80e6;
+
+  --color-effect-gray-20: #5a5a5a2c;
+  --color-effect-dark-20: #2e2e2e17;
 }
 
 @utility icon-hover {
@@ -105,6 +117,16 @@ body {
 @utility benday-dots {
   background-image: radial-gradient(var(--color-effect-benday) 1px, transparent 1px);
   background-size: 8px 8px;
+}
+
+@utility diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    var(--color-effect-gray-20) 4px,
+    var(--color-effect-dark-20) 5px
+  );
 }
 
 @utility catalog-hover {
@@ -156,44 +178,3 @@ body {
 button {
   cursor: pointer;
 }
-
-/* @theme { */
-:root {
-  /* ── Brand ───────────────────────── */
-  --color-primary: #5b21b6;
-  /* purple-800 */
-
-  /* ── Text ────────────────────────── */
-  --color-text-strong: #000000;
-  /* black      */
-  --color-text-body: #374151;
-  /* gray-700   */
-  --color-text-secondary: #4b5563;
-  /* gray-600   */
-  --color-text-muted: #6b7280;
-  /* gray-500   */
-  --color-text-faint: #9ca3af;
-  /* gray-400   */
-  --color-text-inverted: #ffffff;
-  /* white      */
-
-  /* ── Backgrounds ─────────────────── */
-  --color-bg: #ffffff;
-  /* white      */
-  --color-bg-muted: #f9fafb;
-  /* gray-50    */
-
-  /* ── Border ──────────────────────── */
-  --color-border: #d1d5db;
-  /* gray-300   */
-
-  /* ── Status ──────────────────────── */
-  --color-success: #22c55e;
-  /* green-500  */
-  --color-warning: #f97316;
-  /* orange-500 */
-  --color-danger: #ef4444;
-  /* red-500    */
-}
-
-

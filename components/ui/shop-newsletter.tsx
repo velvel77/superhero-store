@@ -2,7 +2,7 @@ import { Zap, Send } from 'lucide-react';
 
 export default function ShopNewsLetter() {
   return (
-    <section className="flex justify-between border-b-2 border-white bg-(--color-effect-red) px-4 py-16">
+    <section className="diagonal-stripes flex justify-between border-b-2 border-white bg-(--color-effect-red) px-4 py-16">
       <div className="flex justify-between w-full max-w-260 mx-auto">
         <div className="flex items-center gap-2">
           <Zap className="text-white border border-white p-2 size-10 rounded-sm" />
