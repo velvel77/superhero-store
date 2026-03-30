@@ -3,20 +3,20 @@ import Link from 'next/link';
 
 export default function ShopFooter() {
   return (
-    <footer className="p-4 bg-(--color-effect-blue) benday-dots">
+    <footer className="p-4 bg-effect-blue benday-dots">
       <div className="flex pb-8 mx-auto max-w-260">
         <div>
-          <div className="flex gap-1 py-2 text-white">
-            <Zap className="bg-(--color-effect-red) border-2 rounded-xs p-1 size-6 border-white" />
+          <div className="flex gap-1 py-2 text-base-white">
+            <Zap className="bg-effect-red border-2 rounded-xs p-1 size-6 border-base-white" />
             <h2 className="uppercase font-bold italic">Hero Vault</h2>
           </div>
-          <p className="text-[.6rem] max-w-[30ch] text-(--color-text-muted)">
+          <p className="text-[.6rem] max-w-[30ch] text-basic-400">
             Premium heroic equipment for the modern legend. Trusted by 12,000+ heroes worldwide.
           </p>
         </div>
-        <nav className="flex uppercase justify-evenly w-full text-[.6rem] text-(--color-text-muted) ">
+        <nav className="flex uppercase justify-evenly w-full text-[.6rem] text-basic-400 ">
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-white font-bold italic pb-2">Shop</h3>
+            <h3 className="text-base-white font-bold italic pb-2">Shop</h3>
             <li>
               <Link href="/">All Gear</Link>
             </li>
@@ -34,7 +34,7 @@ export default function ShopFooter() {
             </li>
           </ul>
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-white font-bold italic pb-2">Support</h3>
+            <h3 className="text-base-white font-bold italic pb-2">Support</h3>
             <li>
               <Link href="/">Hq help center</Link>
             </li>
@@ -49,7 +49,7 @@ export default function ShopFooter() {
             </li>
           </ul>
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-white font-bold italic pb-2">Company</h3>
+            <h3 className="text-base-white font-bold italic pb-2">Company</h3>
             <li>
               <Link href="/">About</Link>
             </li>
@@ -65,7 +65,7 @@ export default function ShopFooter() {
           </ul>
         </nav>
       </div>
-      <div className="py-4 text-(--color-text-muted) uppercase text-[.6rem] flex justify-between max-w-260 mx-auto border-t border-(--color-text-muted)">
+      <div className="py-4 text-basic-400 uppercase text-[.6rem] flex justify-between max-w-260 mx-auto border-t border-basic-400">
         <span>© 2026 Hero Vault — Gear Division</span>
         <span>Plate 001 / Kinetic Voltage Series</span>
       </div>
