@@ -22,7 +22,7 @@ const getColourFromAvailabilityStatus = (
 ): string => {
   if (stock === 0) {
     return "text-red-500";
-  } else if ((stock ?? 0) < 45) {
+  } else if ((stock ?? 0) < 10) {
     return "text-orange-500";
   } else {
     return "text-green-500";
@@ -93,7 +93,7 @@ export default async function ProductTable({ searchParams, total }: { searchPara
               >
                 {(product.stock ?? 0) === 0
                   ? "Out of Stock"
-                  : (product.stock ?? 0) < 45
+                  : (product.stock ?? 0) < 10
                     ? "Low Stock"
                     : "In Stock"}
               </td>
