@@ -20,9 +20,9 @@ export default function ShopFeaturedProducts() {
     <section className="p-4 pb-16 diagonal-stripes ">
       <div className="mx-auto max-w-260 w-full">
         <header className="p-4 py-8 relative grid items-center">
-          <div className="absolute h-7 w-1 bg-(--color-effect-red)"></div>
-          <h2 className="text-white font-bold uppercase italic">Trending Gear</h2>
-          <small className="text-(--color-text-muted)">Most requested by active heroes</small>
+          <div className="absolute h-7 w-1 bg-effect-red"></div>
+          <h2 className="text-base-white font-bold uppercase italic">Trending Gear</h2>
+          <small className="text-basic-400">Most requested by active heroes</small>
         </header>
 
         <div className="flex gap-4">
@@ -58,7 +58,7 @@ export default function ShopFeaturedProducts() {
               {/* Description */}
               <span className="uppercase text-sm italic">{featured.description}</span>
               {/* Price */}
-              <span className="text-sm text-(--color-effect-yellow)">${featured.price}</span>
+              <span className="text-sm text-effect-yellow">${featured.price}</span>
             </div>
           </Link>
 
@@ -68,7 +68,7 @@ export default function ShopFeaturedProducts() {
               <Link
                 href={'/'}
                 key={item.id}
-                className="flex glow-red group items-center benday-dots w-120 border-2 bg-(--color-effect-gray) border-base-white font-bold"
+                className="flex glow-red group items-center benday-dots w-120 border-2 bg-effect-gray border-base-white font-bold"
               >
                 <div className="overflow-clip">
                   <Image
@@ -98,9 +98,9 @@ export default function ShopFeaturedProducts() {
                   {/* Description */}
                   <span className="uppercase text-sm italic">{item.description}</span>
                   {/* Price */}
-                  <span className="text-sm text-(--color-effect-yellow)">${item.price}</span>
+                  <span className="text-sm text-effect-yellow">${item.price}</span>
                 </div>
-                <ArrowRight className="mr-4 group-hover:text-(--color-effect-red) size-6 ml-auto" />
+                <ArrowRight className="mr-4 group-hover:text-effect-red size-6 ml-auto" />
               </Link>
             ))}
           </div>
