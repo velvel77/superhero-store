@@ -9,12 +9,17 @@ export async function getInventoryProducts() {
     cache: "no-store",
   });
 
+  console.log("Inventory response status: ", response.status);
+
+
   if (!response.ok) {
     throw new Error(`API error: ${response.status}`);
   }
 
   const data = await response.json();
-  return data.products || [];
+
+  console.log("Inventory data:", data)
+  return data || [];
 }
 
 export async function getProductsFromParams(

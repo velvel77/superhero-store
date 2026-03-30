@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "mock-server": "json-server --watch server/products.json --middlewares server/middleware.js --port 4000",
-    "dev:full": "concurrently \"npm run dev\" \"npm run mock-server\" \"npm run dev --prefix api\"",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev --prefix api\"",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
@@ -28,6 +27,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^20",
     "@types/pg": "^8.20.0",
     "@types/react": "^19",

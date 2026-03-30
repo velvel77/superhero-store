@@ -6,10 +6,10 @@ import type { Product } from "@/lib/types";
 type ProductForInventoryWidget = Pick<Product, "stock">;
 
 const getAvailabilityStatus = (stock: number | null | undefined) => {
-	const s = stock ?? 0;
-	if (s === 0) return "Out of Stock";
-	if (s < 45) return "Low Stock";
-	return "In Stock";
+  const s = stock ?? 0;
+  if (s === 0) return 'Out of Stock';
+  if (s < 10) return 'Low Stock';
+  return 'In Stock';
 };
 
 export default async function InventoryWidget() {
