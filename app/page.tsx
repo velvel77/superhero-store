@@ -5,7 +5,6 @@ import ProductTable from "@/components/ui/product-table";
 import Header from "@/components/ui/header";
 import SearchWidget from "../components/ui/search-widget";
 
-const API_URL = "http://localhost:5000";
 const defaultLimit = "6";
 
 export default async function Home(params: PageProps<"/">) {
