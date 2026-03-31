@@ -41,7 +41,7 @@ export default function ShopFeaturedProducts() {
             />
             {/* Rarity */}
             <span
-              className={`absolute text-sm border-base-white border rounded-full px-2 m-2 top-0 left-0 
+              className={`absolute text-[.7rem] border-base-white border rounded-sm px-2 top-2 left-2 
               ${
                 featured.rarity === 'Legendary'
                   ? 'bg-rarity-legendary text-base-black'
@@ -82,7 +82,7 @@ export default function ShopFeaturedProducts() {
                 <div className="flex flex-col p-4">
                   {/* Rarity */}
                   <span
-                    className={`w-fit text-[.7rem] border-base-white border rounded-full px-2 my-2 
+                    className={`w-fit text-[.7rem] border-base-white border rounded-sm px-2 my-2 
               ${
                 item.rarity === 'Legendary'
                   ? 'bg-rarity-legendary text-base-black'
