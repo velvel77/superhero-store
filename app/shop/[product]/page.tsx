@@ -9,14 +9,25 @@ import mask from '@/public/mask.jpg';
 import gloves from '@/public/gloves.jpg';
 import belt from '@/public/belt.jpg';
 import outfit from '@/public/outfit.jpg';
-import { Award, Truck, RotateCcw, Heart, PlusIcon, MinusIcon } from 'lucide-react';
+import { Award, Truck, RotateCcw, Heart, PlusIcon, MinusIcon, Shield } from 'lucide-react';
 import { useState } from 'react';
 
+// Mock data ----------
 const related = [
   { id: 1, image: gloves, rarity: 'Epic', name: 'Plasma surge gauntlets', price: 1890, category: 'Weapons' },
   { id: 2, image: belt, rarity: 'Common', name: 'Nightwatch utility belt', price: 780, category: 'Tech' },
   { id: 3, image: mask, rarity: 'Rare', name: 'Phantom Visor MK-IV', price: 1250, category: 'Masks' },
 ];
+
+const powerStats = {
+  intelligence: '38',
+  strength: '100',
+  speed: '17',
+  durability: '80',
+  power: '24',
+  combat: '64',
+};
+// --------------------
 
 export default function Product() {
   const [amount, setAmount] = useState(1);
@@ -69,12 +80,43 @@ export default function Product() {
                   movements, redistributing kinetic energy across micro-channels for maximum impact resistance.
                 </p>
                 {/* Power raiting */}
-                <div className="flex flex-col rounded-sm border-2 border-basic-400 bg-effect-dark-20 p-2 benday-dots">
-                  <span>Power Raiting</span>
-                  <span>Defense</span>
-                  <span>Agility</span>
-                  <span>Stealth</span>
+                <div className="flex flex-col text-sm rounded-sm border-2 border-basic-400 bg-effect-blue p-2 benday-dots">
+                  <h3 className="flex items-center gap-2 mb-2">
+                    <span>
+                      <Shield className="size-4 text-effect-red" />
+                    </span>
+                    <span className="italic uppercase font-bold text-[.7rem]">Power Raiting</span>
+                  </h3>
+                  <span>Combat</span>
+                  <input className="accent-effect-red" type="range" min={0} max={100} value={powerStats.combat} />
+                  <span>Speed</span>
+                  <input className="accent-effect-yellow" type="range" min={0} max={100} value={powerStats.speed} />
+                  <span>Strength</span>
+                  <input
+                    className="accent-rarity-legendary"
+                    type="range"
+                    min={0}
+                    max={100}
+                    value={powerStats.strength}
+                  />
+                  <span>Intelligence</span>
+                  <input
+                    className="accent-effect-light-blue"
+                    type="range"
+                    min={0}
+                    max={100}
+                    value={powerStats.intelligence}
+                  />
+                  <span>Power</span>
+                  <input className="accent-rarity-epic" type="range" min={0} max={100} value={powerStats.power} />
                   <span>Durability</span>
+                  <input
+                    className="accent-rarity-uncommon"
+                    type="range"
+                    min={0}
+                    max={100}
+                    value={powerStats.durability}
+                  />
                 </div>
 
                 {/* Purchase buttons */}
@@ -84,7 +126,7 @@ export default function Product() {
                     {/* Decrease amount */}
                     <button
                       className="h-full w-10 flex justify-center group"
-                      onClick={() => (amount === 0 ? 0 : setAmount(amount - 1))}
+                      onClick={() => (amount === 1 ? 1 : setAmount(amount - 1))}
                     >
                       <MinusIcon className="self-center size-5 group-hover:text-base-white" />
                     </button>
@@ -147,11 +189,11 @@ export default function Product() {
             <div className="flex gap-4">
               {related.map((product) => (
                 <Link href={'/shop'} className="relative" key={product.id}>
-                  <div className="relative">
+                  <div className="relative *:catalog-hover group">
                     {/* Benday dots overlay on image*/}
                     <div className="benday-dots absolute inset-0"></div>
                     <Image
-                      className="w-100 border-2 border-basic-400/20 rounded-sm"
+                      className="w-100 border-2 border-basic-400/20 group-hover:border-effect-red"
                       src={product.image}
                       alt="mask"
                       width={250}
