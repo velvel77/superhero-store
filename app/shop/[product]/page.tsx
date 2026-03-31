@@ -158,7 +158,7 @@ export default function Product() {
                   <Truck className="text-effect-red" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">Free shipping</span>
-                    <span>Orders over $500</span>
+                    <span className="text-basic-400">Orders over $500</span>
                   </div>
                 </div>
                 {/* Return policy */}
@@ -166,7 +166,7 @@ export default function Product() {
                   <RotateCcw className="text-effect-red" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">30-day returns</span>
-                    <span>No questions asked</span>
+                    <span className="text-basic-400">No questions asked</span>
                   </div>
                 </div>
                 {/* Certificate */}
@@ -174,7 +174,7 @@ export default function Product() {
                   <Award className="text-effect-red" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">Hero certified</span>
-                    <span>Field-tested gear</span>
+                    <span className="text-basic-400">Field-tested gear</span>
                   </div>
                 </div>
               </section>
