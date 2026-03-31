@@ -159,6 +159,17 @@ body {
   }
 }
 
+@utility policy {
+  background-color: var(--color-effect-gray);
+  border-radius: 4px;
+  padding: 8px;
+  gap: 8px;
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  align-items: center;
+}
+
 button {
   cursor: pointer;
 }
