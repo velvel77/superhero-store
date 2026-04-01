@@ -42,7 +42,6 @@ export default async function ProductTable({ searchParams, total }: { searchPara
   const currentLimit = getSearchParamsAsString(limit);
   const currentPage = getSearchParamsAsString(page);
   const currentQuery = getSearchParamsAsString(q);
-  console.log(currentLimit, currentPage, q);
 
 
   const products = await getProducts();
