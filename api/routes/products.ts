@@ -9,9 +9,8 @@ router.get("/", async (req, res) => {
             `SELECT * FROM products ORDER BY id DESC`
         );
         res.json(rows);
-        res.json({ message: "Products route works" });
     } catch (error) {
-        console.error("DB error:", error); 
+        console.error("DB error:", error);
         res.status(500).json({ error: "Failed to fetch items/products" });
     }
 });
