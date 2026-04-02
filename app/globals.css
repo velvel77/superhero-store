@@ -11,13 +11,8 @@
   /* ================= SECONDARY (RED / ACTION) ================= */
   --color-secondary-100: #ffe3e3;
   --color-secondary-200: #ffc9c9;
-  --color-secondary-500: #dc2626;
-  /* strong red, maybe change to this #e62e2e */
+  --color-secondary-500: #dc2626; /* strong red, maybe change to this #e62e2e */
   --color-secondary-600: #b91c1c;
-
-  /* ================= BASIC ================= */
-  --color-base-white: #ffffff;
-  --color-base-black: #000000;
 
   /* ================= BASIC (DARK THEME) ================= */
   --color-basic-100: #f8f9fa;
@@ -35,19 +30,6 @@
 
   /* ================= WARNING ================= */
   --color-warning-500: #ff4d4f;
-
-  /* ================= GOLD / PREMIUM ================= */
-  --color-info-brown-100: #fff3bf;
-  --color-info-brown-500: #c9a227;
-  --color-info-brown-900: #7a5c00;
-
-  /* ================= SOFT YELLOW ================= */
-  --color-info-yellow-100: #fff9db;
-  --color-info-yellow-200: #fff3bf;
-
-  /* ================= TECH BLUE (ACCENT) ================= */
-  --color-info-blue-100: #e7f0ff;
-  --color-info-blue-500: #4dabf7;
 
   /* ================= BORDER (DARK THEME) ================= */
   --color-ui-border: #232833;
@@ -73,6 +55,10 @@ body {
   font-family: var(--font-inter);
   background-color: var(--color-basic-900);
   color: var(--color-basic-100);
+}
+
+button {
+  cursor: pointer;
 }
 
 @utility icon-hover {
@@ -151,6 +137,22 @@ body {
   }
 }
 
-button {
-  cursor: pointer;
+@utility focus-red {
+  transition: all 100ms ease-in;
+
+  &:focus {
+    border-color: var(--color-effect-red);
+    box-shadow: 0px 0px 8px var(--color-effect-red);
+  }
+}
+
+@utility policy {
+  background-color: var(--color-effect-gray);
+  border-radius: 4px;
+  padding: 8px;
+  gap: 8px;
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  align-items: center;
 }

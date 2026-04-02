@@ -4,11 +4,11 @@ import Link from 'next/link';
 export default function ShopHeader() {
   return (
 		<>
-			<header className="sticky top-0 z-50 w-full bg-basic-700 benday-dots text-basic-300 flex justify-center border-b-2 border-white">
+			<header className="sticky top-0 z-50 w-full bg-basic-700 benday-dots text-basic-300 flex justify-center border-b-2 border-ui-border">
 				<div className="flex justify-between p-4 w-full max-w-260 items-center">
 					<section className="flex items-center gap-1">
-						<Zap className="size-6 text-white bg-secondary-500 p-1 rounded-sm border border-white " />
-						<h1 className="text-white font-bold uppercase italic">
+						<Zap className="size-6 text-basic-100 bg-secondary-500 p-1 rounded-sm border border-ui-border " />
+						<h1 className="text-basic-100 font-bold uppercase italic">
 							Hero Vault
 						</h1>
 					</section>
@@ -64,7 +64,7 @@ export default function ShopHeader() {
 							<input
 								type="search"
 								placeholder="Search heroic gear..."
-								className="text-sm focus:border-secondary-500 outline-none focus:shadow-[0_0_8px_#E62E2E] border border-transparent pl-8 p-2 bg-[#29292c] rounded-sm"
+								className="text-sm focus:border-secondary-500 outline-none focus:shadow-[0_0_8px_var(--color-secondary-500)] border border-transparent pl-8 p-2 bg-basic-600 rounded-sm"
 							/>
 						</section>
 

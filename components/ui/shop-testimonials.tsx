@@ -27,11 +27,11 @@ const testimonials = [
 
 export default function ShopTestimonials() {
   return (
-		<section className="bg-basic-700 border-y-2 border-white benday-dots px-4 py-16">
+		<section className="bg-basic-700 border-y-2 border-ui-border benday-dots px-4 py-16">
 			<div className="w-full max-w-260 mx-auto">
 				<header className="p-4 relative grid items-center">
 					<div className="absolute h-7 w-1 bg-effect-light-blue"></div>
-					<h2 className="text-white font-bold uppercase italic">
+					<h2 className="text-basic-100 font-bold uppercase italic">
 						HERO TESTIMONIALS
 					</h2>
 					<small className="text-basic-300">
@@ -53,9 +53,9 @@ export default function ShopTestimonials() {
 								))}
 							</div>
 							<Quote className="size-6 text-effect-light-blue text-secondary/30 absolute top-4 right-4" />
-							<p className="text-white">"{testimonial.review}"</p>
+							<p className="text-basic-100">"{testimonial.review}"</p>
 							<div className="border-t border-ui-border pt-4">
-								<h3 className="text-white font-bold uppercase italic">
+								<h3 className="text-basic-100 font-bold uppercase italic">
 									{testimonial.author}
 								</h3>
 								<small className="text-basic-300">
