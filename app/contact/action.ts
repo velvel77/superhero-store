@@ -22,7 +22,7 @@ export default async function sendMessage(prevState: FormState, formData: FormDa
 
     const { error } = await resend.emails.send({
         from: "onboarding@resend.dev",
-        to: "idahenriettakia@gmail.com",
+        to: process.env.CONTACT_TO_EMAIL!,
         subject: `${name} via Superhero Store`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     })
