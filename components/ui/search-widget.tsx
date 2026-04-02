@@ -73,6 +73,7 @@
 import { ChevronDown, Funnel, Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { ChangeEvent } from "react";
+import ProductFiltersPopover from "./products-filters-popover";
 
 export default function SearchWidget() {
 	const router = useRouter();
@@ -129,7 +130,7 @@ export default function SearchWidget() {
 				</button>
 			</div>
 
-			<div className="flex p-1.5 border border-ui-border rounded-xl">
+			{/* <div className="flex p-1.5 border border-ui-border rounded-xl">
 				<button
 					className="flex gap-2 px-2 items-center text-basic-100"
 					type="button"
@@ -137,6 +138,10 @@ export default function SearchWidget() {
 					<Funnel className="w-4 h-4" />
 					Filter
 				</button>
+			</div> */}
+
+			<div className="flex p-1.5 border border-ui-border rounded-xl hover:border-primary-500 transition duration-200">
+				<ProductFiltersPopover />
 			</div>
 		</section>
 	);
