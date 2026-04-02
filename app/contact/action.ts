@@ -36,12 +36,10 @@ export default async function sendMessage(prevState: FormState, formData: FormDa
 
 }
 
-export async function subscribeNewsletter(formData: FormData): Promise<void> {
+export async function subscribeNewsletter(prevState: FormState, formData: FormData): Promise<FormState> {
     const email = formData.get("email") as string;
     if (!email) {
-        console.error("No email provided");
-        return;
-
+        return { error: "No email provided" }
     }
 
     const { error } = await resend.contacts.create({
@@ -51,7 +49,7 @@ export async function subscribeNewsletter(formData: FormData): Promise<void> {
     });
 
     if (error) {
-        console.error("Failed to subscribe bc ", error)
-        return;
+        return { error: "Failed to subscribe, please try again" }
     }
+    return { success: true };
 }
