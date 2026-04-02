@@ -27,34 +27,45 @@ const testimonials = [
 
 export default function ShopTestimonials() {
   return (
-    <section className=" bg-(--color-effect-blue) border-y-2 border-white benday-dots px-4 py-16">
-      <div className="w-full max-w-260 mx-auto">
-        <header className="p-4 relative grid items-center">
-          <div className="absolute h-7 w-1 bg-(--color-effect-light-blue)"></div>
-          <h2 className="text-white font-bold uppercase italic">HERO TESTIMONIALS</h2>
-          <small className="text-(--color-text-muted)">Field-tested. Hero-approved.</small>
-        </header>
-        <div className="flex gap-5">
-          {testimonials.map((testimonial) => (
-            <div
-              className="testimonial-hover relative flex flex-col gap-4 text-xs border-2 border-(--color-text-muted) bg-(--color-effect-gray) p-4"
-              key={testimonial.id}
-            >
-              <div className="flex">
-                {[...Array(testimonial.raiting)].map((_, i) => (
-                  <Star className="fill-current text-(--color-effect-yellow) size-4" key={i} />
-                ))}
-              </div>
-              <Quote className="size-6 text-(--color-effect-light-blue) text-secondary/30 absolute top-4 right-4" />
-              <p className="text-white">"{testimonial.review}"</p>
-              <div className="border-t border-(--color-text-muted) pt-4">
-                <h3 className="text-white font-bold uppercase italic">{testimonial.author}</h3>
-                <small className="text-(--color-text-muted)">{testimonial.about}</small>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+		<section className="bg-basic-700 border-y-2 border-white benday-dots px-4 py-16">
+			<div className="w-full max-w-260 mx-auto">
+				<header className="p-4 relative grid items-center">
+					<div className="absolute h-7 w-1 bg-effect-light-blue"></div>
+					<h2 className="text-white font-bold uppercase italic">
+						HERO TESTIMONIALS
+					</h2>
+					<small className="text-basic-300">
+						Field-tested. Hero-approved.
+					</small>
+				</header>
+				<div className="flex gap-5">
+					{testimonials.map((testimonial) => (
+						<div
+							className="testimonial-hover relative flex flex-col gap-4 text-xs border-2 border-ui-border bg-basic-600 p-4"
+							key={testimonial.id}
+						>
+							<div className="flex">
+								{[...Array(testimonial.raiting)].map((_, i) => (
+									<Star
+										className="fill-current text-primary-500 size-4"
+										key={i}
+									/>
+								))}
+							</div>
+							<Quote className="size-6 text-effect-light-blue text-secondary/30 absolute top-4 right-4" />
+							<p className="text-white">"{testimonial.review}"</p>
+							<div className="border-t border-ui-border pt-4">
+								<h3 className="text-white font-bold uppercase italic">
+									{testimonial.author}
+								</h3>
+								<small className="text-basic-300">
+									{testimonial.about}
+								</small>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
   );
 }
