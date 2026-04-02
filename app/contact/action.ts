@@ -1,45 +1,38 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function sendMessage(formData: FormData) {
+export type FormState = {
+    success?: boolean;
+    error?: string;
+}
+
+export default async function sendMessage(prevState: FormState, formData: FormData): Promise<FormState> {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
 
     if (!message) {
-
-        console.error("Invalid message");
-        return;
+        return { error: "Message is missing" }
     }
 
-
-
-    // const newMessage = {
-    //     name,
-    //     email,
-    //     message
-    // }
 
     const { error } = await resend.emails.send({
         from: "onboarding@resend.dev",
         to: "idahenriettakia@gmail.com",
-        subject: "Kontaktmeddelande från Superhero Store",
+        subject: `${name} via Superhero Store`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     })
 
     if (error) {
-        console.error("Failed o send message:", error);
-        return;
+        return { error: "Something went wrong, try again" }
     }
 
     revalidatePath("/contact/")
-    redirect("/contact/")
-
+    return { success: true };
 
 }
 
