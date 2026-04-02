@@ -3,9 +3,12 @@
 import sendMessage from "@/app/contact/action";
 import Form from "next/form";
 import { useActionState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ContactForm() {
     const [state, action, pending] = useActionState(sendMessage, {});
+
+    
 
     if (state.success) {
         return <p>Your message was sent, we'll get back to you soon.</p>
@@ -20,6 +23,7 @@ export default function ContactForm() {
             <label htmlFor="message">Message</label>
             <textarea name="message" id=""></textarea>
             <button type="submit" disabled={pending}>{pending ? "Sending..." : "Sent"}</button>
+            <Toaster />
         </Form>
     )
 }
