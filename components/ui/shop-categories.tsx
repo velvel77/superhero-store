@@ -41,7 +41,7 @@ export default function ShopCategories() {
   return (
     <section className="benday-dots bg-basic-700 py-8">
       <div className=" mx-auto w-full max-w-260">
-        <div className="text-white relative p-4 grid items-center">
+        <div className="text-basic-100 relative p-4 grid items-center">
           <div className="absolute mx-4 h-7 w-1 bg-primary-500"></div>
           <h2 className="px-4">Gear Categories</h2>
           <small className="px-4 text-basic-300">Browse by division</small>
@@ -65,7 +65,7 @@ export default function ShopCategories() {
               <div className="absolute inset-0 bg-linear-to-t from-basic-700 via-basic-700/40 to-transparent"></div>
               <span className="absolute bottom-4 left-4">
                 <small className={`uppercase  ${item.textColor}`}>{item.count} items</small>
-                <h3 className="text-white font-bold italic">{item.name}</h3>
+                <h3 className="text-basic-100 font-bold italic">{item.name}</h3>
                 <div className="uppercase flex gap-2 items-center text-basic-300 text-[.6rem]">
                   <span className="transition-colors duration-300 group-hover:text-white">Explore</span>{' '}
                   <ArrowRight className="size-3 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white" />

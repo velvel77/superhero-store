@@ -21,7 +21,7 @@ export default function ShopFeaturedProducts() {
       <div className="mx-auto max-w-260 w-full">
         <header className="p-4 py-8 relative grid items-center">
           <div className="absolute h-7 w-1 bg-secondary-500"></div>
-          <h2 className="text-white font-bold uppercase italic">Trending Gear</h2>
+          <h2 className="text-basic-100 font-bold uppercase italic">Trending Gear</h2>
           <small className="text-basic-300">Most requested by active heroes</small>
         </header>
 
@@ -30,7 +30,7 @@ export default function ShopFeaturedProducts() {
           <Link
             href={'/'}
             key={featured.id}
-            className="group overflow-clip relative w-auto border-2 glow-red border-base-white font-bold"
+            className="group overflow-clip relative w-auto border-2 glow-red border-ui-border font-bold"
           >
             <Image
               className="object-cover w-100 h-140 group-hover:scale-110 transition-all duration-300"
@@ -41,15 +41,15 @@ export default function ShopFeaturedProducts() {
             />
             {/* Rarity */}
             <span
-              className={`absolute text-sm border-base-white border rounded-full px-2 m-2 top-0 left-0 
+              className={`absolute text-[.7rem] border-ui-border border rounded-sm px-2 top-2 left-2 
               ${
                 featured.rarity === 'Legendary'
-                  ? 'bg-rarity-legendary text-base-black'
+                  ? 'bg-rarity-legendary text-basic-900'
                   : featured.rarity === 'Epic'
                     ? 'bg-rarity-epic'
                     : featured.rarity === 'Rare'
                       ? 'bg-rarity-rare'
-                      : 'bg-rarity-uncommon text-base-black'
+                      : 'bg-rarity-uncommon text-basic-900'
               }`}
             >
               {featured.rarity}
@@ -68,7 +68,7 @@ export default function ShopFeaturedProducts() {
               <Link
                 href={'/'}
                 key={item.id}
-                className="flex glow-red group items-center benday-dots w-120 border-2 bg-basic-600 border-base-white font-bold"
+                className="flex glow-red group items-center benday-dots w-120 border-2 bg-basic-600 border-ui-border font-bold"
               >
                 <div className="overflow-clip">
                   <Image
@@ -82,15 +82,15 @@ export default function ShopFeaturedProducts() {
                 <div className="flex flex-col p-4">
                   {/* Rarity */}
                   <span
-                    className={`w-fit text-[.7rem] border-base-white border rounded-full px-2 my-2 
+                    className={`w-fit text-[.7rem] border-ui-border border rounded-sm px-2 my-2 
               ${
                 item.rarity === 'Legendary'
-                  ? 'bg-rarity-legendary text-base-black'
+                  ? 'bg-rarity-legendary text-basic-900'
                   : item.rarity === 'Epic'
                     ? 'bg-rarity-epic'
                     : item.rarity === 'Rare'
                       ? 'bg-rarity-rare'
-                      : 'bg-rarity-uncommon text-base-black'
+                      : 'bg-rarity-uncommon text-basic-900'
               }`}
                   >
                     {item.rarity}
@@ -109,3 +109,46 @@ export default function ShopFeaturedProducts() {
     </section>
   );
 }
+
+// ----- API response -----
+// {
+//    response: 'success',
+//    id: '1',
+//    name: 'A-Bomb',
+//    powerstats: {
+//      intelligence: '38',
+//      strength: '100',
+//      speed: '17',
+//      durability: '80',
+//      power: '24',
+//      combat: '64'
+//    },
+//    biography: {
+//      'full-name': 'Richard Milhouse Jones',
+//      'alter-egos': 'No alter egos found.',
+//      aliases: [ 'Rick Jones' ],
+//      'place-of-birth': 'Scarsdale, Arizona',
+//      'first-appearance': 'Hulk Vol 2 #2 (April, 2008) (as A-Bomb)',
+//      publisher: 'Marvel Comics',
+//      alignment: 'good'
+//    },
+//    appearance: {
+//      gender: 'Male',
+//      race: 'Human',
+//      height: [ "6'8", '203 cm' ],
+//      weight: [ '980 lb', '441 kg' ],
+//      'eye-color': 'Yellow',
+//      'hair-color': 'No Hair'
+//    },
+//    work: {
+//      occupation: 'Musician, adventurer, author; formerly talk show host',
+//      base: '-'
+//    },
+//    connections: {
+//      'group-affiliation': 'Hulk Family; Excelsior (sponsor), Avengers (honorary member); formerly partner of the Hulk, Captain America and Captain Marvel; Teen Brigade; ally of Rom',
+//      relatives: 'Marlo Chandler-Jones (wife); Polly (aunt); Mrs. Chandler (mother-in-law); Keith Chandler, Ray Chandler, three unidentified others (brothers-in-law); unidentified father (deceased); Jackie Shorr (alleged mother; unconfirmed)'
+//    },
+//    image: {
+//      url: 'https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg'
+//    }
+//  }

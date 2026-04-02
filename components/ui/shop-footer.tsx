@@ -6,8 +6,8 @@ export default function ShopFooter() {
     <footer className="p-4 bg-basic-700 benday-dots">
       <div className="flex pb-8 mx-auto max-w-260">
         <div>
-          <div className="flex gap-1 py-2 text-white">
-            <Zap className="bg-secondary-500 border-2 rounded-xs p-1 size-6 border-white" />
+          <div className="flex gap-1 py-2 text-basic-100">
+            <Zap className="bg-secondary-500 border-2 rounded-xs p-1 size-6 border-ui-border" />
             <h2 className="uppercase font-bold italic">Hero Vault</h2>
           </div>
           <p className="text-[.6rem] max-w-[30ch] text-basic-300">
@@ -16,7 +16,7 @@ export default function ShopFooter() {
         </div>
         <nav className="flex uppercase justify-evenly w-full text-[.6rem] text-basic-300 ">
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-white font-bold italic pb-2">Shop</h3>
+            <h3 className="text-basic-100 font-bold italic pb-2">Shop</h3>
             <li>
               <Link href="/">All Gear</Link>
             </li>
@@ -34,7 +34,7 @@ export default function ShopFooter() {
             </li>
           </ul>
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-white font-bold italic pb-2">Support</h3>
+            <h3 className="text-basic-100 font-bold italic pb-2">Support</h3>
             <li>
               <Link href="/">Hq help center</Link>
             </li>
@@ -49,7 +49,7 @@ export default function ShopFooter() {
             </li>
           </ul>
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-white font-bold italic pb-2">Company</h3>
+            <h3 className="text-basic-100 font-bold italic pb-2">Company</h3>
             <li>
               <Link href="/">About</Link>
             </li>
@@ -65,7 +65,7 @@ export default function ShopFooter() {
           </ul>
         </nav>
       </div>
-      <div className="py-4 text-basic-300 uppercase text-[.6rem] flex justify-between max-w-260 mx-auto border-t border-ui-border">
+      <div className="py-4 text-basic-400 uppercase text-[.6rem] flex justify-between max-w-260 mx-auto border-t border-ui-border">
         <span>© 2026 Hero Vault — Gear Division</span>
         <span>Plate 001 / Kinetic Voltage Series</span>
       </div>
