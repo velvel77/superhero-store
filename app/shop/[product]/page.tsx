@@ -94,13 +94,13 @@ export default function Product() {
 									maximum impact resistance.
 								</p>
 								{/* Power raiting */}
-								<div className="flex flex-col text-sm rounded-sm border-2 border-basic-400 bg-effect-light-blue p-2 benday-dots">
+								<div className="flex flex-col text-sm rounded-sm border-2 border-basic-400 bg-basic-700 p-2 benday-dots">
 									<h3 className="flex items-center gap-2 mb-2">
 										<span>
 											<Shield className="size-4 text-secondary-500" />
 										</span>
 										<span className="italic uppercase font-bold text-[.7rem]">
-											Power Raiting
+											Power Rating
 										</span>
 									</h3>
 									<span>Combat</span>
