@@ -1,16 +1,23 @@
-// import { db } from "@/lib/db/index";
-// import type { Product } from "@/types";
+import { db } from "@/lib/db/index";
+import type { Product, ProductFormData } from "@/lib/types";
 
-// type GetProductsParams = {
-// 	page?: number;
-// 	limit?: number;
-// 	q?: string;
-// };
+type StatusFilter = "" | "out" | "low" | "in";
+type RarityFilter = "" | "COMMON" | "RARE" | "EPIC" | "LEGENDARY";
+
+type GetProductsParams = {
+	page?: number;
+	limit?: number;
+	q?: string;
+	rarity?: RarityFilter;
+	status?: StatusFilter;
+};
 
 // export async function getProducts({
 // 	page = 1,
 // 	limit = 5,
 // 	q = "",
+// 	rarity = "",
+// 	status = "",
 // }: GetProductsParams = {}): Promise<Product[]> {
 // 	const offset = (page - 1) * limit;
 
@@ -42,6 +49,38 @@
 // 	return res.rows;
 // }
 
+export async function getProducts({
+	page = 1,
+	limit = 5,
+	q = "",
+	rarity = "",
+	status = "",
+}: GetProductsParams = {}): Promise<Product[]> {
+	const offset = (page - 1) * limit;
+
+	const { whereClause, values } = buildProductFilters({
+		q,
+		rarity,
+		status,
+	});
+
+	values.push(limit);
+	values.push(offset);
+
+	const res = await db.query(
+		`
+    SELECT *
+    FROM products
+    ${whereClause}
+    ORDER BY created_at DESC
+    LIMIT $${values.length - 1} OFFSET $${values.length}
+    `,
+		values,
+	);
+
+	return res.rows;
+}
+
 // export async function getProductsCount(q = ""): Promise<number> {
 // 	if (q.trim()) {
 // 		const res = await db.query(
@@ -64,68 +103,30 @@
 // 	return res.rows[0].count;
 // }
 
-import { db } from "@/lib/db/index";
-import type { Product, ProductFormData } from "@/lib/types";
 
-type GetProductsParams = {
-	page?: number;
-	limit?: number;
-	q?: string;
-};
-
-export async function getProducts({
-	page = 1,
-	limit = 5,
+export async function getProductsCount({
 	q = "",
-}: GetProductsParams = {}): Promise<Product[]> {
-	const offset = (page - 1) * limit;
-
-	if (q.trim()) {
-		const res = await db.query(
-			`
-      SELECT *
-      FROM products
-      WHERE name ILIKE $1
-      ORDER BY created_at DESC
-      LIMIT $2 OFFSET $3
-      `,
-			[`%${q}%`, limit, offset],
-		);
-
-		return res.rows;
-	}
+	rarity = "",
+	status = "",
+}: {
+	q?: string;
+	rarity?: RarityFilter;
+	status?: StatusFilter;
+} = {}): Promise<number> {
+	const { whereClause, values } = buildProductFilters({
+		q,
+		rarity,
+		status,
+	});
 
 	const res = await db.query(
 		`
-    SELECT *
-    FROM products
-    ORDER BY created_at DESC
-    LIMIT $1 OFFSET $2
-    `,
-		[limit, offset],
-	);
-
-	return res.rows;
-}
-
-export async function getProductsCount(q = ""): Promise<number> {
-	if (q.trim()) {
-		const res = await db.query(
-			`
-      SELECT COUNT(*)::int AS count
-      FROM products
-      WHERE name ILIKE $1
-      `,
-			[`%${q}%`],
-		);
-
-		return res.rows[0].count;
-	}
-
-	const res = await db.query(`
     SELECT COUNT(*)::int AS count
     FROM products
-  `);
+    ${whereClause}
+    `,
+		values,
+	);
 
 	return res.rows[0].count;
 }
@@ -195,6 +196,7 @@ export async function updateProductById(
 	return res.rows[0];
 }
 
+
 export async function deleteProductById(id: number): Promise<void> {
 	await db.query(
 		`
@@ -203,4 +205,41 @@ export async function deleteProductById(id: number): Promise<void> {
     `,
 		[id],
 	);
+}
+
+function buildProductFilters({
+	q = "",
+	rarity = "",
+	status = "",
+}: {
+	q?: string;
+	rarity?: RarityFilter;
+	status?: StatusFilter;
+}) {
+	const conditions: string[] = [];
+	const values: (string | number)[] = [];
+
+	if (q.trim()) {
+		values.push(`%${q.trim()}%`);
+		conditions.push(`name ILIKE $${values.length}`);
+	}
+
+	if (rarity) {
+		values.push(rarity);
+		conditions.push(`rarity = $${values.length}`);
+	}
+
+	if (status === "out") {
+		conditions.push(`stock = 0`);
+	} else if (status === "low") {
+		conditions.push(`stock > 0 AND stock < 10`);
+	} else if (status === "in") {
+		conditions.push(`stock >= 10`);
+	}
+
+	const whereClause = conditions.length
+		? `WHERE ${conditions.join(" AND ")}`
+		: "";
+
+	return { whereClause, values };
 }
