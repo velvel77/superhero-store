@@ -18,7 +18,6 @@ export async function getInventoryProducts() {
 
   const data = await response.json();
 
-  console.log("Inventory data:", data)
   return data || [];
 }
 
