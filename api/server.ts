@@ -1,7 +1,9 @@
 import path from "node:path";
 import dotenv from "dotenv";
 
-dotenv.config({ path: path.resolve(process.cwd(), "../.env") });
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: path.resolve(process.cwd(), "../.env") });
+}
 
 import cors from "cors";
 import express from "express";
