@@ -1,20 +1,15 @@
 import { API_URL } from "@/lib/config";
 import type { ProductFormData, ProductsResponse } from "@/lib/types";
+import { db } from "@/lib/db/index";
 import "server-only";
 
 //#region GET
 
 export async function getInventoryProducts() {
-  const response = await fetch(`${API_URL}/products`, {
-    cache: "no-store",
-  });
 
-  if (!response.ok) {
-    throw new Error(`API error: ${response.status}`);
-  }
+  const res = await db.query(`SELECT stock FROM products`);
+  return res.rows;
 
-  const data = await response.json();
-  return data.products || [];
 }
 
 export async function getProductsFromParams(

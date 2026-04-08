@@ -1,33 +1,159 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-/* @theme { */
-:root{
-  /* ── Brand ───────────────────────── */
-  --color-primary:        #5b21b6; /* purple-800 */
+@theme {
+  /* ================= PRIMARY (YELLOW / ENERGY) ================= */
+  --color-primary-100: #fff9db;
+  --color-primary-300: #ffe066;
+  --color-primary-400: #ffd43b;
+  --color-primary-500: #fcdb1d;
+  /* main yellow*/
 
+  /* ================= SECONDARY (RED / ACTION) ================= */
+  --color-secondary-100: #ffe3e3;
+  --color-secondary-200: #ffc9c9;
+  --color-secondary-500: #dc2626; /* strong red, maybe change to this #e62e2e */
+  --color-secondary-600: #b91c1c;
 
-  /* ── Text ────────────────────────── */
-  --color-text-strong:    #000000; /* black      */
-  --color-text-body:      #374151; /* gray-700   */
-  --color-text-secondary: #4b5563; /* gray-600   */
-  --color-text-muted:     #6b7280; /* gray-500   */
-  --color-text-faint:     #9ca3af; /* gray-400   */
-  --color-text-inverted:  #ffffff; /* white      */
+  /* ================= BASIC (DARK THEME) ================= */
+  --color-basic-100: #f8f9fa;
+  --color-basic-200: #e9ecef;
+  --color-basic-300: #adb5bd;
+  --color-basic-400: #868e96;
+  --color-basic-600: #282c33;
 
-  /* ── Backgrounds ─────────────────── */
-  --color-bg:             #ffffff; /* white      */
-  --color-bg-muted:       #f9fafb; /* gray-50    */
+  --color-basic-700: #1c1f26;
+  /* cards */
+  --color-basic-800: #14171c;
+  /* surfaces */
+  --color-basic-900: #0b0f14;
+  /* main background */
 
-  /* ── Border ──────────────────────── */
-  --color-border:         #d1d5db; /* gray-300   */
+  /* ================= WARNING ================= */
+  --color-warning-500: #ff4d4f;
 
-  /* ── Status ──────────────────────── */
-  --color-success:        #22c55e; /* green-500  */
-  --color-warning:        #f97316; /* orange-500 */
-  --color-danger:         #ef4444; /* red-500    */
+  /* ================= BORDER (DARK THEME) ================= */
+  --color-ui-border: #232833;
+  /* subtle default border */
+  --color-ui-border-strong: #2e3440;
+  /* stronger borders (cards, sections) */
+
+  /* ================= GEAR RARITY ================= */
+  --color-rarity-uncommon: #1eff00;
+  --color-rarity-rare: #0070dd;
+  --color-rarity-epic: #a335ee;
+  --color-rarity-legendary: #ff8000;
+
+  /* ================= EFFECTS / OVERLAYS ================= */
+  --color-pattern-benday: #f5f2eb0f;
+  --color-effect-light-blue: #4d80e6;
+
+  --color-overlay-gray-soft: #5a5a5a2c;
+  --color-overlay-dark-soft: #2e2e2e17;
 }
 
-
 body {
-  font-family: var(--font-inter); 
+  font-family: var(--font-inter);
+  background-color: var(--color-basic-900);
+  color: var(--color-basic-100);
+}
+
+button {
+  cursor: pointer;
+}
+
+@utility icon-hover {
+  transition: all 150ms ease-in;
+
+  &:hover {
+    color: var(--color-secondary-500);
+    cursor: pointer;
+  }
+}
+
+@utility link-hover {
+  transition: all 150ms ease-in;
+
+  &:hover {
+    color: white;
+  }
+}
+
+@utility benday-dots {
+  background-image: radial-gradient(var(--color-pattern-benday) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+@utility diagonal-stripes {
+  background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 4px,
+      var(--color-overlay-gray-soft) 4px,
+      var(--color-overlay-dark-soft) 5px);
+}
+
+@utility catalog-hover {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-secondary-500);
+    box-shadow: 0px 0px 15px var(--color-secondary-500);
+    cursor: pointer;
+  }
+}
+
+@utility testimonial-hover {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-effect-light-blue);
+    box-shadow: 0px 0px 15px var(--color-effect-light-blue);
+  }
+}
+
+@utility glow-blue {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-effect-light-blue);
+    box-shadow: 0px 0px 15px var(--color-effect-light-blue);
+  }
+}
+
+@utility glow-red {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-secondary-500);
+    box-shadow: 0px 0px 15px var(--color-secondary-500);
+  }
+}
+
+@utility glow-yellow {
+  transition: all 100ms ease-in;
+
+  &:hover {
+    border-color: var(--color-primary-500);
+    box-shadow: 0px 0px 15px var(--color-primary-500);
+  }
+}
+
+@utility focus-red {
+  transition: all 100ms ease-in;
+
+  &:focus {
+    border-color: var(--color-effect-red);
+    box-shadow: 0px 0px 8px var(--color-effect-red);
+  }
+}
+
+@utility policy {
+  background-color: var(--color-effect-gray);
+  border-radius: 4px;
+  padding: 8px;
+  gap: 8px;
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }

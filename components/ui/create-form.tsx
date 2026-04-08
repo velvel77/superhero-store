@@ -1,212 +1,420 @@
+// "use client";
+
+// import Form from "next/form";
+// import { useActionState } from "react";
+// import { type ActionState, addProductActionState } from "@/lib/actions";
+// import type { ProductFormData, Category } from "@/lib/types";
+
+// const initialState: ActionState = null;
+
+// export default function CreateForm({ categories }: { categories: Category[] }) {
+// 	const [state, formAction, pending] = useActionState(
+// 		addProductActionState,
+// 		initialState,
+// 	);
+
+// 	const data = state?.data as ProductFormData;
+
+// 	return (
+// 		<div className="w-full">
+// 			<Form
+// 				key={state?.timestamp}
+// 				action={formAction}
+// 				className="w-full bg-basic-800 p-12 rounded-3xl shadow-xl border border-ui-border"
+// 			>
+// 				<div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-6 items-center">
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="title"
+// 					>
+// 						Title
+// 					</label>
+// 					<input
+// 						className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 						type="text"
+// 						id="title"
+// 						name="title"
+// 						minLength={3}
+// 						maxLength={20}
+// 						defaultValue={data?.title}
+// 						required
+// 					/>
+
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="brand"
+// 					>
+// 						Brand
+// 					</label>
+// 					<input
+// 						className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 						type="text"
+// 						id="brand"
+// 						name="brand"
+// 						defaultValue={data?.brand}
+// 						required
+// 					/>
+
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="price"
+// 					>
+// 						Price
+// 					</label>
+// 					{/* <input
+//             className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+//             type="number"
+//             min="0.5"
+//             step="0.01"
+//             id="price"
+//             name="price"
+//             defaultValue={data?.price}
+//             required
+//           /> */}
+// 					<div className="col-start-2 flex flex-col space-y-1">
+// 						<input
+// 							className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 							type="number"
+// 							id="price"
+// 							name="price"
+// 							min="0.5"
+// 							step="0.01"
+// 							defaultValue={data?.price}
+// 							required
+// 						/>
+// 						{state?.errors?.price && (
+// 							<p className="text-sm text-warning-500">
+// 								{state.errors.price[0]}
+// 							</p>
+// 						)}
+// 					</div>
+
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="stock"
+// 					>
+// 						Stock
+// 					</label>
+// 					<input
+// 						className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 						type="number"
+// 						id="stock"
+// 						name="stock"
+// 						defaultValue={data?.stock}
+// 						required
+// 					/>
+
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="categoryId"
+// 					>
+// 						Category
+// 					</label>
+// 					<select
+// 						className="bg-basic-800 border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 						id="categoryId"
+// 						name="categoryId"
+// 						defaultValue={data?.categoryId ?? ""}
+// 						required
+// 					>
+// 						<option
+// 							value=""
+// 							disabled
+// 							className="bg-basic-800 text-basic-300"
+// 						>
+// 							Select a category
+// 						</option>
+// 						{categories.map((category) => (
+// 							<option
+// 								key={category.id}
+// 								value={category.id}
+// 								className="bg-basic-800"
+// 							>
+// 								{category.name}
+// 							</option>
+// 						))}
+// 					</select>
+
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="description"
+// 					>
+// 						Description
+// 					</label>
+// 					<textarea
+// 						className="border border-ui-border rounded-lg p-2 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 						id="description"
+// 						name="description"
+// 						minLength={5}
+// 						maxLength={400}
+// 						defaultValue={data?.description}
+// 						required
+// 					/>
+
+// 					<label
+// 						className="font-medium text-basic-300"
+// 						htmlFor="thumbnail"
+// 					>
+// 						Thumbnail
+// 					</label>
+// 					{/* <input
+//             className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+//             type="url"
+//             id="thumbnail"
+//             name="thumbnail"
+//             defaultValue={data?.thumbnail}
+//             required
+//           />
+//         </div> */}
+
+// 					<div className="col-start-2 flex flex-col space-y-1">
+// 						<input
+// 							type="text"
+// 							id="thumbnail"
+// 							name="thumbnail"
+// 							defaultValue={data?.thumbnail}
+// 							required
+// 							className="border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary-500"
+// 						/>
+// 						{state?.errors?.thumbnail && (
+// 							<p className="text-sm text-warning-500">
+// 								{state.errors.thumbnail[0]}
+// 							</p>
+// 						)}
+// 					</div>
+// 				</div>
+
+// 				<button
+// 					type="submit"
+// 					disabled={pending}
+// 					className="mt-8 w-auto px-8 bg-secondary-500 py-2 rounded-lg font-medium hover:opacity-90 transition mx-auto block disabled:opacity-50 disabled:cursor-not-allowed"
+// 				>
+// 					{pending ? "Saving..." : "Save Product"}
+// 				</button>
+
+// 				{state?.message && (
+// 					<p className="mt-4 text-center text-sm text-warning-500">
+// 						{state.message}
+// 					</p>
+// 				)}
+// 			</Form>
+// 		</div>
+// 	);
+// }
+
 "use client";
 
 import Form from "next/form";
 import { useActionState } from "react";
 import { type ActionState, addProductActionState } from "@/lib/actions";
-import type { ProductFormData, Category } from "@/lib/types";
+import type { ProductFormData } from "@/lib/types";
 
 const initialState: ActionState = null;
 
-export default function CreateForm({
-  categories,
-}: {
-  categories: Category[];
-}) {
-  const [state, formAction, pending] = useActionState(
-    addProductActionState,
-    initialState
-  );
+const inputClass =
+	"bg-basic-900 text-basic-100 border border-ui-border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-primary-500";
 
+export default function CreateForm() {
+	const [state, formAction, pending] = useActionState(
+		addProductActionState,
+		initialState,
+	);
 
-  const data = state?.data as ProductFormData;
+	const data = state?.data as Partial<ProductFormData> | undefined;
 
-  return (
-    <div className="w-full">
-      <Form
-        key={state?.timestamp}
-        action={formAction}
-        className="w-full bg-[var(--color-bg)] p-12 rounded-3xl shadow-xl border border-[var(--color-border)]"
-      >
-        <div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-6 items-center">
-         
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="title"
-          >
-            Title
-          </label>
-          <input
-            className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            type="text"
-            id="title"
-            name="title"
-            minLength={3}
-            maxLength={20}
-            defaultValue={data?.title}
-            required
-          />
+	return (
+		<div className="w-full">
+			<Form
+				key={state?.timestamp}
+				action={formAction}
+				className="w-full bg-basic-800 p-12 rounded-3xl shadow-xl border border-ui-border"
+			>
+				<div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-6 items-center">
+					<label
+						className="font-medium text-basic-300"
+						htmlFor="name"
+					>
+						Name
+					</label>
+					<div className="col-start-2 flex flex-col gap-1">
+						<input
+							className={inputClass}
+							type="text"
+							id="name"
+							name="name"
+							minLength={3}
+							maxLength={100}
+							defaultValue={data?.name ?? ""}
+							required
+						/>
+						{state?.errors?.name && (
+							<p className="text-sm text-warning-500">
+								{state.errors.name[0]}
+							</p>
+						)}
+					</div>
 
-         
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="brand"
-          >
-            Brand
-          </label>
-          <input
-            className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            type="text"
-            id="brand"
-            name="brand"
-            defaultValue={data?.brand}
-            required
-          />
+					<label
+						className="font-medium text-basic-300"
+						htmlFor="price"
+					>
+						Price
+					</label>
+					<div className="col-start-2 flex flex-col gap-1">
+						<input
+							className={inputClass}
+							type="number"
+							id="price"
+							name="price"
+							min="0.01"
+							step="0.01"
+							defaultValue={data?.price ?? ""}
+							required
+						/>
+						{state?.errors?.price && (
+							<p className="text-sm text-warning-500">
+								{state.errors.price[0]}
+							</p>
+						)}
+					</div>
 
-          
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="price"
-          >
-            Price
-          </label>
-          {/* <input
-            className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            type="number"
-            min="0.5"
-            step="0.01"
-            id="price"
-            name="price"
-            defaultValue={data?.price}
-            required
-          /> */}
-          <div className="col-start-2 flex flex-col space-y-1">
-            <input
-                className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-                type="number"
-                id="price"
-                name="price"
-                min="0.5"
-                step="0.01"
-                defaultValue={data?.price}
-                required
-            />
-            {state?.errors?.price && (
-                <p className="text-sm text-red-600">
-                {state.errors.price[0]}
-                </p>
-            )}
-            </div>
-       
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="stock"
-          >
-            Stock
-          </label>
-          <input
-            className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            type="number"
-            id="stock"
-            name="stock"
-            defaultValue={data?.stock}
-            required
-          />
+					<label
+						className="font-medium text-basic-300"
+						htmlFor="stock"
+					>
+						Stock
+					</label>
+					<div className="col-start-2 flex flex-col gap-1">
+						<input
+							className={inputClass}
+							type="number"
+							id="stock"
+							name="stock"
+							min="0"
+							step="1"
+							defaultValue={data?.stock ?? ""}
+							required
+						/>
+						{state?.errors?.stock && (
+							<p className="text-sm text-warning-500">
+								{state.errors.stock[0]}
+							</p>
+						)}
+					</div>
 
-       
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="categoryId"
-          >
-            Category
-          </label>
-          <select
-            className="border border-[var(--color-border)] rounded-lg p-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            id="categoryId"
-            name="categoryId"
-            defaultValue={data?.categoryId ?? ""}
-            required
-          >
-            <option value="" disabled>
-              Select a category
-            </option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+					<label
+						className="font-medium text-basic-300"
+						htmlFor="rarity"
+					>
+						Rarity
+					</label>
+					<div className="col-start-2 flex flex-col gap-1">
+						<select
+							className={inputClass}
+							id="rarity"
+							name="rarity"
+							defaultValue={data?.rarity ?? ""}
+							required
+						>
+							<option
+								value=""
+								disabled
+								className="bg-basic-800 text-basic-300"
+							>
+								Select rarity
+							</option>
+							<option
+								value="COMMON"
+								className="bg-basic-800 text-basic-100"
+							>
+								COMMON
+							</option>
+							<option
+								value="RARE"
+								className="bg-basic-800 text-basic-100"
+							>
+								RARE
+							</option>
+							<option
+								value="EPIC"
+								className="bg-basic-800 text-basic-100"
+							>
+								EPIC
+							</option>
+							<option
+								value="LEGENDARY"
+								className="bg-basic-800 text-basic-100"
+							>
+								LEGENDARY
+							</option>
+						</select>
+						{state?.errors?.rarity && (
+							<p className="text-sm text-warning-500">
+								{state.errors.rarity[0]}
+							</p>
+						)}
+					</div>
 
-        
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="description"
-          >
-            Description
-          </label>
-          <textarea
-            className="border border-[var(--color-border)] rounded-lg p-2 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            id="description"
-            name="description"
-            minLength={5}
-            maxLength={400}
-            defaultValue={data?.description}
-            required
-          />
+					<label
+						className="font-medium text-basic-300"
+						htmlFor="description"
+					>
+						Description
+					</label>
+					<div className="col-start-2 flex flex-col gap-1">
+						<textarea
+							className={`${inputClass} h-24 resize-none`}
+							id="description"
+							name="description"
+							minLength={5}
+							maxLength={400}
+							defaultValue={data?.description ?? ""}
+							required
+						/>
+						{state?.errors?.description && (
+							<p className="text-sm text-warning-500">
+								{state.errors.description[0]}
+							</p>
+						)}
+					</div>
 
-        
-          <label
-            className="font-medium text-[var(--color-text-secondary)]"
-            htmlFor="thumbnail"
-          >
-            Thumbnail
-          </label>
-          {/* <input
-            className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            type="url"
-            id="thumbnail"
-            name="thumbnail"
-            defaultValue={data?.thumbnail}
-            required
-          />
-        </div> */}
+					<label
+						className="font-medium text-basic-300"
+						htmlFor="image_url"
+					>
+						Image URL
+					</label>
+					<div className="col-start-2 flex flex-col gap-1">
+						<input
+							className={inputClass}
+							type="text"
+							id="image_url"
+							name="image_url"
+							defaultValue={data?.image_url ?? ""}
+							required
+						/>
+						{state?.errors?.image_url && (
+							<p className="text-sm text-warning-500">
+								{state.errors.image_url[0]}
+							</p>
+						)}
+					</div>
+				</div>
 
-    
-        <div className="col-start-2 flex flex-col space-y-1">
-        <input
-            type="text"
-            id="thumbnail"
-            name="thumbnail"
-            defaultValue={data?.thumbnail}
-            required
-            className="border border-[var(--color-border)] rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-        />
-        {state?.errors?.thumbnail && (
-            <p className="text-sm text-red-600">
-            {state.errors.thumbnail[0]}
-            </p>
-        )}
-        </div>
+				<button
+					type="submit"
+					disabled={pending}
+					className="mt-8 w-auto px-8 bg-secondary-500 text-basic-100 py-2 rounded-lg font-medium hover:bg-secondary-600 transition mx-auto block disabled:opacity-50 disabled:cursor-not-allowed"
+				>
+					{pending ? "Saving..." : "Save Product"}
+				</button>
 
-    </div>
-
-       
-        <button
-          type="submit"
-          disabled={pending}
-          className="mt-8 w-auto px-8 bg-[var(--color-primary)] text-white py-2 rounded-lg font-medium hover:opacity-90 transition mx-auto block disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {pending ? "Saving..." : "Save Product"}
-        </button>
-
-       
-        {state?.message && (
-          <p className="mt-4 text-center text-sm text-[var(--color-danger)]">
-            {state.message}
-          </p>
-        )}
-      </Form>
-    </div>
-  );
+				{state?.message && (
+					<p className="mt-4 text-center text-sm text-warning-500">
+						{state.message}
+					</p>
+				)}
+			</Form>
+		</div>
+	);
 }
-
-
