@@ -184,7 +184,7 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
               <section className="flex gap-6 text-[.7rem] *:policy">
                 {/* Shipping */}
                 <div className="">
-                  <Truck className="text-effect-red" />
+                  <Truck className="text-secondary-500" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">Free shipping</span>
                     <span className="text-basic-400">Orders over $500</span>
@@ -192,7 +192,7 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                 </div>
                 {/* Return policy */}
                 <div className="">
-                  <RotateCcw className="text-effect-red" />
+                  <RotateCcw className="text-secondary-500" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">30-day returns</span>
                     <span className="text-basic-400">No questions asked</span>
@@ -200,7 +200,7 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                 </div>
                 {/* Certificate */}
                 <div className="">
-                  <Award className="text-effect-red" />
+                  <Award className="text-secondary-500" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">Certified Hero</span>
                     <span className="text-basic-400">Battle-tested</span>
@@ -211,8 +211,8 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
           </main>
           {/* Related section */}
           <section className="py-16">
-            <div className="text-base-white relative p-4 grid items-center">
-              <div className="absolute h-7 w-1 bg-effect-red"></div>
+            <div className="text-basic-100 relative p-4 grid items-center">
+              <div className="absolute h-7 w-1 bg-secondary-500"></div>
               <h2 className="uppercase font-bold italic">Related gear</h2>
             </div>
             <div className="flex gap-4">
@@ -222,7 +222,7 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                     {/* Benday dots overlay on image*/}
                     <div className="benday-dots absolute inset-0"></div>
                     <Image
-                      className="w-100 border-2 border-basic-400/20 group-hover:border-effect-red"
+                      className="w-100 border-2 border-basic-400/20 group-hover:border-secondary-500"
                       src={product.image}
                       alt="mask"
                       width={250}
@@ -230,24 +230,24 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                     />
                   </div>
                   <div
-                    className={`absolute text-[.7rem] border-base-white border rounded-sm px-2 top-2 left-2 
+                    className={`absolute text-[.7rem] border-ui-border border rounded-sm px-2 top-2 left-2 
               ${
                 product.rarity === 'Legendary'
-                  ? 'bg-rarity-legendary text-base-black'
+                  ? 'bg-rarity-legendary text-basic-900'
                   : product.rarity === 'Epic'
                     ? 'bg-rarity-epic'
                     : product.rarity === 'Rare'
                       ? 'bg-rarity-rare'
-                      : 'bg-rarity-uncommon text-base-black'
+                      : 'bg-rarity-uncommon text-basic-900'
               }`}
                   >
                     {product.rarity}
                   </div>
                   {/* Product info */}
                   <div className="flex flex-col p-2">
-                    <span className="text-effect-red uppercase text-[.5rem] tracking-wider">{product.category}</span>
+                    <span className="text-secondary-500 uppercase text-[.5rem] tracking-wider">{product.category}</span>
                     <span className="italic uppercase font-bold text-[.7rem]">{product.name}</span>
-                    <span className="text-effect-yellow">${product.price}</span>
+                    <span className="text-primary-500">${product.price}</span>
                   </div>
                 </Link>
               ))}

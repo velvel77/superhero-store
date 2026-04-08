@@ -5,47 +5,37 @@
   --color-primary-100: #fff9db;
   --color-primary-300: #ffe066;
   --color-primary-400: #ffd43b;
-  --color-primary-500: #ffcc00; /* main yellow */
+  --color-primary-500: #fcdb1d;
+  /* main yellow*/
 
   /* ================= SECONDARY (RED / ACTION) ================= */
   --color-secondary-100: #ffe3e3;
   --color-secondary-200: #ffc9c9;
-  --color-secondary-500: #dc2626; /* strong red */
+  --color-secondary-500: #dc2626; /* strong red, maybe change to this #e62e2e */
   --color-secondary-600: #b91c1c;
-
-  /* ================= BASIC ================= */
-  --color-base-white: #ffffff;
-  --color-base-black: #000000;
 
   /* ================= BASIC (DARK THEME) ================= */
   --color-basic-100: #f8f9fa;
   --color-basic-200: #e9ecef;
   --color-basic-300: #adb5bd;
   --color-basic-400: #868e96;
+  --color-basic-600: #282c33;
 
-  --color-basic-700: #1c1f26; /* cards */
-  --color-basic-800: #14171c; /* surfaces */
-  --color-basic-900: #0b0f14; /* main background */
+  --color-basic-700: #1c1f26;
+  /* cards */
+  --color-basic-800: #14171c;
+  /* surfaces */
+  --color-basic-900: #0b0f14;
+  /* main background */
 
   /* ================= WARNING ================= */
   --color-warning-500: #ff4d4f;
 
-  /* ================= GOLD / PREMIUM ================= */
-  --color-info-brown-100: #fff3bf;
-  --color-info-brown-500: #c9a227;
-  --color-info-brown-900: #7a5c00;
-
-  /* ================= SOFT YELLOW ================= */
-  --color-info-yellow-100: #fff9db;
-  --color-info-yellow-200: #fff3bf;
-
-  /* ================= TECH BLUE (ACCENT) ================= */
-  --color-info-blue-100: #e7f0ff;
-  --color-info-blue-500: #4dabf7;
-
   /* ================= BORDER (DARK THEME) ================= */
-  --color-ui-border: #232833; /* subtle default border */
-  --color-ui-border-strong: #2e3440; /* stronger borders (cards, sections) */
+  --color-ui-border: #232833;
+  /* subtle default border */
+  --color-ui-border-strong: #2e3440;
+  /* stronger borders (cards, sections) */
 
   /* ================= GEAR RARITY ================= */
   --color-rarity-uncommon: #1eff00;
@@ -53,17 +43,12 @@
   --color-rarity-epic: #a335ee;
   --color-rarity-legendary: #ff8000;
 
-  /* ================= EFFECT COLORS ================= */
-  --color-effect-red: #e62e2e;
-  --color-effect-blue: #161a1e;
-  --color-effect-yellow: #fcdb1d;
-  --color-effect-benday: #f5f2eb0f;
-  --color-effect-gray: #282c33;
+  /* ================= EFFECTS / OVERLAYS ================= */
+  --color-pattern-benday: #f5f2eb0f;
   --color-effect-light-blue: #4d80e6;
 
-  --color-effect-gray-20: #5a5a5a2c;
-  --color-effect-dark-20: #2e2e2e17;
-  --color-effect-dark: #29292c;
+  --color-overlay-gray-soft: #5a5a5a2c;
+  --color-overlay-dark-soft: #2e2e2e17;
 }
 
 body {
@@ -80,7 +65,7 @@ button {
   transition: all 150ms ease-in;
 
   &:hover {
-    color: var(--color-effect-red);
+    color: var(--color-secondary-500);
     cursor: pointer;
   }
 }
@@ -89,31 +74,29 @@ button {
   transition: all 150ms ease-in;
 
   &:hover {
-    color: var(--color-text-inverted);
+    color: white;
   }
 }
 
 @utility benday-dots {
-  background-image: radial-gradient(var(--color-effect-benday) 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-pattern-benday) 1px, transparent 1px);
   background-size: 8px 8px;
 }
 
 @utility diagonal-stripes {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 4px,
-    var(--color-effect-gray-20) 4px,
-    var(--color-effect-dark-20) 5px
-  );
+  background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 4px,
+      var(--color-overlay-gray-soft) 4px,
+      var(--color-overlay-dark-soft) 5px);
 }
 
 @utility catalog-hover {
   transition: all 100ms ease-in;
 
   &:hover {
-    border-color: var(--color-effect-red);
-    box-shadow: 0px 0px 15px var(--color-effect-red);
+    border-color: var(--color-secondary-500);
+    box-shadow: 0px 0px 15px var(--color-secondary-500);
     cursor: pointer;
   }
 }
@@ -140,8 +123,8 @@ button {
   transition: all 100ms ease-in;
 
   &:hover {
-    border-color: var(--color-effect-red);
-    box-shadow: 0px 0px 15px var(--color-effect-red);
+    border-color: var(--color-secondary-500);
+    box-shadow: 0px 0px 15px var(--color-secondary-500);
   }
 }
 
@@ -149,8 +132,8 @@ button {
   transition: all 100ms ease-in;
 
   &:hover {
-    border-color: var(--color-effect-yellow);
-    box-shadow: 0px 0px 15px var(--color-effect-yellow);
+    border-color: var(--color-primary-500);
+    box-shadow: 0px 0px 15px var(--color-primary-500);
   }
 }
 
