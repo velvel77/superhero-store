@@ -5,6 +5,7 @@ import weapons from '@/public/weapons.jpg';
 import tech from '@/public/tech.jpg';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { SuperheroSearchResponse } from '@/app/types';
 
 const categories = [
   {
@@ -37,10 +38,33 @@ const categories = [
   },
 ];
 
-export default function ShopCategories() {
+export default async function ShopCategories() {
+  let result: SuperheroSearchResponse | null = null;
+  const API_KEY = process.env.API_KEY;
+  try {
+    const response = await fetch(`https://superheroapi.com/api/${API_KEY}/search/a`);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    result = (await response.json()) as SuperheroSearchResponse;
+    if (!result || result.response === 'error') {
+      return <div>Failed to load</div>;
+    }
+    // console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <section className="benday-dots bg-effect-blue py-8">
       <div className=" mx-auto w-full max-w-260">
+        <section className="grid grid-cols-4 gap-2 rounded-md">
+          {result.results.map((hero) => (
+            <Link className="border border-amber-200" href={`/shop/${hero.id}`} key={hero.id}>
+              <Image className="w-full max-w-50" src={hero.image.url} alt={hero.name} width={100} height={200} />
+              <div>{hero.name}</div>
+            </Link>
+          ))}
+        </section>
         <div className="text-base-white relative p-4 grid items-center">
           <div className="absolute mx-4 h-7 w-1 bg-effect-yellow"></div>
           <h2 className="px-4">Gear Categories</h2>
