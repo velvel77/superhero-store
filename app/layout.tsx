@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { ToastListener } from "@/components/toast-listener";
 import { Providers } from "@/lib/providers";
+import CartProviderWrapper from "@/components/ui/cart-provider-wrapper";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
 			<body className={`${inter.variable} antialiased `}>
 				<Toaster position="top-center" />
 				<ToastListener />
-				<Providers>{children}</Providers>
+				<CartProviderWrapper>
+					<Providers>{children}</Providers>
+				</CartProviderWrapper>
 			</body>
 		</html>
 	);
