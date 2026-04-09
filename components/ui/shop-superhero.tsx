@@ -96,13 +96,14 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
             <section className="max-w-120">
               <div>
                 <span
-                  className={`${alignment === 'good' ? `text-rarity-uncommon` : alignment === 'neutral' ? 'text-amber-300' : `text-red-600`} uppercase tracking-widest font-bold text-effect-red text-[.7rem]`}
+                  className={`${alignment === 'good' ? `text-rarity-uncommon` : alignment === 'neutral' ? 'text-primary-500' : `text-red-600`} 
+                  uppercase tracking-widest font-bold text-[.7rem]`}
                 >
                   {alignment === 'good' ? `Hero` : alignment === 'neutral' ? 'Anti-hero' : `Villain`}
                 </span>
-                <h2 className="text-shadow-md text-shadow-effect-red italic font-bold text-3xl">{hero.name}</h2>
+                <h2 className="text-shadow-md text-shadow-secondary-500 italic font-bold text-3xl">{hero.name}</h2>
                 <div className="py-4 mb-4 border-b border-basic-400/20">
-                  <span className="text-effect-yellow text-2xl">{`${alignment === 'good' ? `$${hourlyFee * 10}` : `$${hourlyFee * 10 * 2}`} `}</span>{' '}
+                  <span className="text-primary-500 text-2xl">{`${alignment === 'good' ? `$${hourlyFee * 10}` : `$${hourlyFee * 10 * 2}`} `}</span>{' '}
                   <span className="text-[.5rem]"> / hour</span>
                 </div>
               </div>
@@ -118,14 +119,14 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                 <div className="flex flex-col text-sm rounded-sm border-2 border-basic-400 bg-effect-blue p-2 benday-dots">
                   <h3 className="flex items-center gap-2 mb-2">
                     <span>
-                      <Shield className="size-4 text-effect-red" />
+                      <Shield className="size-4 text-secondary-500" />
                     </span>
                     <span className="italic uppercase font-bold text-[.7rem]">Power Raiting</span>
                   </h3>
                   <span>Combat</span>
-                  <input readOnly className="accent-effect-red" type="range" min={0} max={100} value={combat} />
+                  <input readOnly className="accent-secondary-500" type="range" min={0} max={100} value={combat} />
                   <span>Speed</span>
-                  <input readOnly className="accent-effect-yellow" type="range" min={0} max={100} value={speed} />
+                  <input readOnly className="accent-primary-500" type="range" min={0} max={100} value={speed} />
                   <span>Strength</span>
                   <input readOnly className="accent-rarity-legendary" type="range" min={0} max={100} value={strength} />
                   <span>Intelligence</span>
@@ -159,23 +160,23 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                       className="h-full w-10 flex justify-center group"
                       onClick={() => (amount === 1 ? 1 : setAmount(amount - 1))}
                     >
-                      <MinusIcon className="self-center size-5 group-hover:text-base-white" />
+                      <MinusIcon className="self-center size-5 group-hover:text-basic-100" />
                     </button>
                     {/* Amount */}
-                    <div className="w-10 self-center text-base-white text-center">{amount}</div>
+                    <div className="w-10 self-center text-basic-100 text-center">{amount}</div>
                     {/* Increase amount */}
                     <button className="h-full w-10 flex justify-center group" onClick={() => setAmount(amount + 1)}>
-                      <PlusIcon className="self-center size-5 group-hover:text-base-white" />
+                      <PlusIcon className="self-center size-5 group-hover:text-basic-100" />
                     </button>
                   </div>
                   {/* Hire */}
-                  <button className="bg-effect-red p-4 flex-2 border-2 border-base-white rounded-sm">Hire</button>
+                  <button className="bg-secondary-500 p-4 flex-2 border-2 border-basic-100 rounded-sm">Hire</button>
                   {/* Favorite */}
                   <button
                     onClick={() => setFavorite(!favorite)}
-                    className={`size-16 border-2 hover:border-effect-red bg-effect-dark ${favorite ? 'border-effect-red text-effect-red' : 'border-basic-400 text-basic-400'} rounded-sm group flex items-center justify-center`}
+                    className={`size-16 border-2 hover:border-secondary-500 bg-effect-dark ${favorite ? 'border-effect-red text-secondary-500' : 'border-basic-400 text-basic-400'} rounded-sm group flex items-center justify-center`}
                   >
-                    <Heart className={`group-hover:text-effect-red ${favorite ? 'fill-effect-red' : ''}`} />
+                    <Heart className={`group-hover:text-secondary-500 ${favorite ? 'fill-secondary-500' : ''}`} />
                   </button>
                 </div>
               </div>
