@@ -41,6 +41,7 @@ const categories = [
 export default async function ShopCategories() {
   let result: SuperheroSearchResponse | null = null;
   const API_KEY = process.env.API_KEY;
+
   try {
     const response = await fetch(`https://superheroapi.com/api/${API_KEY}/search/a`);
     if (!response.ok) {
@@ -54,6 +55,12 @@ export default async function ShopCategories() {
   } catch (error) {
     console.log(error);
   }
+
+  // Null check to fix squiggly line in row 68
+  if (!result || !result.results) {
+    return <div>Failed to load</div>;
+  }
+
   return (
     <section className="benday-dots bg-basic-700 py-8">
       <div className=" mx-auto w-full max-w-260">
