@@ -44,7 +44,6 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
     Number(speed) * 8 +
     Number(strength) * 5;
 
-  type status = 'Available' | 'Unavailable';
   const raiting =
     totalPower >= 400
       ? 'Legendary'
@@ -103,6 +102,7 @@ export default function Superhero({ hero }: { hero: SuperheroProp }) {
                 </span>
                 <h2 className="text-shadow-md text-shadow-secondary-500 italic font-bold text-3xl">{hero.name}</h2>
                 <div className="py-4 mb-4 border-b border-basic-400/20">
+                  {/* Hourly fee */}
                   <span className="text-primary-500 text-2xl">{`${alignment === 'good' ? `$${hourlyFee * 10}` : `$${hourlyFee * 10 * 2}`} `}</span>{' '}
                   <span className="text-[.5rem]"> / hour</span>
                 </div>
