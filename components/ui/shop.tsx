@@ -414,9 +414,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 	return (
 		<div className="min-h-screen bg-basic-900 text-basic-100">
 			<section className="border-y border-ui-border bg-basic-800">
-				<div className="mx-auto max-w-[1580px] px-7 py-0 xl:px-8">
+				<div className="mx-auto max-w-395 px-7 py-0 xl:px-8">
 					<div className="relative overflow-hidden border-x border-ui-border bg-basic-800 diagonal-stripes">
-						<div className="benday-dots mx-auto grid min-h-[210px] items-center gap-8 px-8 py-10 lg:grid-cols-[1.15fr_0.85fr] xl:px-10">
+						<div className="benday-dots mx-auto grid min-h-52.5 items-center gap-8 px-8 py-10 lg:grid-cols-[1.15fr_0.85fr] xl:px-10">
 							<div className="relative">
 								<p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.42em] text-secondary-500">
 									/// HERO VAULT — GEAR DIVISION ///
@@ -432,7 +432,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 								</h1>
 
 								<div className="mt-5 flex items-center gap-3">
-									<div className="h-[3px] w-12 bg-secondary-500" />
+									<div className="h-0.75 w-12 bg-secondary-500" />
 									<p className="text-[11px] text-basic-300">
 										Premium heroic equipment & tactical gear
 									</p>
@@ -440,11 +440,11 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 							</div>
 
 							<div className="relative flex items-start justify-start gap-4 lg:justify-end">
-								<div className="absolute right-[-20px] top-[-30px] hidden h-52 w-52 opacity-50 lg:block">
+								<div className="absolute -right-5 -top-7.5 hidden h-52 w-52 opacity-50 lg:block">
 									<div className="h-full w-full rounded-full bg-[repeating-conic-gradient(from_0deg,rgba(220,38,38,0.55)_0deg_2deg,transparent_2deg_16deg)]" />
 								</div>
 
-								<div className="relative z-10 grid w-full max-w-[410px] grid-cols-3 gap-3">
+								<div className="relative z-10 grid w-full max-w-102.5 grid-cols-3 gap-3">
 									<div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
 										<div className="mb-2 text-xs text-secondary-500">◌</div>
 										<div className="text-[28px] font-black leading-none">
@@ -481,11 +481,11 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 				</div>
 			</section>
 
-			<section className="mx-auto max-w-[1580px] px-7 py-0 xl:px-8">
+			<section className="mx-auto max-w-395 px-7 py-0 xl:px-8">
 				<div className="border-x border-ui-border bg-basic-900 px-8 py-7 xl:px-10">
 					<div className="mb-6 flex flex-col gap-2">
 						<div className="flex items-center gap-3">
-							<div className="h-8 w-[3px] bg-secondary-500" />
+							<div className="h-8 w-0.75 bg-secondary-500" />
 							<h2 className="text-[28px] font-black uppercase italic tracking-tight text-basic-100">
 								Tactical catalog
 							</h2>
@@ -575,7 +575,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setMaxPrice(Math.max(value, minPrice));
 											setPage(1);
 										}}
-										className="w-full accent-[var(--color-effect-light-blue)]"
+										className="w-full accent-effect-light-blue"
 									/>
 
 									<div className="flex items-center justify-between gap-2 pt-1">
@@ -920,7 +920,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 										<button
 											onClick={() => setPage((prev) => Math.max(1, prev - 1))}
 											disabled={page === 1}
-											className="min-w-[44px] border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
+											className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
 										>
 											Prev
 										</button>
@@ -930,7 +930,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 												<button
 													key={pageNumber}
 													onClick={() => setPage(pageNumber)}
-													className={`min-w-[44px] border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
+													className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
 														page === pageNumber
 															? "border-secondary-500 bg-secondary-500/15 text-basic-100"
 															: "border-ui-border bg-basic-700 text-basic-100"
