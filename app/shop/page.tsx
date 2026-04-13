@@ -12,7 +12,7 @@ export default async function ShopPage() {
   return (
     <div>
       <ShopHeader />
-      <ShopPageUI products={products} superheroes={superheroes} />;
+      <ShopPageUI products={products} superheroes={superheroes} />
     </div>
   );
 }
