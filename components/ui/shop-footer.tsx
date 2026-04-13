@@ -7,7 +7,7 @@ export default function ShopFooter() {
       <div className="flex pb-8 mx-auto max-w-260">
         <div>
           <div className="flex gap-1 py-2 text-basic-100">
-            <Zap className="bg-secondary-500 border-2 rounded-xs p-1 size-6 border-ui-border" />
+            <Zap className="bg-secondary-500 border rounded-xs p-1 size-6 border-basic-100" />
             <h2 className="uppercase font-bold italic">Hero Vault</h2>
           </div>
           <p className="text-[.6rem] max-w-[30ch] text-basic-300">
