@@ -1,8 +1,7 @@
-// import dotenv from "dotenv";
+import dotenv from 'dotenv';
+import pkg from 'pg';
 
-// dotenv.config();
-
-import pkg from "pg";
+dotenv.config();
 
 const { Pool } = pkg;
 
@@ -12,7 +11,5 @@ export const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: Number(process.env.DB_PORT),
-  ssl: process.env.DB_HOST?.includes("supabase.com")
-    ? { rejectUnauthorized: false }
-    : false,
+  ssl: process.env.DB_HOST?.includes('supabase.com') ? { rejectUnauthorized: false } : false,
 });
