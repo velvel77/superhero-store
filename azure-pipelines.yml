@@ -1,19 +1,49 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- dev
+  branches:
+    include:
+      - main
+      - dev
+
+pr:
+  branches:
+    include:
+      - main
+      - dev
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+  - job: Frontend
+    displayName: Build frontend
+    steps:
+      - checkout: self
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+      - task: UseNode@1
+        inputs:
+          version: '22.x'
+        displayName: Use Node.js 22
+
+      - script: npm ci
+        displayName: Install frontend dependencies
+
+      - script: npm run build
+        displayName: Build frontend
+
+  - job: Backend
+    displayName: Build backend
+    steps:
+      - checkout: self
+
+      - task: UseNode@1
+        inputs:
+          version: '22.x'
+        displayName: Use Node.js 22
+
+      - script: npm ci
+        workingDirectory: api
+        displayName: Install backend dependencies
+
+      - script: npm run build
+        workingDirectory: api
+        displayName: Build backend
