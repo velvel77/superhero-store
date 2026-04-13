@@ -106,3 +106,25 @@ export interface SuperheroSearchResponse {
   response: string;
   results: SuperheroProp[];
 }
+
+export interface Hero {
+  id: number;
+  name: string;
+  price: string;
+  description: string;
+  superpowers: string;
+  stats: HeroStats;
+  image_url: string;
+  is_available: boolean;
+  joined_at: string;
+  ranking: 'S' | 'A' | 'B' | 'C' | string;
+}
+
+export interface HeroStats {
+  speed: number;
+  combat: number;
+  energy: number;
+  strength: number;
+  durability: number;
+  intelligence: number;
+}
