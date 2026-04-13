@@ -32,31 +32,11 @@ export default function Superhero({ hero }: { hero: Hero }) {
   const strength = Number(hero.stats.strength);
   const speed = Number(hero.stats.speed);
 
-  const totalPower = energy + intelligence + durability + combat + strength + speed;
-
-  // const raiting =
-  //   totalPower >= 400
-  //     ? 'Legendary'
-  //     : totalPower < 400 && totalPower >= 300
-  //       ? 'Epic'
-  //       : totalPower < 300 && totalPower >= 200
-  //         ? 'Rare'
-  //         : 'Common';
-
-  const rarity =
-    totalPower >= 400
-      ? 'text-rarity-legendary'
-      : totalPower < 400 && totalPower >= 300
-        ? 'text-rarity-epic'
-        : totalPower < 300 && totalPower >= 200
-          ? 'text-rarity-rare'
-          : 'text-rarity-common';
-
   return (
     <div>
       <ShopHeader />
       <div className="max-w-260 mx-auto px-4">
-        <Link className="uppercase text-[.5rem]" href={'/shop'}>
+        <Link className="uppercase text-[.5rem]" href={'/'}>
           {`< Back to catalog`}
         </Link>
         <div className="flex flex-col">
