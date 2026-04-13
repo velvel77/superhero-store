@@ -3,10 +3,12 @@
 import { cookies } from "next/headers";
 
 export type CartItem = {
-    id: string;
+    id: number;
     name: string;
     price: number;
     quantity: number;
+    type: "product" | "superhero";
+    image_url?: string | null;
 
 }
 
@@ -24,18 +26,30 @@ export async function getCart(): Promise<CartItem[]> {
     }
 }
 
-export async function addToCart(item: CartItem): Promise<void>{
-    try{
+export async function addToCart(item: CartItem): Promise<void> {
+    try {
         const storedCookie = await cookies();
         const cart = await getCart();
         const inCart = cart.find(i => i.id === item.id);
 
-        if(inCart){
+        if (inCart) {
             inCart.quantity += 1;
-        } else {cart.push({...item, quantity: 1});
-    }
-    storedCookie.set("cart", JSON.stringify(cart));
+        } else {
+            cart.push({ ...item, quantity: 1 });
+        }
+        storedCookie.set("cart", JSON.stringify(cart));
     } catch (error) {
         console.error("Failed add to cart:", error)
+    }
+}
+
+export async function removeFromCart(id: number): Promise<void> {
+    try {
+        const storedCookie = await cookies();
+        const cart = await getCart();
+        const updatedList = cart.filter(i => i.id !== id);
+        storedCookie.set("cart", JSON.stringify(updatedList));
+    } catch (error) {
+        console.error("Failed to remove from cart:", error)
     }
 }

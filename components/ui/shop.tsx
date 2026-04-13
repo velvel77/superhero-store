@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { ShopProduct } from "@/lib/queries/products";
+import CartButtonProduct from "./cart-btn-product";
 
 type Superhero = {
 	id: number;
@@ -37,25 +38,25 @@ type PowerTier = "street" | "city" | "planetary" | "cosmic";
 
 type CatalogItem =
 	| {
-			type: "product";
-			id: number;
-			name: string;
-			description: string | null;
-			price: number | null;
-			image_url: string | null;
-			score: number;
-			product: ShopProduct;
-	  }
+		type: "product";
+		id: number;
+		name: string;
+		description: string | null;
+		price: number | null;
+		image_url: string | null;
+		score: number;
+		product: ShopProduct;
+	}
 	| {
-			type: "superhero";
-			id: number;
-			name: string;
-			description: string | null;
-			price: number | null;
-			image_url: string | null;
-			score: number;
-			hero: Superhero;
-	  };
+		type: "superhero";
+		id: number;
+		name: string;
+		description: string | null;
+		price: number | null;
+		image_url: string | null;
+		score: number;
+		hero: Superhero;
+	};
 
 const ITEMS_PER_PAGE = 6;
 
@@ -530,11 +531,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 												setContentFilter(item);
 												setPage(1);
 											}}
-											className={`border px-2 py-2 text-[10px] font-black uppercase tracking-[0.12em] ${
-												contentFilter === item
+											className={`border px-2 py-2 text-[10px] font-black uppercase tracking-[0.12em] ${contentFilter === item
 													? "border-secondary-500 bg-secondary-500/10 text-basic-100"
 													: "border-ui-border bg-basic-800 text-basic-300"
-											}`}
+												}`}
 										>
 											{item === "all"
 												? "All"
@@ -601,11 +601,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setContentFilter("all");
 											setPage(1);
 										}}
-										className={`h-6 w-6 border ${
-											contentFilter === "all"
+										className={`h-6 w-6 border ${contentFilter === "all"
 												? "border-basic-100"
 												: "border-ui-border"
-										} bg-basic-100`}
+											} bg-basic-100`}
 									/>
 									<button
 										title="Products"
@@ -613,11 +612,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setContentFilter("products");
 											setPage(1);
 										}}
-										className={`h-6 w-6 border ${
-											contentFilter === "products"
+										className={`h-6 w-6 border ${contentFilter === "products"
 												? "border-basic-100"
 												: "border-ui-border"
-										} bg-rarity-rare`}
+											} bg-rarity-rare`}
 									/>
 									<button
 										title="Superheroes"
@@ -625,29 +623,26 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setContentFilter("superheroes");
 											setPage(1);
 										}}
-										className={`h-6 w-6 border ${
-											contentFilter === "superheroes"
+										className={`h-6 w-6 border ${contentFilter === "superheroes"
 												? "border-basic-100"
 												: "border-ui-border"
-										} bg-secondary-500`}
+											} bg-secondary-500`}
 									/>
 									<button
 										title="Legendary"
 										onClick={() => toggleRarity("LEGENDARY")}
-										className={`h-6 w-6 border ${
-											selectedRarities.includes("LEGENDARY")
+										className={`h-6 w-6 border ${selectedRarities.includes("LEGENDARY")
 												? "border-basic-100"
 												: "border-ui-border"
-										} bg-primary-500`}
+											} bg-primary-500`}
 									/>
 									<button
 										title="Epic"
 										onClick={() => toggleRarity("EPIC")}
-										className={`h-6 w-6 border ${
-											selectedRarities.includes("EPIC")
+										className={`h-6 w-6 border ${selectedRarities.includes("EPIC")
 												? "border-basic-100"
 												: "border-ui-border"
-										} bg-rarity-epic`}
+											} bg-rarity-epic`}
 									/>
 									<button
 										title="Available heroes"
@@ -657,11 +652,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											);
 											setPage(1);
 										}}
-										className={`h-6 w-6 border ${
-											availabilityFilter === "available"
+										className={`h-6 w-6 border ${availabilityFilter === "available"
 												? "border-basic-100"
 												: "border-ui-border"
-										} bg-rarity-uncommon`}
+											} bg-rarity-uncommon`}
 									/>
 								</div>
 							</div>
@@ -854,6 +848,14 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 															<div className="mt-2 text-[18px] font-black text-primary-500">
 																{formatPrice(product.price)}
 															</div>
+															<CartButtonProduct item={{
+																id: product.id,
+																name: product.name,
+																price: product.price,
+																quantity: 1,
+																type: "product",
+																image_url: product.image_url,
+															}} />
 														</div>
 													</Link>
 												);
@@ -930,11 +932,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 												<button
 													key={pageNumber}
 													onClick={() => setPage(pageNumber)}
-													className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
-														page === pageNumber
+													className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${page === pageNumber
 															? "border-secondary-500 bg-secondary-500/15 text-basic-100"
 															: "border-ui-border bg-basic-700 text-basic-100"
-													}`}
+														}`}
 												>
 													{pageNumber}
 												</button>

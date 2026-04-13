@@ -1,14 +1,13 @@
 "use client";
-import { addToCart, CartItem } from "@/app/cart/actions";
-import { Product } from "@/types";
+import { addToCart, CartItem, removeFromCart } from "@/app/cart/actions";
 import { createContext, useContext, useState } from "react";
 
 
 
 export interface CartContextType {
     items: CartItem[];
-    addItem: (product: Product) => Promise<void>;
-    // removeItem: (productId: string) => void;
+    addItem: (item: CartItem) => Promise<void>;
+    removeItem: (id: number) => void;
     // clearCart: () => void;
     totalItems: number;
 }
@@ -26,17 +25,12 @@ export function useCart() {
 export function CartProvider({ children, initialCart }: { children: React.ReactNode, initialCart: CartItem[] }) {
     const [items, setItems] = useState<CartItem[]>(initialCart);
 
-    async function addItem(product: Product) {
-        const item: CartItem = {
-            id: product.id.toString(),
-            name: product.name,
-            price: product.price,
-            quantity: 1,
-        };
+    async function addItem(item: CartItem) {
+
         try {
             await addToCart(item);
             setItems(prev => {
-                const inCart = prev.find(i => i.id === item.id);
+                const inCart = prev.find(i => i.id === item.id && i.type === item.type);
                 if (inCart) {
                     return prev.map(i => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i);
                 }
@@ -47,11 +41,20 @@ export function CartProvider({ children, initialCart }: { children: React.ReactN
         }
     }
 
+    async function removeItem(id: number) {
+        try {
+            await removeFromCart(id);
+            setItems(prev => prev.filter(i => i.id !== id));
+        } catch (error) {
+            console.error("Failed to remove item:", error)
+        }
+    }
+
 
 
     const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
     return (
-        <CartContext.Provider value={{ items, addItem, totalItems }}>
+        <CartContext.Provider value={{ items, addItem, removeItem, totalItems }}>
             {children}
         </CartContext.Provider>
     )
