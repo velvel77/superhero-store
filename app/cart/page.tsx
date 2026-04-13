@@ -1,3 +1,4 @@
+import CartList from "@/components/ui/cart-list";
 import { getCart } from "./actions";
 
 export default async function CartPage() {
@@ -11,16 +12,8 @@ export default async function CartPage() {
     return (
 
         <div>
-            <h1>What's in your cart</h1>
-            {cart.map(item => (
-                <div key={item.id}>
-                    <h6>{item.name}</h6>
-                    <span>{item.quantity} -</span>
-                    <span>{item.price * item.quantity} kr</span>
-
-                    <h6>Total: {cart.reduce((sum, i) => sum + i.price * i.quantity, 0)} kr</h6>
-                </div>
-            ))}
+            <h1>Your cart</h1>
+            <CartList />
         </div>
     )
 }
