@@ -12,43 +12,6 @@ type GetProductsParams = {
 	status?: StatusFilter;
 };
 
-// export async function getProducts({
-// 	page = 1,
-// 	limit = 5,
-// 	q = "",
-// 	rarity = "",
-// 	status = "",
-// }: GetProductsParams = {}): Promise<Product[]> {
-// 	const offset = (page - 1) * limit;
-
-// 	if (q.trim()) {
-// 		const res = await db.query(
-// 			`
-//       SELECT *
-//       FROM products
-//       WHERE name ILIKE $1
-//       ORDER BY created_at DESC
-//       LIMIT $2 OFFSET $3
-//       `,
-// 			[`%${q}%`, limit, offset],
-// 		);
-
-// 		return res.rows;
-// 	}
-
-// 	const res = await db.query(
-// 		`
-//     SELECT *
-//     FROM products
-//     ORDER BY created_at DESC
-//     LIMIT $1 OFFSET $2
-//     `,
-// 		[limit, offset],
-// 	);
-
-// 	return res.rows;
-// }
-
 export async function getProducts({
 	page = 1,
 	limit = 5,
@@ -80,29 +43,6 @@ export async function getProducts({
 
 	return res.rows;
 }
-
-// export async function getProductsCount(q = ""): Promise<number> {
-// 	if (q.trim()) {
-// 		const res = await db.query(
-// 			`
-//       SELECT COUNT(*)::int AS count
-//       FROM products
-//       WHERE name ILIKE $1
-//       `,
-// 			[`%${q}%`],
-// 		);
-
-// 		return res.rows[0].count;
-// 	}
-
-// 	const res = await db.query(`
-//     SELECT COUNT(*)::int AS count
-//     FROM products
-//   `);
-
-// 	return res.rows[0].count;
-// }
-
 
 export async function getProductsCount({
 	q = "",
@@ -196,7 +136,6 @@ export async function updateProductById(
 	return res.rows[0];
 }
 
-
 export async function deleteProductById(id: number): Promise<void> {
 	await db.query(
 		`
@@ -242,4 +181,52 @@ function buildProductFilters({
 		: "";
 
 	return { whereClause, values };
+}
+
+export type ShopProduct = {
+	id: number;
+	name: string;
+	price: number;
+	description: string | null;
+	stock: number;
+	image_url: string | null;
+	rarity: "COMMON" | "RARE" | "EPIC" | "LEGENDARY";
+	categories: string[];
+	stats: {
+		POWER?: number;
+		DURABILITY?: number;
+		SPECIAL?: number;
+	};
+};
+
+export async function getProductsForShop(): Promise<ShopProduct[]> {
+	const res = await db.query(
+		`
+    SELECT
+      p.id,
+      p.name,
+      p.price::float AS price,
+      p.description,
+      p.stock,
+      p.image_url,
+      p.rarity,
+      COALESCE(cat.categories, ARRAY[]::text[]) AS categories,
+      COALESCE(stat_block.stats, '{}'::jsonb) AS stats
+    FROM products p
+    LEFT JOIN LATERAL (
+      SELECT ARRAY_AGG(c.name ORDER BY c.name) AS categories
+      FROM product_categories pc
+      INNER JOIN categories c ON c.id = pc.category_id
+      WHERE pc.product_id = p.id
+    ) cat ON true
+    LEFT JOIN LATERAL (
+      SELECT JSONB_OBJECT_AGG(ps.stat_name, ps.value) AS stats
+      FROM product_stats ps
+      WHERE ps.product_id = p.id
+    ) stat_block ON true
+    ORDER BY p.created_at DESC, p.id DESC
+    `,
+	);
+
+	return res.rows;
 }
