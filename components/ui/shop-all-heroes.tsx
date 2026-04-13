@@ -7,8 +7,6 @@ export default async function ShopAllHeroes() {
   const data = await fetch('http://localhost:5000/superheroes');
   const heroes = await data.json();
 
-  console.log('This is heroess', heroes);
-
   return (
     <section className="diagonal-stripes py-8">
       <div className="max-w-260 mx-auto px-4">
@@ -31,6 +29,7 @@ export default async function ShopAllHeroes() {
                     src={hero.image_url}
                     alt={hero.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="inset-0 absolute bg-black/30 group-hover:bg-transparent transition-all duration-200"></div>
                 </div>
