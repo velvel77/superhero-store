@@ -35,9 +35,9 @@ export default async function ShopAllHeroes() {
                 </div>
                 {/* Status */}
                 <span
-                  className={`text-xs ${hero.name.includes('e') ? 'text-rarity-uncommon' : 'text-secondary-500'} backdrop-blur-2xl px-2 rounded-sm absolute top-2 right-2 text-shadow-sm text-shadow-black`}
+                  className={`text-xs ${hero.is_available ? 'text-rarity-uncommon' : 'text-secondary-500'} backdrop-blur-2xl px-2 rounded-sm absolute top-2 right-2 text-shadow-sm text-shadow-black`}
                 >
-                  {hero.name.includes('e') ? 'Available' : 'Unavailable'}
+                  {hero.is_available ? 'Available' : 'Unavailable'}
                 </span>
               </div>
               <div className="flex flex-col p-2">
@@ -46,7 +46,8 @@ export default async function ShopAllHeroes() {
                 </span>
                 <div className="py-4 mb-4">
                   {/* Hourly fee */}
-                  <span className="text-primary-500 text-2xl">500</span> <span className="text-[.5rem]"> / hour</span>
+                  <span className="text-primary-500 text-2xl">{hero.price}</span>{' '}
+                  <span className="text-[.5rem]"> / hour</span>
                 </div>
               </div>
             </Link>
