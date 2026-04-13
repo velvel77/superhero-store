@@ -1,15 +1,9 @@
 "use client";
 
-import { addToCart, CartItem } from "@/app/cart/actions";
+import { CartItem } from "@/app/cart/actions";
 import { useCart } from "@/context/CartContext";
 
-// interface ButtonProps {
-//     id: string;
-//     name: string;
-//     price: number;
-// }
-
-export default function CartButtonProduct({ item }: { item: CartItem }) {
+export default function CartButton({ item }: { item: CartItem }) {
     const { items, addItem, removeItem } = useCart();
     const inCart = items.some(i => i.id === item.id && i.type === "product");
     return inCart ? (

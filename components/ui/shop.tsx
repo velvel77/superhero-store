@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { ShopProduct } from "@/lib/queries/products";
-import CartButtonProduct from "./cart-btn-product";
+import CartButton from "./cart-button";
 
 type Superhero = {
 	id: number;
@@ -532,8 +532,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 												setPage(1);
 											}}
 											className={`border px-2 py-2 text-[10px] font-black uppercase tracking-[0.12em] ${contentFilter === item
-													? "border-secondary-500 bg-secondary-500/10 text-basic-100"
-													: "border-ui-border bg-basic-800 text-basic-300"
+												? "border-secondary-500 bg-secondary-500/10 text-basic-100"
+												: "border-ui-border bg-basic-800 text-basic-300"
 												}`}
 										>
 											{item === "all"
@@ -602,8 +602,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setPage(1);
 										}}
 										className={`h-6 w-6 border ${contentFilter === "all"
-												? "border-basic-100"
-												: "border-ui-border"
+											? "border-basic-100"
+											: "border-ui-border"
 											} bg-basic-100`}
 									/>
 									<button
@@ -613,8 +613,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setPage(1);
 										}}
 										className={`h-6 w-6 border ${contentFilter === "products"
-												? "border-basic-100"
-												: "border-ui-border"
+											? "border-basic-100"
+											: "border-ui-border"
 											} bg-rarity-rare`}
 									/>
 									<button
@@ -624,24 +624,24 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setPage(1);
 										}}
 										className={`h-6 w-6 border ${contentFilter === "superheroes"
-												? "border-basic-100"
-												: "border-ui-border"
+											? "border-basic-100"
+											: "border-ui-border"
 											} bg-secondary-500`}
 									/>
 									<button
 										title="Legendary"
 										onClick={() => toggleRarity("LEGENDARY")}
 										className={`h-6 w-6 border ${selectedRarities.includes("LEGENDARY")
-												? "border-basic-100"
-												: "border-ui-border"
+											? "border-basic-100"
+											: "border-ui-border"
 											} bg-primary-500`}
 									/>
 									<button
 										title="Epic"
 										onClick={() => toggleRarity("EPIC")}
 										className={`h-6 w-6 border ${selectedRarities.includes("EPIC")
-												? "border-basic-100"
-												: "border-ui-border"
+											? "border-basic-100"
+											: "border-ui-border"
 											} bg-rarity-epic`}
 									/>
 									<button
@@ -653,8 +653,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											setPage(1);
 										}}
 										className={`h-6 w-6 border ${availabilityFilter === "available"
-												? "border-basic-100"
-												: "border-ui-border"
+											? "border-basic-100"
+											: "border-ui-border"
 											} bg-rarity-uncommon`}
 									/>
 								</div>
@@ -848,7 +848,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 															<div className="mt-2 text-[18px] font-black text-primary-500">
 																{formatPrice(product.price)}
 															</div>
-															<CartButtonProduct item={{
+															<CartButton item={{
 																id: product.id,
 																name: product.name,
 																price: product.price,
@@ -933,8 +933,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 													key={pageNumber}
 													onClick={() => setPage(pageNumber)}
 													className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${page === pageNumber
-															? "border-secondary-500 bg-secondary-500/15 text-basic-100"
-															: "border-ui-border bg-basic-700 text-basic-100"
+														? "border-secondary-500 bg-secondary-500/15 text-basic-100"
+														: "border-ui-border bg-basic-700 text-basic-100"
 														}`}
 												>
 													{pageNumber}

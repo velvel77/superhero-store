@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getSearchParamsAsString } from "@/utils/getSearchParams";
 import { ProductActions } from "@/components/ui/delete-actions";
 import { getProducts } from "@/lib/queries/products";
-import AddToCartButton from "./cart-btn-product";
+import AddToCartButton from "./cart-button";
 
 const thStyle = "p-4 text-sm font-semibold text-basic-300";
 const tdStyle =
