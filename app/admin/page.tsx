@@ -5,6 +5,7 @@ import SearchWidget from "@/components/ui/search-widget";
 import InventoryWidget from "@/components/ui/dashboard-widget";
 import { getProductsCount } from "@/lib/queries/products";
 import { getSearchParamsAsString } from "@/utils/getSearchParams";
+import { Suspense } from "react";
 
 export default async function Home(params: PageProps<"/">) {
     const searchParams = await params.searchParams;
@@ -29,7 +30,9 @@ export default async function Home(params: PageProps<"/">) {
                 <Header />
                 <div className="pr-4 pl-4 pb-4 flex flex-col gap-4">
                     <InventoryWidget />
-                    <SearchWidget />
+                    <Suspense fallback={null}>
+                        <SearchWidget />
+                    </Suspense>
                     <ProductTable
                         searchParams={params.searchParams}
                         total={total}
