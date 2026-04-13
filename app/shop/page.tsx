@@ -3,6 +3,8 @@ import ShopHeader from "@/components/ui/shop-header";
 import { getProductsForShop } from "@/lib/queries/products";
 import { getSuperheroes } from "@/lib/queries/superheroes";
 
+export const dynamic = "force-dynamic";
+
 export default async function ShopPage() {
   const [products, superheroes] = await Promise.all([
     getProductsForShop(),
