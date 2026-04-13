@@ -84,11 +84,13 @@ button {
 }
 
 @utility diagonal-stripes {
-  background-image: repeating-linear-gradient(-45deg,
-      transparent,
-      transparent 4px,
-      var(--color-overlay-gray-soft) 4px,
-      var(--color-overlay-dark-soft) 5px);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    var(--color-overlay-gray-soft) 4px,
+    var(--color-overlay-dark-soft) 5px
+  );
 }
 
 @utility catalog-hover {
@@ -128,6 +130,11 @@ button {
   }
 }
 
+@utility glow-epic {
+  border-color: var(--color-rarity-epic);
+  box-shadow: 0px 0px 15px var(--color-rarity-epic);
+}
+
 @utility glow-yellow {
   transition: all 100ms ease-in;
 
@@ -156,4 +163,11 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+@utility text-shadow-black {
+  text-shadow:
+    0px 0px 5px black,
+    -1px 0px 2px black,
+    1px 0px 2px black;
 }
