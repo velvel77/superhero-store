@@ -30,7 +30,7 @@ jobs:
       - script: npm run build
         displayName: Build frontend
         env:
-          API_URL: https://superhero-store-backend.onrender.com
+          API_URL: https://superhero-store-test.onrender.com/superheroes
 
   - job: Backend
     displayName: Build backend
