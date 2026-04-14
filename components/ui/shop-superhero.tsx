@@ -79,7 +79,7 @@ export default function Superhero({ hero }: { hero: Hero }) {
                 </h1>
                 <div className="py-4 mb-4 border-b border-basic-400/20">
                   {/* Hourly fee */}
-                  <span className="text-primary-500 text-2xl">{hero.price}</span>{' '}
+                  <span className="text-primary-500 text-2xl">${hero.price}</span>{' '}
                   <span className="text-[.7rem]"> / hour</span>
                   <div className="flex gap-4 py-4">
                     <span
