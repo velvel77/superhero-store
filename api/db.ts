@@ -1,5 +1,10 @@
+// import path from 'node:path';
 import dotenv from 'dotenv';
 import pkg from 'pg';
+
+// if (process.env.NODE_ENV !== 'production') {
+//   dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
+// }
 
 dotenv.config();
 
