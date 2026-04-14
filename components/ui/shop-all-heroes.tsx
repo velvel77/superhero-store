@@ -4,7 +4,13 @@ import Image from 'next/image';
 import type { Hero } from '@/app/types';
 
 export default async function ShopAllHeroes() {
-  const data = await fetch(`${process.env.API_URL}/superheroes`);
+  const apiUrl = process.env.API_URL;
+
+  if (!apiUrl) {
+    throw new Error('API_URL is not set');
+  }
+
+  const data = await fetch(`${apiUrl}/superheroes`);
   const heroes = await data.json();
 
   return (
