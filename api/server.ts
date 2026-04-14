@@ -11,6 +11,7 @@ import categoryRouter from "./routes/categories.js";
 import productsRouter from "./routes/products.js";
 import superheroRouter from "./routes/superheroes.js";
 import usersRouter from "./routes/users.js";
+import ordersRouter from "./routes/orders.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,6 +25,7 @@ app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/categories", categoryRouter);
 app.use("/superheroes", superheroRouter);
+app.use("/orders", ordersRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -10,7 +10,7 @@ export interface CartContextType {
     removeItem: (id: number, type: "product" | "superhero") => void;
     increaseQuantity: (id: number, type: "product" | "superhero") => Promise<void>;
     decreaseQuantity: (id: number, type: "product" | "superhero") => Promise<void>;
-    // clearCart: () => void;
+    clearCart: () => void;
     totalItems: number;
 }
 
@@ -52,6 +52,10 @@ export function CartProvider({ children, initialCart }: { children: React.ReactN
         }
     }
 
+    function clearCart() {
+        setItems([]);
+    }
+
     async function increaseQuantity(id: number, type: "product" | "superhero") {
         try {
             const item = items.find(i => i.id === id && i.type === type);
@@ -90,7 +94,7 @@ export function CartProvider({ children, initialCart }: { children: React.ReactN
 
     const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
     return (
-        <CartContext.Provider value={{ items, addItem, removeItem, decreaseQuantity, increaseQuantity, totalItems }}>
+        <CartContext.Provider value={{ items, addItem, removeItem, clearCart, decreaseQuantity, increaseQuantity, totalItems }}>
             {children}
         </CartContext.Provider>
     )

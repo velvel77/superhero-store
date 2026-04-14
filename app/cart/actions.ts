@@ -16,8 +16,8 @@ export async function getCart(): Promise<CartItem[]> {
     try {
         const storedCookie = await cookies();
         const cart = storedCookie.get("cart");
-        if (!cart) {
-            return []
+        if (!cart || !cart.value) {
+            return [];
         }
         return JSON.parse(cart.value) as CartItem[];
     } catch (error) {
@@ -87,5 +87,57 @@ export async function decreaseQuantityAction(id: number, type: "product" | "supe
         }
     } catch (error) {
         console.error("Failed to decrease quantity:", error);
+    }
+}
+
+export async function placeOrder(): Promise<{ success: boolean; orderId?: number; error?: string }> {
+    try {
+        const cart = await getCart();
+
+        if (cart.length === 0) {
+            return { success: false, error: "Cart is empty" };
+        }
+        const products = cart.filter(i => i.type === "product").map(i => ({
+            id: i.id,
+            quantity: i.quantity,
+        }));
+
+        const heroes = cart.filter(i => i.type === "superhero").map(i => ({
+            id: i.id,
+        }));
+
+        const response = await fetch("http://localhost:5001/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: 1,
+                products, heroes,
+            }),
+        });
+
+        if (!response.ok) {
+
+            const errorBody = await response.text();
+            console.error("Order failed:", response.status, errorBody);
+            return { success: false, error: "Failed to place order (actions.ts)" };
+
+        }
+        const data = await response.json();
+        console.log("order response", data)
+        if (!data.orderId) {
+            return { success: false, error: "No order ID returned from server" };
+        }
+
+        const storedCookie = await cookies();
+        storedCookie.delete("cart");
+
+        return (
+            { success: true, orderId: data.orderId }
+        );
+    } catch (error) {
+        console.error("Failed to place order:", error);
+        return { success: false, error: "Something went wrong" }
     }
 }

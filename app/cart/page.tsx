@@ -1,5 +1,6 @@
 import CartList from "@/components/ui/cart-list";
 import { getCart } from "./actions";
+import PlaceOrderButton from "@/components/ui/place-order-button";
 
 export default async function CartPage() {
     const cart = await getCart();
@@ -14,6 +15,7 @@ export default async function CartPage() {
         <div>
             <h1>Your cart</h1>
             <CartList />
+            <PlaceOrderButton />
         </div>
     )
 }
