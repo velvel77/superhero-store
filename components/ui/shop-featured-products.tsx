@@ -36,8 +36,8 @@ export default function ShopFeaturedProducts() {
               className="object-cover w-100 h-140 group-hover:scale-110 transition-all duration-300"
               src={featured.image}
               alt=""
-              width={250}
-              height={500}
+              width={1920}
+              height={1080}
             />
             {/* Rarity */}
             <span
