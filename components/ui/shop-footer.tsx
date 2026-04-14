@@ -70,7 +70,7 @@ export default function ShopFooter() {
         <span>Plate 001 / Kinetic Voltage Series</span>
       </div>
       <section className="w-full mt-4 max-w-260 mx-auto">
-        <span className="text-basic-100">Disclaimer</span>
+        <div className="text-basic-100 text-center p-2">Disclaimer</div>
         <p className="text-xs text-basic-400">
           This website is a non-commercial project created for educational and portfolio purposes. All characters,
           images, and written content are generated using artificial intelligence and are intended to be original works.
