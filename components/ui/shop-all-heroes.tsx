@@ -58,7 +58,7 @@ export default async function ShopAllHeroes() {
                 </span>
                 <div className="py-4 mb-4">
                   {/* Hourly fee */}
-                  <span className="text-primary-500 text-2xl">{hero.price}</span>{' '}
+                  <span className="text-primary-500 text-2xl">${hero.price}</span>{' '}
                   <span className="text-[.7rem]"> / hour</span>
                 </div>
               </div>
