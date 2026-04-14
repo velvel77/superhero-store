@@ -39,7 +39,7 @@ const categories = [
 
 export default async function ShopCategories() {
   return (
-    <section className="benday-dots bg-basic-700 py-8">
+    <section className="benday-dots bg-basic-700 py-8 border-y-2 border-ui-border">
       <div className=" mx-auto w-full max-w-260">
         <div className="text-base-white relative p-4 grid items-center">
           <div className="absolute mx-4 h-7 w-1 bg-primary-500"></div>
