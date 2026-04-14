@@ -15,9 +15,17 @@ import { useState } from 'react';
 
 // Mock data ----------
 const related = [
-  { id: 1, image: gloves, rarity: 'Epic', name: 'Plasma surge gauntlets', price: 1890, category: 'Weapons' },
-  { id: 2, image: belt, rarity: 'Common', name: 'Nightwatch utility belt', price: 780, category: 'Tech' },
-  { id: 3, image: mask, rarity: 'Rare', name: 'Phantom Visor MK-IV', price: 1250, category: 'Masks' },
+  {
+    id: 1,
+    image: gloves,
+    type: 'gauntlet',
+    rarity: 'Epic',
+    name: 'Plasma surge gauntlets',
+    price: 1890,
+    category: 'Weapons',
+  },
+  { id: 2, image: belt, type: 'belt', rarity: 'Common', name: 'Nightwatch utility belt', price: 780, category: 'Tech' },
+  { id: 3, image: mask, type: 'headwear', rarity: 'Rare', name: 'Phantom Visor MK-IV', price: 1250, category: 'Masks' },
 ];
 // --------------------
 
@@ -63,11 +71,16 @@ export default function Superhero({ hero }: { hero: Hero }) {
             {/* Right panel */}
             <section className="flex-1">
               <div>
-                <h2 className="text-shadow-md text-shadow-secondary-500 italic font-bold text-3xl">{hero.name}</h2>
+                <h1
+                  aria-describedby="hero-description"
+                  className="text-shadow-md text-shadow-secondary-500 italic font-bold text-3xl"
+                >
+                  {hero.name}
+                </h1>
                 <div className="py-4 mb-4 border-b border-basic-400/20">
                   {/* Hourly fee */}
                   <span className="text-primary-500 text-2xl">{hero.price}</span>{' '}
-                  <span className="text-[.5rem]"> / hour</span>
+                  <span className="text-[.7rem]"> / hour</span>
                   <div className="flex gap-4 py-4">
                     <span
                       className={`p-2 rounded-sm text-shadow-black text-2xl px-4 ${
@@ -98,7 +111,9 @@ export default function Superhero({ hero }: { hero: Hero }) {
                 </div>
               </div>
               <div>
-                <p className="text-[.8rem] text-basic-400">{hero.description}</p>
+                <p id="hero-description" className="text-[.8rem] text-basic-400">
+                  {hero.description}
+                </p>
                 {/* Superpowers */}
                 <section className="p-4 bg-pattern-benday my-4 rounded-sm border border-basic-400">
                   <div className="flex items-center gap-2 pb-2">
@@ -108,40 +123,102 @@ export default function Superhero({ hero }: { hero: Hero }) {
                   <span>{hero.superpowers}</span>
                 </section>
                 {/* Power raiting */}
-                <div className="flex flex-col text-sm rounded-sm border border-basic-400 bg-effect-blue p-2 benday-dots">
-                  <h3 className="flex items-center gap-2 mb-2">
-                    <span>
-                      <Shield className="size-4 text-secondary-500" />
-                    </span>
-                    <span className="italic uppercase font-bold text-[.7rem]">Power Raiting</span>
-                  </h3>
-                  <span>Combat</span>
-                  <input readOnly className="accent-secondary-500" type="range" min={0} max={100} value={combat} />
-                  <span>Speed</span>
-                  <input readOnly className="accent-primary-500" type="range" min={0} max={100} value={speed} />
-                  <span>Strength</span>
-                  <input readOnly className="accent-rarity-legendary" type="range" min={0} max={100} value={strength} />
-                  <span>Intelligence</span>
-                  <input
-                    readOnly
-                    className="accent-effect-light-blue"
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={intelligence}
-                  />
-                  <span>Energy</span>
-                  <input readOnly className="accent-rarity-epic" type="range" min={0} max={100} value={energy} />
-                  <span>Durability</span>
-                  <input
-                    readOnly
-                    className="accent-rarity-uncommon"
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={durability}
-                  />
-                </div>
+                <section className="flex flex-col text-sm rounded-sm border border-basic-400 bg-effect-blue p-2 benday-dots">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Shield className="size-4 text-secondary-500" />
+                    <h2 className="italic uppercase font-bold text-[.7rem]">Power Raiting</h2>
+                  </div>
+                  {/* Combat */}
+                  <div className="flex justify-between">
+                    <span className="text-basic-300">Combat</span>
+                    <span>{combat}</span>
+                  </div>
+                  <div className="w-full h-2 my-2 rounded-full border border-basic-700">
+                    <div
+                      role="meter"
+                      aria-valuemin={0}
+                      aria-valuenow={combat}
+                      aria-valuemax={100}
+                      style={{ width: `${combat}%` }}
+                      className={` h-full rounded-full bg-secondary-500`}
+                    ></div>
+                  </div>
+                  {/* Speed */}
+                  <div className="flex justify-between">
+                    <span className="text-basic-300">Speed</span>
+                    <span>{speed}</span>
+                  </div>
+                  <div className="w-full h-2 my-2 rounded-full border border-basic-700">
+                    <div
+                      role="meter"
+                      aria-valuemin={0}
+                      aria-valuenow={speed}
+                      aria-valuemax={100}
+                      style={{ width: `${speed}%` }}
+                      className={` h-full rounded-full bg-primary-500`}
+                    ></div>
+                  </div>
+                  {/* Strength */}
+                  <div className="flex justify-between">
+                    <span className="text-basic-300">Strength</span>
+                    <span>{strength}</span>
+                  </div>
+                  <div className="w-full h-2 my-2 rounded-full border border-basic-700">
+                    <div
+                      role="meter"
+                      aria-valuemin={0}
+                      aria-valuenow={strength}
+                      aria-valuemax={100}
+                      style={{ width: `${strength}%` }}
+                      className={` h-full rounded-full bg-rarity-legendary`}
+                    ></div>
+                  </div>
+                  {/* Intelligence */}
+                  <div className="flex justify-between">
+                    <span className="text-basic-300">Intelligence</span>
+                    <span>{intelligence}</span>
+                  </div>
+                  <div className="w-full h-2 my-2 rounded-full border border-basic-700">
+                    <div
+                      role="meter"
+                      aria-valuemin={0}
+                      aria-valuenow={intelligence}
+                      aria-valuemax={100}
+                      style={{ width: `${intelligence}%` }}
+                      className={` h-full rounded-full bg-effect-light-blue`}
+                    ></div>
+                  </div>
+                  {/* Energy */}
+                  <div className="flex justify-between">
+                    <span className="text-basic-300">Energy</span>
+                    <span>{energy}</span>
+                  </div>
+                  <div className="w-full h-2 my-2 rounded-full border border-basic-700">
+                    <div
+                      role="meter"
+                      aria-valuemin={0}
+                      aria-valuenow={energy}
+                      aria-valuemax={100}
+                      style={{ width: `${energy}%` }}
+                      className={` h-full rounded-full bg-rarity-epic`}
+                    ></div>
+                  </div>
+                  {/* Durability */}
+                  <div className="flex justify-between">
+                    <span className="text-basic-300">Durability</span>
+                    <span>{durability}</span>
+                  </div>
+                  <div className="w-full h-2 my-2 rounded-full border border-basic-700">
+                    <div
+                      role="meter"
+                      aria-valuemin={0}
+                      aria-valuenow={durability}
+                      aria-valuemax={100}
+                      style={{ width: `${durability}%` }}
+                      className={` h-full rounded-full bg-rarity-uncommon`}
+                    ></div>
+                  </div>
+                </section>
 
                 {/* Purchase buttons */}
                 <div className="flex py-4 gap-4">
@@ -149,6 +226,7 @@ export default function Superhero({ hero }: { hero: Hero }) {
                   <div className="flex flex-1 rounded-sm border-2 border-basic-400 bg-effect-dark text-basic-400">
                     {/* Decrease amount */}
                     <button
+                      aria-label="Decrease amount"
                       className="h-full w-10 flex justify-center group"
                       onClick={() => (amount === 1 ? 1 : setAmount(amount - 1))}
                     >
@@ -157,7 +235,11 @@ export default function Superhero({ hero }: { hero: Hero }) {
                     {/* Amount */}
                     <div className="w-10 self-center text-basic-100 text-center">{amount}</div>
                     {/* Increase amount */}
-                    <button className="h-full w-10 flex justify-center group" onClick={() => setAmount(amount + 1)}>
+                    <button
+                      aria-label="Increase amount"
+                      className="h-full w-10 flex justify-center group"
+                      onClick={() => setAmount(amount + 1)}
+                    >
                       <PlusIcon className="self-center size-5 group-hover:text-basic-100" />
                     </button>
                   </div>
@@ -165,6 +247,7 @@ export default function Superhero({ hero }: { hero: Hero }) {
                   <button className="bg-secondary-500 p-4 flex-2 border-2 border-basic-100 rounded-sm">Hire</button>
                   {/* Favorite */}
                   <button
+                    aria-label="Add to favorites"
                     onClick={() => setFavorite(!favorite)}
                     className={`size-16 border-2 hover:border-secondary-500 bg-effect-dark ${favorite ? 'border-effect-red text-secondary-500' : 'border-basic-400 text-basic-400'} rounded-sm group flex items-center justify-center`}
                   >
@@ -217,7 +300,7 @@ export default function Superhero({ hero }: { hero: Hero }) {
                     <Image
                       className="w-100 border-2 border-basic-400/20 group-hover:border-secondary-500"
                       src={product.image}
-                      alt="mask"
+                      alt={product.type}
                       width={250}
                       height={250}
                     />
@@ -238,8 +321,8 @@ export default function Superhero({ hero }: { hero: Hero }) {
                   </div>
                   {/* Product info */}
                   <div className="flex flex-col p-2">
-                    <span className="text-secondary-500 uppercase text-[.5rem] tracking-wider">{product.category}</span>
-                    <span className="italic uppercase font-bold text-[.7rem]">{product.name}</span>
+                    <span className="text-secondary-450 uppercase text-[.7rem] tracking-wider">{product.category}</span>
+                    <span className="italic uppercase font-bold">{product.name}</span>
                     <span className="text-primary-500">${product.price}</span>
                   </div>
                 </Link>
