@@ -44,7 +44,7 @@ export default function Superhero({ hero }: { hero: Hero }) {
     <div>
       <ShopHeader />
       <div className="max-w-260 mx-auto px-4">
-        <Link className="uppercase text-[.5rem]" href={'/'}>
+        <Link className="uppercase text-[.7rem]" href={'/'}>
           {`< Back to catalog`}
         </Link>
         <div className="flex flex-col">
