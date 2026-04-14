@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getProductById } from "@/lib/queries/products";
+import ShopHeader from "@/components/ui/shop-header";
 
 type Props = {
 	params: Promise<{
@@ -43,6 +44,7 @@ export default async function ProductDetailsPage({ params }: Props) {
 
 	return (
 		<div className="min-h-screen bg-basic-900 text-basic-100">
+			<ShopHeader />
 			<div className="mx-auto max-w-350 px-6 py-10">
 				<div className="mb-6">
 					<a
