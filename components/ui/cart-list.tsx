@@ -5,7 +5,7 @@ import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 
 export default function CartList() {
-    const { items, removeItem, increaseQuantity, decreaseQuantity } = useCart();
+    const { items, removeItem, increaseQuantity, decreaseQuantity, totalItems } = useCart();
     async function increase(item: CartItem) {
         await addToCart(item);
     }
@@ -27,6 +27,8 @@ export default function CartList() {
     }
     return (
         <div>
+            <span>Total items:{totalItems}</span>
+
             {items.map(item => (
                 <div key={`${item.type}-${item.id}`}>
                     <h6>{item.name} <span>{item.price * item.quantity}</span></h6>

@@ -1,8 +1,9 @@
 import { Heart, Search, Zap, User, ShoppingBag, Menu } from 'lucide-react';
 import Link from 'next/link';
+import CartCount from './cart-count';
 
 export default function ShopHeader() {
-  return (
+	return (
 		<>
 			<header className="sticky top-0 z-50 w-full bg-basic-700 benday-dots text-basic-300 flex justify-center border-b-2 border-ui-border">
 				<div className="flex justify-between p-4 w-full max-w-260 items-center">
@@ -71,7 +72,10 @@ export default function ShopHeader() {
 						{/* ICONS */}
 						<section className="flex gap-2 pl-2">
 							<Heart className="size-4 icon-hover" />
-							<ShoppingBag className="size-4 icon-hover" />
+							<div className="relative">
+								<ShoppingBag className="size-4 icon-hover" />
+								<CartCount />
+							</div>
 							<User className="size-4 icon-hover" />
 							<Menu className="size-4 icon-hover lg:hidden" />
 						</section>
@@ -79,5 +83,5 @@ export default function ShopHeader() {
 				</div>
 			</header>
 		</>
-  );
+	);
 }
