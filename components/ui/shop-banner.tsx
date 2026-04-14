@@ -26,7 +26,7 @@ export default function ShopBanner() {
 
       {/* Info overlay on image */}
       <div className="flex flex-col p-4 gap-4 w-full max-w-260 mx-auto z-10">
-        <span className="px-4 tracking-[.2rem] text-[.6rem] uppercase text-secondary-500 text-shadow-black text-shadow-sm">
+        <span className="px-4 tracking-[.2rem] text-[.7rem] uppercase text-secondary-450 text-shadow-black text-shadow-sm">
           /// Kinetic voltage collection - 2026 ///
         </span>
         <h1
