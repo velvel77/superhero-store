@@ -27,6 +27,14 @@ jobs:
       - script: npm ci
         displayName: Install frontend dependencies
 
+      - script: |
+          echo "API_URL=$API_URL"
+          curl -i "$API_URL/superheroes"
+          curl -i "$API_URL/superheroes/1"
+        displayName: Debug backend endpoints
+        env:
+          API_URL: https://superhero-store-test.onrender.com
+
       - script: npm run build
         displayName: Build frontend
         env:
