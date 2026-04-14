@@ -54,55 +54,24 @@ export interface ProductsResponse {
   pages: number;
 }
 
-export interface SuperheroProp {
-  response: string;
-  id: string;
+export interface Hero {
+  id: number;
   name: string;
-
-  powerstats: {
-    intelligence: string;
-    strength: string;
-    speed: string;
-    durability: string;
-    power: string;
-    combat: string;
-  };
-
-  biography: {
-    'full-name': string;
-    'alter-egos': string;
-    aliases: string[];
-    'place-of-birth': string;
-    'first-appearance': string;
-    publisher: string;
-    alignment: string;
-  };
-
-  appearance: {
-    gender: string;
-    race: string;
-    height: string[]; // ["6'8", "203 cm"]
-    weight: string[]; // ["980 lb", "441 kg"]
-    'eye-color': string;
-    'hair-color': string;
-  };
-
-  work: {
-    occupation: string;
-    base: string;
-  };
-
-  connections: {
-    'group-affiliation': string;
-    relatives: string;
-  };
-
-  image: {
-    url: string;
-  };
+  price: string;
+  description: string;
+  superpowers: string;
+  stats: HeroStats;
+  image_url: string;
+  is_available: boolean;
+  joined_at: string;
+  ranking: 'S' | 'A' | 'B' | 'C' | string;
 }
 
-export interface SuperheroSearchResponse {
-  response: string;
-  results: SuperheroProp[];
+export interface HeroStats {
+  speed: number;
+  combat: number;
+  energy: number;
+  strength: number;
+  durability: number;
+  intelligence: number;
 }
