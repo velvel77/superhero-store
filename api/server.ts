@@ -1,11 +1,9 @@
-// import path from 'node:path';
+import path from 'node:path';
 import dotenv from 'dotenv';
 
-// if (process.env.NODE_ENV !== 'production') {
-//   dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
-// }
-
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
+}
 
 import cors from 'cors';
 import express from 'express';
