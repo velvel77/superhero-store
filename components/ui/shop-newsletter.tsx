@@ -14,7 +14,11 @@ export default function ShopNewsLetter() {
           </div>
         </div>
         <form className="flex border-2 border-ui-border/80" action="">
+          <label htmlFor="email-field" className="sr-only">
+            Sign up to our newsletter via email
+          </label>
           <input
+            id="email-field"
             className="outline-0 p-2 text-sm text-basic-100 placeholder:text-basic-200"
             required
             type="email"

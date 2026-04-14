@@ -22,20 +22,23 @@ export default function ShopBanner() {
       <div className="absolute inset-0 benday-dots z-10" aria-hidden="true"></div>
 
       {/* Gradient overlay on image */}
-      <div className="absolute inset-0 bg-linear-to-r from-basic-700 via-basic-700/85 to-basic-700/40"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-basic-900 via-basic-900/85 to-basic-900/40"></div>
 
       {/* Info overlay on image */}
       <div className="flex flex-col p-4 gap-4 w-full max-w-260 mx-auto z-10">
-        <span className="px-4 tracking-[.2rem] text-[.6rem] uppercase text-secondary-500">
+        <span className="px-4 tracking-[.2rem] text-[.6rem] uppercase text-secondary-500 text-shadow-black text-shadow-sm">
           /// Kinetic voltage collection - 2026 ///
         </span>
-        <h1 className="uppercase text-basic-100 text-6xl font-bold italic flex flex-col px-2 gap-3">
+        <h1
+          aria-describedby="site-description"
+          className="uppercase text-basic-100 text-6xl font-bold italic flex flex-col px-2 gap-3"
+        >
           <span className="text-shadow-md text-shadow-secondary-500">Unleash your</span>{' '}
           <span className="text-primary-500">inner legend</span>
         </h1>
         <div className="relative flex items-center pl-6">
           <span className="absolute left-4 h-0.5 w-20 bg-secondary-500"></span>
-          <small className="text-basic-400 px-4 py-4 pl-20">
+          <small id="site-description" className="text-basic-400 px-4 py-4 pl-20">
             Premium heroic equipment & tactical gear for the modern vigilante
           </small>
         </div>
