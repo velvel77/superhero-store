@@ -13,6 +13,7 @@ export default async function Product({
     throw new Error("API_URL is not set");
   }
 
+  // test comment
   const data = await fetch(`${apiUrl}/superheroes`);
 
   if(!data.ok) {
