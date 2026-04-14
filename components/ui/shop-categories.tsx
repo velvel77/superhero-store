@@ -66,7 +66,7 @@ export default async function ShopCategories() {
               <span className="absolute bottom-4 left-4">
                 <small className={`uppercase  ${item.textColor}`}>{item.count} items</small>
                 <h3 className="text-basic-100 font-bold italic">{item.name}</h3>
-                <div className="uppercase flex gap-2 items-center text-basic-300 text-[.6rem]">
+                <div className="uppercase flex gap-2 items-center text-basic-300 text-[.7rem]">
                   <span className="transition-colors duration-300 group-hover:text-white">Explore</span>{' '}
                   <ArrowRight className="size-3 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white" />
                 </div>

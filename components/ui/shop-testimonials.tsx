@@ -37,7 +37,7 @@ export default function ShopTestimonials() {
         <div className="flex gap-5">
           {testimonials.map((testimonial) => (
             <div
-              className="testimonial-hover relative flex flex-col gap-4 text-xs border-2 border-ui-border bg-basic-600 p-4"
+              className="testimonial-hover relative flex flex-col gap-4 text-sm border-2 border-ui-border bg-basic-600 p-4"
               key={testimonial.id}
             >
               <div className="flex">

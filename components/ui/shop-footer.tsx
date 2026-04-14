@@ -10,11 +10,11 @@ export default function ShopFooter() {
             <Zap className="bg-secondary-500 border rounded-xs p-1 size-6 border-basic-100" />
             <h2 className="uppercase font-bold italic">Hero Vault</h2>
           </div>
-          <p className="text-[.6rem] max-w-[30ch] text-basic-300">
+          <p className="text-[.7rem] max-w-[30ch] text-basic-300">
             Premium heroic equipment for the modern legend. Trusted by 12,000+ heroes worldwide.
           </p>
         </div>
-        <nav className="flex uppercase justify-evenly w-full text-[.6rem] text-basic-300 ">
+        <nav className="flex uppercase justify-evenly w-full text-[.7rem] text-basic-300 ">
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
             <h3 className="text-basic-100 font-bold italic pb-2">Shop</h3>
             <li>
@@ -65,7 +65,7 @@ export default function ShopFooter() {
           </ul>
         </nav>
       </section>
-      <div className="py-4 text-basic-400 uppercase text-[.6rem] flex justify-between max-w-260 mx-auto border-t border-ui-border">
+      <div className="py-4 text-basic-400 uppercase text-[.7rem] flex justify-between max-w-260 mx-auto border-t border-ui-border">
         <span>© 2026 Hero Vault — Gear Division</span>
         <span>Plate 001 / Kinetic Voltage Series</span>
       </div>

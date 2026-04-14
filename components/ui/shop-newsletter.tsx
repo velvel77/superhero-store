@@ -8,7 +8,7 @@ export default function ShopNewsLetter() {
           <Zap className="text-basic-100 border border-basic-100 p-2 size-10 rounded-sm" />
           <div>
             <h2 className="uppercase font-bold text-basic-100 italic">Join the league</h2>
-            <p className="text-basic-300 uppercase text-[.6rem]">
+            <p className="text-basic-300 uppercase text-[.7rem]">
               Get early access to new drops & exclusive hero deals
             </p>
           </div>
