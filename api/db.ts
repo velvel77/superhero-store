@@ -6,8 +6,6 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
 }
 
-dotenv.config();
-
 const { Pool } = pkg;
 
 export const pool = new Pool({
