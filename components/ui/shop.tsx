@@ -175,7 +175,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 	const [selectedRarities, setSelectedRarities] = useState<
 		Array<ShopProduct["rarity"]>
 	>([]);
-	const [selectedPowerTiers, setSelectedPowerTiers] = useState<PowerTier[]>([]);
+	const [selectedPowerTiers, setSelectedPowerTiers] = useState<PowerTier[]>(
+		[],
+	);
 	const [stockFilter, setStockFilter] = useState<StockFilter>("all");
 	const [availabilityFilter, setAvailabilityFilter] =
 		useState<AvailabilityFilter>("all");
@@ -287,7 +289,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 				const matchesAvailability =
 					availabilityFilter === "all" ||
 					(availabilityFilter === "available" && hero.is_available) ||
-					(availabilityFilter === "unavailable" && !hero.is_available);
+					(availabilityFilter === "unavailable" &&
+						!hero.is_available);
 
 				const matchesPrice =
 					heroPrice >= minPrice && heroPrice <= maxPrice;
@@ -360,7 +363,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 		});
 	}, [filteredProducts, filteredHeroes]);
 
-	const totalPages = Math.max(1, Math.ceil(catalogItems.length / ITEMS_PER_PAGE));
+	const totalPages = Math.max(
+		1,
+		Math.ceil(catalogItems.length / ITEMS_PER_PAGE),
+	);
 
 	useEffect(() => {
 		if (page > totalPages) setPage(totalPages);
@@ -446,7 +452,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 
 								<div className="relative z-10 grid w-full max-w-102.5 grid-cols-3 gap-3">
 									<div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
-										<div className="mb-2 text-xs text-secondary-500">◌</div>
+										<div className="mb-2 text-xs text-secondary-500">
+											◌
+										</div>
 										<div className="text-[28px] font-black leading-none">
 											{availableHeroesCount}
 										</div>
@@ -456,7 +464,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 									</div>
 
 									<div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
-										<div className="mb-2 text-xs text-secondary-500">✦</div>
+										<div className="mb-2 text-xs text-secondary-500">
+											✦
+										</div>
 										<div className="text-[28px] font-black leading-none">
 											{products.length}
 										</div>
@@ -466,7 +476,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 									</div>
 
 									<div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
-										<div className="mb-2 text-xs text-secondary-500">⚡</div>
+										<div className="mb-2 text-xs text-secondary-500">
+											⚡
+										</div>
 										<div className="text-[28px] font-black leading-none">
 											{readinessPercent}%
 										</div>
@@ -523,7 +535,13 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 								</h4>
 
 								<div className="grid grid-cols-3 gap-2">
-									{(["all", "products", "superheroes"] as const).map((item) => (
+									{(
+										[
+											"all",
+											"products",
+											"superheroes",
+										] as const
+									).map((item) => (
 										<button
 											key={item}
 											onClick={() => {
@@ -558,8 +576,12 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 										max={maxDbPrice}
 										value={minPrice}
 										onChange={(e) => {
-											const value = Number(e.target.value);
-											setMinPrice(Math.min(value, maxPrice));
+											const value = Number(
+												e.target.value,
+											);
+											setMinPrice(
+												Math.min(value, maxPrice),
+											);
 											setPage(1);
 										}}
 										className="w-full accent-secondary-500"
@@ -571,8 +593,12 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 										max={maxDbPrice}
 										value={maxPrice}
 										onChange={(e) => {
-											const value = Number(e.target.value);
-											setMaxPrice(Math.max(value, minPrice));
+											const value = Number(
+												e.target.value,
+											);
+											setMaxPrice(
+												Math.max(value, minPrice),
+											);
 											setPage(1);
 										}}
 										className="w-full accent-effect-light-blue"
@@ -633,9 +659,13 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 									/>
 									<button
 										title="Legendary"
-										onClick={() => toggleRarity("LEGENDARY")}
+										onClick={() =>
+											toggleRarity("LEGENDARY")
+										}
 										className={`h-6 w-6 border ${
-											selectedRarities.includes("LEGENDARY")
+											selectedRarities.includes(
+												"LEGENDARY",
+											)
 												? "border-basic-100"
 												: "border-ui-border"
 										} bg-primary-500`}
@@ -653,7 +683,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 										title="Available heroes"
 										onClick={() => {
 											setAvailabilityFilter((prev) =>
-												prev === "available" ? "all" : "available",
+												prev === "available"
+													? "all"
+													: "available",
 											);
 											setPage(1);
 										}}
@@ -672,20 +704,38 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 								</h4>
 
 								<div className="space-y-1.5">
-									{([
-										{ label: "Street Tier", value: "street" },
-										{ label: "City Tier", value: "city" },
-										{ label: "Planetary", value: "planetary" },
-										{ label: "Cosmic", value: "cosmic" },
-									] as const).map((item) => (
+									{(
+										[
+											{
+												label: "Street Tier",
+												value: "street",
+											},
+											{
+												label: "City Tier",
+												value: "city",
+											},
+											{
+												label: "Planetary",
+												value: "planetary",
+											},
+											{
+												label: "Cosmic",
+												value: "cosmic",
+											},
+										] as const
+									).map((item) => (
 										<label
 											key={item.value}
 											className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
 										>
 											<input
 												type="checkbox"
-												checked={selectedPowerTiers.includes(item.value)}
-												onChange={() => togglePowerTier(item.value)}
+												checked={selectedPowerTiers.includes(
+													item.value,
+												)}
+												onChange={() =>
+													togglePowerTier(item.value)
+												}
 												className="accent-secondary-500"
 											/>
 											<span>{item.label}</span>
@@ -707,8 +757,12 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 										>
 											<input
 												type="checkbox"
-												checked={selectedCategories.includes(category)}
-												onChange={() => toggleCategory(category)}
+												checked={selectedCategories.includes(
+													category,
+												)}
+												onChange={() =>
+													toggleCategory(category)
+												}
 												className="accent-secondary-500"
 											/>
 											<span>{category}</span>
@@ -723,12 +777,20 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 								</h4>
 
 								<div className="space-y-1.5">
-									{([
-										{ label: "All", value: "all" },
-										{ label: "In Stock", value: "in" },
-										{ label: "Low Stock", value: "low" },
-										{ label: "Out of Stock", value: "out" },
-									] as const).map((item) => (
+									{(
+										[
+											{ label: "All", value: "all" },
+											{ label: "In Stock", value: "in" },
+											{
+												label: "Low Stock",
+												value: "low",
+											},
+											{
+												label: "Out of Stock",
+												value: "out",
+											},
+										] as const
+									).map((item) => (
 										<label
 											key={item.value}
 											className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
@@ -736,7 +798,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											<input
 												type="radio"
 												name="stock-filter"
-												checked={stockFilter === item.value}
+												checked={
+													stockFilter === item.value
+												}
 												onChange={() => {
 													setStockFilter(item.value);
 													setPage(1);
@@ -755,11 +819,19 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 								</h4>
 
 								<div className="space-y-1.5">
-									{([
-										{ label: "All", value: "all" },
-										{ label: "Available", value: "available" },
-										{ label: "Unavailable", value: "unavailable" },
-									] as const).map((item) => (
+									{(
+										[
+											{ label: "All", value: "all" },
+											{
+												label: "Available",
+												value: "available",
+											},
+											{
+												label: "Unavailable",
+												value: "unavailable",
+											},
+										] as const
+									).map((item) => (
 										<label
 											key={item.value}
 											className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
@@ -767,9 +839,14 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 											<input
 												type="radio"
 												name="availability-filter"
-												checked={availabilityFilter === item.value}
+												checked={
+													availabilityFilter ===
+													item.value
+												}
 												onChange={() => {
-													setAvailabilityFilter(item.value);
+													setAvailabilityFilter(
+														item.value,
+													);
 													setPage(1);
 												}}
 												className="accent-secondary-500"
@@ -818,10 +895,13 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 																		product.rarity,
 																	)}`}
 																>
-																	{product.rarity}
+																	{
+																		product.rarity
+																	}
 																</span>
 
-																{product.stock > 0 ? (
+																{product.stock >
+																0 ? (
 																	<span className="bg-primary-500 px-2 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-black">
 																		IN
 																	</span>
@@ -833,14 +913,18 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 																	product.image_url ||
 																	"https://placehold.co/700x850/111827/ffffff?text=Gear"
 																}
-																alt={product.name}
+																alt={
+																	product.name
+																}
 																className="h-full w-full object-cover"
 															/>
 														</div>
 
 														<div className="bg-basic-800 px-4 pb-4 pt-3">
 															<p className="mb-1 text-[9px] font-black uppercase tracking-[0.22em] text-secondary-500">
-																{product.categories[0] || "Misc"}
+																{product
+																	.categories[0] ||
+																	"Misc"}
 															</p>
 
 															<h3 className="text-[18px] font-black uppercase leading-tight text-basic-100">
@@ -848,11 +932,14 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 															</h3>
 
 															<p className="mt-1 h-8 overflow-hidden text-[11px] text-basic-300">
-																{product.description || "No description available."}
+																{product.description ||
+																	"No description available."}
 															</p>
 
 															<div className="mt-2 text-[18px] font-black text-primary-500">
-																{formatPrice(product.price)}
+																{formatPrice(
+																	product.price,
+																)}
 															</div>
 														</div>
 													</Link>
@@ -875,7 +962,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 																		hero.ranking,
 																	)}`}
 																>
-																	{hero.ranking}
+																	{
+																		hero.ranking
+																	}
 																</span>
 															) : null}
 
@@ -904,11 +993,14 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 														</h3>
 
 														<p className="mt-1 h-8 overflow-hidden text-[11px] text-basic-300">
-															{hero.description || "No description available."}
+															{hero.description ||
+																"No description available."}
 														</p>
 
 														<div className="mt-2 text-[18px] font-black text-primary-500">
-															{formatPrice(hero.price)}
+															{formatPrice(
+																hero.price,
+															)}
 														</div>
 													</div>
 												</Link>
@@ -918,32 +1010,44 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 
 									<div className="mt-6 flex flex-wrap justify-center gap-2">
 										<button
-											onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+											onClick={() =>
+												setPage((prev) =>
+													Math.max(1, prev - 1),
+												)
+											}
 											disabled={page === 1}
 											className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
 										>
 											Prev
 										</button>
 
-										{Array.from({ length: totalPages }, (_, i) => i + 1).map(
-											(pageNumber) => (
-												<button
-													key={pageNumber}
-													onClick={() => setPage(pageNumber)}
-													className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
-														page === pageNumber
-															? "border-secondary-500 bg-secondary-500/15 text-basic-100"
-															: "border-ui-border bg-basic-700 text-basic-100"
-													}`}
-												>
-													{pageNumber}
-												</button>
-											),
-										)}
+										{Array.from(
+											{ length: totalPages },
+											(_, i) => i + 1,
+										).map((pageNumber) => (
+											<button
+												key={pageNumber}
+												onClick={() =>
+													setPage(pageNumber)
+												}
+												className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
+													page === pageNumber
+														? "border-secondary-500 bg-secondary-500/15 text-basic-100"
+														: "border-ui-border bg-basic-700 text-basic-100"
+												}`}
+											>
+												{pageNumber}
+											</button>
+										))}
 
 										<button
 											onClick={() =>
-												setPage((prev) => Math.min(totalPages, prev + 1))
+												setPage((prev) =>
+													Math.min(
+														totalPages,
+														prev + 1,
+													),
+												)
 											}
 											disabled={page === totalPages}
 											className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
