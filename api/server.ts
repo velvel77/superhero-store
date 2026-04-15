@@ -8,10 +8,10 @@ if (process.env.NODE_ENV !== "production") {
 import cors from "cors";
 import express from "express";
 import categoryRouter from "./routes/categories.js";
+import ordersRouter from "./routes/orders.js";
 import productsRouter from "./routes/products.js";
 import superheroRouter from "./routes/superheroes.js";
 import usersRouter from "./routes/users.js";
-import ordersRouter from "./routes/orders.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
