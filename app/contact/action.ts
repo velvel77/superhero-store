@@ -14,6 +14,11 @@ export default async function sendMessage(prevState: FormState, formData: FormDa
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
+    // console.log("API key exists:", !!process.env.RESEND_API_KEY)
+
+    // This will console log audience ID used for newsletter
+    // const { data } = await resend.audiences.list();
+    // console.log("audiences:", JSON.stringify(data));
 
     if (!message) {
         return { error: "Message is missing" }
@@ -28,6 +33,7 @@ export default async function sendMessage(prevState: FormState, formData: FormDa
     })
 
     if (error) {
+        console.log("Error when submitting:", error)
         return { error: "Something went wrong, try again" }
     }
 
