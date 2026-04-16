@@ -48,23 +48,24 @@ export default function Superhero({ hero }: { hero: Hero }) {
           {`< Back to catalog`}
         </Link>
         <div className="flex flex-col">
-          <main className="flex my-4 gap-4">
+          <main className="flex flex-col lg:flex-row my-4 gap-4">
             {/* Left panel */}
             <div className="relative flex-1">
-              <div className="relative overflow-clip h-full">
+              <div className="relative overflow-clip h-full lg:aspect-auto aspect-3/4 mx-auto max-h-204">
                 {/* Benday dots overlay on image*/}
                 <div className="benday-dots absolute z-10 inset-0"></div>
                 <Image
                   className="w-full object-cover border-2 border-basic-400/20 rounded-sm"
-                  src={hero.image_url ? hero.image_url : placeholder}
+                  src={hero.image_url || placeholder}
                   alt={hero.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
                 />
+                <span className="absolute top-2 right-2 text-rarity-uncommon bg-black px-2 rounded-sm">
+                  {hero.is_available ? 'Available' : 'Unavailable'}
+                </span>
               </div>
-              <span className="absolute top-2 right-2 text-rarity-uncommon bg-black px-2 rounded-sm">
-                {hero.is_available ? 'Available' : 'Unavailable'}
-              </span>
               {/* Extra images */}
             </div>
 
@@ -111,14 +112,14 @@ export default function Superhero({ hero }: { hero: Hero }) {
                 </div>
               </div>
               <div>
-                <p id="hero-description" className="text-[.8rem] text-basic-400">
+                <p id="hero-description" className=" text-basic-100">
                   {hero.description}
                 </p>
                 {/* Superpowers */}
                 <section className="p-4 bg-pattern-benday my-4 rounded-sm border border-basic-400">
                   <div className="flex items-center gap-2 pb-2">
                     <Zap className="size-4 text-primary-500" />
-                    <span className="italic font-bold uppercase text-xs">Superpowers</span>
+                    <span className="italic font-bold uppercase tracking-wider text-xs">Superpowers</span>
                   </div>
                   <span>{hero.superpowers}</span>
                 </section>
@@ -130,90 +131,114 @@ export default function Superhero({ hero }: { hero: Hero }) {
                   </div>
                   {/* Combat */}
                   <div className="flex justify-between">
-                    <span className="text-basic-300">Combat</span>
+                    <span id="combat-label" className="text-basic-300">
+                      Combat
+                    </span>
                     <span>{combat}</span>
                   </div>
                   <div className="w-full h-2 my-2 rounded-full border border-basic-700">
                     <div
-                      role="meter"
+                      aria-labelledby="combat-label"
+                      role="progressbar"
                       aria-valuemin={0}
                       aria-valuenow={combat}
                       aria-valuemax={100}
+                      aria-valuetext={`${combat} out of 100`}
                       style={{ width: `${combat}%` }}
                       className={` h-full rounded-full bg-secondary-500`}
                     ></div>
                   </div>
                   {/* Speed */}
                   <div className="flex justify-between">
-                    <span className="text-basic-300">Speed</span>
+                    <span id="speed-label" className="text-basic-300">
+                      Speed
+                    </span>
                     <span>{speed}</span>
                   </div>
                   <div className="w-full h-2 my-2 rounded-full border border-basic-700">
                     <div
-                      role="meter"
+                      aria-labelledby="speed-label"
+                      role="progressbar"
                       aria-valuemin={0}
                       aria-valuenow={speed}
                       aria-valuemax={100}
+                      aria-valuetext={`${speed} out of 100`}
                       style={{ width: `${speed}%` }}
                       className={` h-full rounded-full bg-primary-500`}
                     ></div>
                   </div>
                   {/* Strength */}
                   <div className="flex justify-between">
-                    <span className="text-basic-300">Strength</span>
+                    <span id="strength-label" className="text-basic-300">
+                      Strength
+                    </span>
                     <span>{strength}</span>
                   </div>
                   <div className="w-full h-2 my-2 rounded-full border border-basic-700">
                     <div
-                      role="meter"
+                      aria-labelledby="strength-label"
+                      role="progressbar"
                       aria-valuemin={0}
                       aria-valuenow={strength}
                       aria-valuemax={100}
+                      aria-valuetext={`${strength} out of 100`}
                       style={{ width: `${strength}%` }}
                       className={` h-full rounded-full bg-rarity-legendary`}
                     ></div>
                   </div>
                   {/* Intelligence */}
                   <div className="flex justify-between">
-                    <span className="text-basic-300">Intelligence</span>
+                    <span id="intelligence-label" className="text-basic-300">
+                      Intelligence
+                    </span>
                     <span>{intelligence}</span>
                   </div>
                   <div className="w-full h-2 my-2 rounded-full border border-basic-700">
                     <div
-                      role="meter"
+                      aria-labelledby="intelligence-label"
+                      role="progressbar"
                       aria-valuemin={0}
                       aria-valuenow={intelligence}
                       aria-valuemax={100}
+                      aria-valuetext={`${intelligence} out of 100`}
                       style={{ width: `${intelligence}%` }}
                       className={` h-full rounded-full bg-effect-light-blue`}
                     ></div>
                   </div>
                   {/* Energy */}
                   <div className="flex justify-between">
-                    <span className="text-basic-300">Energy</span>
+                    <span id="energy-label" className="text-basic-300">
+                      Energy
+                    </span>
                     <span>{energy}</span>
                   </div>
                   <div className="w-full h-2 my-2 rounded-full border border-basic-700">
                     <div
-                      role="meter"
+                      aria-labelledby="energy-label"
+                      role="progressbar"
                       aria-valuemin={0}
                       aria-valuenow={energy}
                       aria-valuemax={100}
+                      aria-valuetext={`${energy} out of 100`}
                       style={{ width: `${energy}%` }}
                       className={` h-full rounded-full bg-rarity-epic`}
                     ></div>
                   </div>
                   {/* Durability */}
                   <div className="flex justify-between">
-                    <span className="text-basic-300">Durability</span>
+                    <span id="durability-label" className="text-basic-300">
+                      Durability
+                    </span>
                     <span>{durability}</span>
                   </div>
                   <div className="w-full h-2 my-2 rounded-full border border-basic-700">
                     <div
-                      role="meter"
+                      aria-labelledby="durability-label"
+                      role="progressbar"
                       aria-valuemin={0}
                       aria-valuenow={durability}
                       aria-valuemax={100}
+                      aria-valuetext={`${durability} out of 100`}
                       style={{ width: `${durability}%` }}
                       className={` h-full rounded-full bg-rarity-uncommon`}
                     ></div>
