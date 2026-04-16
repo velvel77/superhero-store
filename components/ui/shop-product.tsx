@@ -3,8 +3,7 @@
 import ShopHeader from "@/components/ui/shop-header";
 import ShopFooter from "@/components/ui/shop-footer";
 
-import type { Hero } from "@/app/types";
-import type { RelatedProduct } from "@/lib/queries/products";
+import type { ProductDetails, RelatedProduct } from "@/lib/queries/products";
 import Image from "next/image";
 import Link from "next/link";
 import placeholder from "@/public/superhero.jpg";
@@ -21,27 +20,59 @@ import {
 import { useState } from "react";
 
 type Props = {
-	hero: Hero;
+	product: ProductDetails;
 	relatedProducts: RelatedProduct[];
 };
 
-export default function Superhero({ hero, relatedProducts }: Props) {
+const CART_KEY = "hero-vault-cart";
+
+export default function ShopProduct({ product, relatedProducts }: Props) {
 	const [amount, setAmount] = useState(1);
 	const [favorite, setFavorite] = useState(false);
+	const [added, setAdded] = useState(false);
 
-	const energy = Number(hero.stats.energy);
-	const intelligence = Number(hero.stats.intelligence);
-	const durability = Number(hero.stats.durability);
-	const combat = Number(hero.stats.combat);
-	const strength = Number(hero.stats.strength);
-	const speed = Number(hero.stats.speed);
+	const power = Number(product.stats.POWER ?? 0);
+	const durability = Number(product.stats.DURABILITY ?? 0);
+	const special = Number(product.stats.SPECIAL ?? 0);
+
+	function addToCart() {
+		if (typeof window === "undefined") return;
+
+		const raw = localStorage.getItem(CART_KEY);
+		const cart = raw ? JSON.parse(raw) : [];
+
+		const existingIndex = cart.findIndex(
+			(item: { id: number; type: string }) =>
+				item.id === product.id && item.type === "product",
+		);
+
+		if (existingIndex >= 0) {
+			cart[existingIndex].quantity += amount;
+		} else {
+			cart.push({
+				id: product.id,
+				type: "product",
+				name: product.name,
+				price: product.price,
+				image_url: product.image_url,
+				quantity: amount,
+			});
+		}
+
+		localStorage.setItem(CART_KEY, JSON.stringify(cart));
+		setAdded(true);
+
+		setTimeout(() => {
+			setAdded(false);
+		}, 1800);
+	}
 
 	return (
 		<div>
 			<ShopHeader />
 
 			<div className="max-w-260 mx-auto px-4">
-				<Link className="uppercase text-[.5rem]" href={"/"}>
+				<Link className="uppercase text-[.5rem]" href={"/shop"}>
 					{`< Back to catalog`}
 				</Link>
 
@@ -54,20 +85,26 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 								<Image
 									className="w-full object-cover border-2 border-basic-400/20 rounded-sm"
 									src={
-										hero.image_url
-											? hero.image_url
+										product.image_url
+											? product.image_url
 											: placeholder
 									}
-									alt={hero.name}
+									alt={product.name}
 									fill
 									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 								/>
 							</div>
 
-							<span className="absolute top-2 right-2 text-rarity-uncommon bg-black px-2 rounded-sm">
-								{hero.is_available
-									? "Available"
-									: "Unavailable"}
+							<span
+								className={`absolute top-2 right-2 px-2 rounded-sm ${
+									product.stock > 0
+										? "text-rarity-uncommon bg-black"
+										: "text-basic-100 bg-secondary-500"
+								}`}
+							>
+								{product.stock > 0
+									? "In stock"
+									: "Out of stock"}
 							</span>
 						</div>
 
@@ -75,44 +112,46 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 						<section className="flex-1">
 							<div>
 								<h2 className="text-shadow-md text-shadow-secondary-500 italic font-bold text-3xl">
-									{hero.name}
+									{product.name}
 								</h2>
 
 								<div className="py-4 mb-4 border-b border-basic-400/20">
 									<span className="text-primary-500 text-2xl">
-										{hero.price ? `$${hero.price}` : "N/A"}
+										${product.price}
 									</span>{" "}
 									<span className="text-[.5rem]">
 										{" "}
-										/ hour
+										/ item
 									</span>
 									<div className="flex gap-4 py-4">
 										<span
 											className={`p-2 rounded-sm text-shadow-black text-2xl px-4 ${
-												hero.ranking === "S"
+												product.rarity === "LEGENDARY"
 													? "bg-rarity-legendary"
-													: hero.ranking === "A"
+													: product.rarity === "EPIC"
 														? "bg-rarity-epic"
-														: hero.ranking === "B"
+														: product.rarity ===
+															  "RARE"
 															? "bg-rarity-rare"
 															: "bg-rarity-uncommon"
-											} `}
+											}`}
 										>
-											{hero.ranking}
+											{product.rarity}
 										</span>
 
 										<div className="flex flex-col">
 											<span className="text-sm text-basic-400">
-												Hero Rank
+												Item rarity
 											</span>
 											<span>
-												{hero.ranking === "S"
+												{product.rarity === "LEGENDARY"
 													? "Legendary"
-													: hero.ranking === "A"
+													: product.rarity === "EPIC"
 														? "Epic"
-														: hero.ranking === "B"
+														: product.rarity ===
+															  "RARE"
 															? "Rare"
-															: "Uncommon"}
+															: "Common"}
 											</span>
 										</div>
 									</div>
@@ -121,18 +160,29 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 
 							<div>
 								<p className="text-[.8rem] text-basic-400">
-									{hero.description}
+									{product.description ||
+										"No description available."}
 								</p>
 
-								{/* Superpowers */}
+								{/* Product details */}
 								<section className="p-4 bg-pattern-benday my-4 rounded-sm border border-basic-400">
 									<div className="flex items-center gap-2 pb-2">
 										<Zap className="size-4 text-primary-500" />
 										<span className="italic font-bold uppercase text-xs">
-											Superpowers
+											Gear details
 										</span>
 									</div>
-									<span>{hero.superpowers}</span>
+
+									<div className="flex flex-col gap-1 text-sm">
+										<span>
+											Categories:{" "}
+											{product.categories.length
+												? product.categories.join(", ")
+												: "Misc"}
+										</span>
+										<span>Stock: {product.stock}</span>
+										<span>Rarity: {product.rarity}</span>
+									</div>
 								</section>
 
 								{/* Power rating */}
@@ -146,64 +196,34 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 										</span>
 									</h3>
 
-									<span>Combat</span>
+									<span>Power</span>
 									<input
 										readOnly
 										className="accent-secondary-500"
 										type="range"
 										min={0}
-										max={100}
-										value={combat}
-									/>
-
-									<span>Speed</span>
-									<input
-										readOnly
-										className="accent-primary-500"
-										type="range"
-										min={0}
-										max={100}
-										value={speed}
-									/>
-
-									<span>Strength</span>
-									<input
-										readOnly
-										className="accent-rarity-legendary"
-										type="range"
-										min={0}
-										max={100}
-										value={strength}
-									/>
-
-									<span>Intelligence</span>
-									<input
-										readOnly
-										className="accent-effect-light-blue"
-										type="range"
-										min={0}
-										max={100}
-										value={intelligence}
-									/>
-
-									<span>Energy</span>
-									<input
-										readOnly
-										className="accent-rarity-epic"
-										type="range"
-										min={0}
-										max={100}
-										value={energy}
+										max={10}
+										value={power}
 									/>
 
 									<span>Durability</span>
 									<input
 										readOnly
-										className="accent-rarity-uncommon"
+										className="accent-primary-500"
 										type="range"
 										min={0}
-										max={100}
+										max={10}
 										value={durability}
+									/>
+
+									<span>Special</span>
+									<input
+										readOnly
+										className="accent-rarity-epic"
+										type="range"
+										min={0}
+										max={10}
+										value={special}
 									/>
 								</div>
 
@@ -235,8 +255,11 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 										</button>
 									</div>
 
-									<button className="bg-secondary-500 p-4 flex-2 border-2 border-basic-100 rounded-sm">
-										Hire
+									<button
+										onClick={addToCart}
+										className="bg-secondary-500 p-4 flex-2 border-2 border-basic-100 rounded-sm"
+									>
+										Add to cart
 									</button>
 
 									<button
@@ -256,6 +279,12 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 										/>
 									</button>
 								</div>
+
+								{added ? (
+									<p className="text-[.7rem] font-bold uppercase text-rarity-uncommon">
+										Added to cart
+									</p>
+								) : null}
 							</div>
 
 							{/* Policy */}
@@ -288,7 +317,7 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 									<Award className="text-secondary-500" />
 									<div className="flex flex-col">
 										<span className="italic font-bold uppercase">
-											Certified Hero
+											Certified gear
 										</span>
 										<span className="text-basic-400">
 											Battle-tested
@@ -309,11 +338,11 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 						</div>
 
 						<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							{relatedProducts.map((product) => (
+							{relatedProducts.map((related) => (
 								<Link
-									href={`/products/${product.id}`}
+									href={`/products/${related.id}`}
 									className="relative block"
-									key={product.id}
+									key={related.id}
 								>
 									<div className="relative group">
 										<div className="relative aspect-4/5 w-full overflow-hidden border-2 border-basic-400/20 bg-basic-800 group-hover:border-secondary-500">
@@ -322,41 +351,43 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 											<Image
 												className="object-cover"
 												src={
-													product.image_url
-														? product.image_url
+													related.image_url
+														? related.image_url
 														: placeholder
 												}
-												alt={product.name}
+												alt={related.name}
 												fill
 												sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 											/>
 
 											<div
-												className={`absolute top-2 left-2 z-20 text-[.7rem] border-ui-border border rounded-sm px-2
-						${
-							product.rarity === "LEGENDARY"
-								? "bg-rarity-legendary text-basic-900"
-								: product.rarity === "EPIC"
-									? "bg-rarity-epic"
-									: product.rarity === "RARE"
-										? "bg-rarity-rare"
-										: "bg-rarity-uncommon text-basic-900"
-						}`}
+												className={`absolute top-2 left-2 z-20 text-[.7rem] border-ui-border border rounded-sm px-2 ${
+													related.rarity ===
+													"LEGENDARY"
+														? "bg-rarity-legendary text-basic-900"
+														: related.rarity ===
+															  "EPIC"
+															? "bg-rarity-epic"
+															: related.rarity ===
+																  "RARE"
+																? "bg-rarity-rare"
+																: "bg-rarity-uncommon text-basic-900"
+												}`}
 											>
-												{product.rarity}
+												{related.rarity}
 											</div>
 										</div>
 									</div>
 
 									<div className="flex min-h-18 flex-col p-2">
 										<span className="text-secondary-500 uppercase text-[.5rem] tracking-wider">
-											{product.category}
+											{related.category}
 										</span>
 										<span className="italic uppercase font-bold text-[.7rem]">
-											{product.name}
+											{related.name}
 										</span>
 										<span className="text-primary-500">
-											${product.price}
+											${related.price}
 										</span>
 									</div>
 								</Link>
