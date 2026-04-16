@@ -3,7 +3,7 @@ import { Zap, Send } from 'lucide-react';
 export default function ShopNewsLetter() {
   return (
     <section
-      id="news-letter-section"
+      id="newsletter-section"
       className="scroll-mt-18 diagonal-stripes flex justify-between border-b-2 border-ui-border bg-secondary-500 px-4 py-16"
     >
       <div className="flex justify-between w-full max-w-260 mx-auto">
