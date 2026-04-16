@@ -11,12 +11,11 @@ export default function ShopBanner() {
   return (
     <section className="relative flex items-center border-b-2 border-ui-border h-140">
       <Image
-        className="absolute -z-10 w-full object-cover bg-cover h-140"
+        className="absolute w-full object-cover bg-cover h-140"
         src={'/hero-landing.jpg'}
         alt="A caped hero standing on a rooftop, looking out over a city towards a lightningstorm in the distance"
         loading="eager"
-        width={1920}
-        height={800}
+        fill
       />
       {/* Benday dots overlay on image*/}
       <div className="absolute inset-0 benday-dots z-10" aria-hidden="true"></div>
