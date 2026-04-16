@@ -230,3 +230,92 @@ export async function getProductsForShop(): Promise<ShopProduct[]> {
 
 	return res.rows;
 }
+
+export type RelatedProduct = {
+	id: number;
+	name: string;
+	price: number;
+	image_url: string | null;
+	rarity: "COMMON" | "RARE" | "EPIC" | "LEGENDARY";
+	category: string;
+};
+
+export async function getRelatedProducts(limit = 3): Promise<RelatedProduct[]> {
+	const res = await db.query(
+		`
+    SELECT
+      p.id,
+      p.name,
+      p.price::float AS price,
+      p.image_url,
+      p.rarity,
+      COALESCE(cat.name, 'Misc') AS category
+    FROM products p
+    LEFT JOIN LATERAL (
+      SELECT c.name
+      FROM product_categories pc
+      INNER JOIN categories c ON c.id = pc.category_id
+      WHERE pc.product_id = p.id
+      ORDER BY c.name
+      LIMIT 1
+    ) cat ON true
+    ORDER BY p.created_at DESC, p.id DESC
+    LIMIT $1
+    `,
+		[limit],
+	);
+
+	return res.rows;
+}
+
+export type ProductDetails = {
+	id: number;
+	name: string;
+	price: number;
+	description: string | null;
+	stock: number;
+	image_url: string | null;
+	rarity: "COMMON" | "RARE" | "EPIC" | "LEGENDARY";
+	categories: string[];
+	stats: {
+		POWER?: number;
+		DURABILITY?: number;
+		SPECIAL?: number;
+	};
+};
+
+export async function getProductDetailsById(
+	id: number,
+): Promise<ProductDetails | null> {
+	const res = await db.query(
+		`
+    SELECT
+      p.id,
+      p.name,
+      p.price::float AS price,
+      p.description,
+      p.stock,
+      p.image_url,
+      p.rarity,
+      COALESCE(cat.categories, ARRAY[]::text[]) AS categories,
+      COALESCE(stat_block.stats, '{}'::jsonb) AS stats
+    FROM products p
+    LEFT JOIN LATERAL (
+      SELECT ARRAY_AGG(c.name ORDER BY c.name) AS categories
+      FROM product_categories pc
+      INNER JOIN categories c ON c.id = pc.category_id
+      WHERE pc.product_id = p.id
+    ) cat ON true
+    LEFT JOIN LATERAL (
+      SELECT JSONB_OBJECT_AGG(ps.stat_name, ps.value) AS stats
+      FROM product_stats ps
+      WHERE ps.product_id = p.id
+    ) stat_block ON true
+    WHERE p.id = $1
+    LIMIT 1
+    `,
+		[id],
+	);
+
+	return res.rows[0] ?? null;
+}

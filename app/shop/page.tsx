@@ -5,16 +5,39 @@ import { getSuperheroes } from "@/lib/queries/superheroes";
 
 export const dynamic = "force-dynamic";
 
-export default async function ShopPage() {
-  const [products, superheroes] = await Promise.all([
-    getProductsForShop(),
-    getSuperheroes({ page: 1, limit: 100 }),
-  ]);
+type SearchParams = Promise<{
+	q?: string;
+	page?: string;
+	type?: string;
+	minPrice?: string;
+	maxPrice?: string;
+	stock?: string;
+	availability?: string;
+	categories?: string;
+	rarities?: string;
+	tiers?: string;
+}>;
 
-  return (
-    <div>
-      <ShopHeader />
-      <ShopPageUI products={products} superheroes={superheroes} />
-    </div>
-  );
+export default async function ShopPage({
+	searchParams,
+}: {
+	searchParams: SearchParams;
+}) {
+	const params = await searchParams;
+
+	const [products, superheroes] = await Promise.all([
+		getProductsForShop(),
+		getSuperheroes({ page: 1, limit: 100 }),
+	]);
+
+	return (
+		<div>
+			<ShopHeader />
+			<ShopPageUI
+				products={products}
+				superheroes={superheroes}
+				initialSearchParams={params}
+			/>
+		</div>
+	);
 }

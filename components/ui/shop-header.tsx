@@ -1,17 +1,17 @@
-import { Heart, Search, Zap, User, ShoppingBag, Menu } from 'lucide-react';
-import Link from 'next/link';
+import { Heart, Search, Zap, User, ShoppingBag, Menu } from "lucide-react";
+import Link from "next/link";
 
 export default function ShopHeader() {
-  return (
+	return (
 		<>
 			<header className="sticky top-0 z-50 w-full bg-basic-700 benday-dots text-basic-300 flex justify-center border-b-2 border-ui-border">
 				<div className="flex justify-between p-4 w-full max-w-260 items-center">
-					<section className="flex items-center gap-1">
-						<Zap className="size-6 text-basic-100 bg-secondary-500 p-1 rounded-sm border border-ui-border " />
-						<h1 className="text-basic-100 font-bold uppercase italic">
+					<Link href="/" className="flex items-center gap-1">
+						<Zap className="size-6 rounded-sm border border-ui-border bg-secondary-500 p-1 text-basic-100" />
+						<h1 className="font-bold uppercase italic text-basic-100">
 							Hero Vault
 						</h1>
-					</section>
+					</Link>
 
 					{/* NAVIGATION */}
 					<nav>
@@ -19,38 +19,38 @@ export default function ShopHeader() {
 							<li>
 								<Link
 									className="text-secondary-500 link-hover"
-									href={"/"}
+									href={"/products"}
 								>
 									All Gear
 								</Link>
 							</li>
 							<li>
-								<Link className="link-hover" href={"/"}>
+								<Link className="link-hover" href={"/products"}>
 									Suits
 								</Link>
 							</li>
 							<li>
-								<Link className="link-hover" href={"/"}>
+								<Link className="link-hover" href={"/products"}>
 									Weapons
 								</Link>
 							</li>
 							<li>
-								<Link className="link-hover" href={"/"}>
+								<Link className="link-hover" href={"/products"}>
 									Masks
 								</Link>
 							</li>
 							<li>
-								<Link className="link-hover" href={"/"}>
+								<Link className="link-hover" href={"/products"}>
 									Capes
 								</Link>
 							</li>
 							<li>
-								<Link className="link-hover" href={"/"}>
+								<Link className="link-hover" href={"/products"}>
 									Boots
 								</Link>
 							</li>
 							<li>
-								<Link className="link-hover" href={"/"}>
+								<Link className="link-hover" href={"/products"}>
 									Tech
 								</Link>
 							</li>
@@ -70,14 +70,21 @@ export default function ShopHeader() {
 
 						{/* ICONS */}
 						<section className="flex gap-2 pl-2">
-							<Heart className="size-4 icon-hover" />
-							<ShoppingBag className="size-4 icon-hover" />
-							<User className="size-4 icon-hover" />
+							<Link href="/">
+								<Heart className="size-4 icon-hover" />
+							</Link>
+							<Link href="/cart">
+								<ShoppingBag className="size-4 icon-hover" />
+							</Link>
+							<Link href="/register">
+								<User className="size-4 icon-hover" />
+							</Link>
+
 							<Menu className="size-4 icon-hover lg:hidden" />
 						</section>
 					</div>
 				</div>
 			</header>
 		</>
-  );
+	);
 }
