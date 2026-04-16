@@ -12,8 +12,8 @@ export default async function CartPage() {
   return (
     <>
       <ShopHeader />
-      <main className="grid grid-cols-9 grid-rows-7 m-10 gap-10 *:border-2 *:border-red-500">
-        <section className="col-start-4 col-end-7 row-start-1 row-end-2 grid place-items-center bg-primary-100">
+      <main className="grid grid-cols-8 grid-rows-5 m-10 gap-10 *:border-2 *:border-red-500">
+        <section className="col-start-3 col-end-8 row-start-1 row-end-2 grid place-items-center bg-primary-100">
           <span className="text-secondary-600 text-2xl tracking-tight font-black italic">
             Shameless ad coming soon!
           </span>
@@ -45,6 +45,17 @@ export default async function CartPage() {
               <PlaceOrderButton />
             </>
           )}
+        </section>
+
+        <section className="col-start-7 col-end-9 row-start-2 row-end-4 flex flex-col justify-between py-3 pl-5 space-y-2">
+          <div className="relative">
+            <div className="absolute h-7 w-1 bg-secondary-500" />
+            <h2 className="pl-4 text-basic-100 font-bold uppercase italic">
+              Recommended gear
+            </h2>
+          </div>
+          <hr className="w-[90%] border-t border-ui-border-strong my-4" />
+          <span className="text-secondary-200 mb-3 whitespace-nowrap text-base font-bold uppercase italic leading-none mr-4">Coming soon!</span>
         </section>
       </main>
       <ShopNewsLetter />

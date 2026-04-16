@@ -24,7 +24,7 @@ export default function CartList() {
         <h3>Your cart is empty.</h3>
         <span>
           Find what you need
-          <Link href="http://localhost:3000/shop/"> in our shop!</Link>
+          <Link href="/shop"> in our shop!</Link>
         </span>
       </div>
     );
