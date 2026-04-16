@@ -51,7 +51,7 @@ export default function Superhero({ hero }: { hero: Hero }) {
           <main className="flex flex-col lg:flex-row my-4 gap-4">
             {/* Left panel */}
             <div className="relative flex-1">
-              <div className="relative overflow-clip h-full lg:aspect-auto aspect-3/4 mx-auto max-h-204">
+              <div className="relative overflow-clip lg:max-h-none lg:aspect-auto h-full max-h-175 aspect-3/4 mx-auto ">
                 {/* Benday dots overlay on image*/}
                 <div className="benday-dots absolute z-10 inset-0"></div>
                 <Image
