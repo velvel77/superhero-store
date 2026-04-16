@@ -18,19 +18,19 @@ export default function ShopFooter() {
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
             <h3 className="text-basic-100 font-bold italic pb-2">Shop</h3>
             <li>
-              <Link href="/">All Gear</Link>
+              <Link href="/products">All Gear</Link>
             </li>
             <li>
-              <Link href="/">Suits</Link>
+              <Link href="/products">Suits</Link>
             </li>
             <li>
-              <Link href="/">Weapons</Link>
+              <Link href="/products">Weapons</Link>
             </li>
             <li>
-              <Link href="/">Masks</Link>
+              <Link href="/products">Masks</Link>
             </li>
             <li>
-              <Link href="/">Tech</Link>
+              <Link href="/products">Tech</Link>
             </li>
           </ul>
           <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
