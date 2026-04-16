@@ -1,4 +1,4 @@
-import { Undo2, Zap } from "lucide-react";
+import { Undo2 } from "lucide-react";
 import Link from "next/link";
 import CartList from "@/components/ui/cart-list";
 import PlaceOrderButton from "@/components/ui/place-order-button";
