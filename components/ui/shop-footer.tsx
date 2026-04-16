@@ -14,56 +14,68 @@ export default function ShopFooter() {
             Premium heroic equipment for the modern legend. Trusted by 12,000+ heroes worldwide.
           </p>
         </div>
-        <nav className="flex uppercase justify-evenly w-full text-[.7rem] text-basic-300 ">
-          <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-basic-100 font-bold italic pb-2">Shop</h3>
-            <li>
-              <Link href="/">All Gear</Link>
-            </li>
-            <li>
-              <Link href="/">Suits</Link>
-            </li>
-            <li>
-              <Link href="/">Weapons</Link>
-            </li>
-            <li>
-              <Link href="/">Masks</Link>
-            </li>
-            <li>
-              <Link href="/">Tech</Link>
-            </li>
-          </ul>
-          <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-basic-100 font-bold italic pb-2">Support</h3>
-            <li>
-              <Link href="/">Hq help center</Link>
-            </li>
-            <li>
-              <Link href="/">Shipping</Link>
-            </li>
-            <li>
-              <Link href="/">Returns</Link>
-            </li>
-            <li>
-              <Link href="/">Size guide</Link>
-            </li>
-          </ul>
-          <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
-            <h3 className="text-basic-100 font-bold italic pb-2">Company</h3>
-            <li>
-              <Link href="/">About</Link>
-            </li>
-            <li>
-              <Link href="/">Careers</Link>
-            </li>
-            <li>
-              <Link href="/">Press</Link>
-            </li>
-            <li>
-              <Link href="/">Affiliates</Link>
-            </li>
-          </ul>
-        </nav>
+        <section className="flex uppercase justify-evenly w-full text-[.7rem] text-basic-300 ">
+          <nav aria-labelledby="shop-heading">
+            <h3 id="shop-heading" className="text-basic-100 font-bold italic pb-2">
+              Shop
+            </h3>
+            <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
+              <li>
+                <Link href="/">All Gear</Link>
+              </li>
+              <li>
+                <Link href="/">Suits</Link>
+              </li>
+              <li>
+                <Link href="/">Weapons</Link>
+              </li>
+              <li>
+                <Link href="/">Masks</Link>
+              </li>
+              <li>
+                <Link href="/">Tech</Link>
+              </li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="support-heading">
+            <h3 id="support-heading" className="text-basic-100 font-bold italic pb-2">
+              Support
+            </h3>
+            <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
+              <li>
+                <Link href="/">Hq help center</Link>
+              </li>
+              <li>
+                <Link href="/">Shipping</Link>
+              </li>
+              <li>
+                <Link href="/">Returns</Link>
+              </li>
+              <li>
+                <Link href="/">Size guide</Link>
+              </li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="company-heading">
+            <h3 id="company-heading" className="text-basic-100 font-bold italic pb-2">
+              Company
+            </h3>
+            <ul className="flex flex-col gap-2 [&>li]:hover:icon-hover">
+              <li>
+                <Link href="/">About</Link>
+              </li>
+              <li>
+                <Link href="/">Careers</Link>
+              </li>
+              <li>
+                <Link href="/">Press</Link>
+              </li>
+              <li>
+                <Link href="/">Affiliates</Link>
+              </li>
+            </ul>
+          </nav>
+        </section>
       </section>
       <div className="py-4 text-basic-400 uppercase text-[.7rem] flex justify-between max-w-260 mx-auto border-t border-ui-border">
         <span>© 2026 Hero Vault — Gear Division</span>
