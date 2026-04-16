@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import {
+	getProductById,
 	getProductDetailsById,
 	getRelatedProducts,
 } from "@/lib/queries/products";
@@ -10,6 +11,15 @@ type Props = {
 		id: string;
 	}>;
 };
+
+export async function generateMetadata({ params }: PageProps<"/products/[id]">) {
+	const { id } = await params;
+	const product = await getProductById(Number(id));
+	return {
+		title: `Superhero Store - ${product.name}`,
+		description: product.description
+	}
+}
 
 export default async function ProductPage({ params }: Props) {
 	const { id } = await params;
