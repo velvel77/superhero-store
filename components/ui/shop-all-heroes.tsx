@@ -20,7 +20,7 @@ export default async function ShopAllHeroes() {
   const heroes = await data.json();
 
   return (
-    <section id="all-superheroes-section" className="scroll-mt-18 diagonal-stripes py-8">
+    <main id="all-superheroes-section" className="scroll-mt-18 diagonal-stripes py-8">
       <div className="max-w-260 mx-auto px-4">
         <div className="text-base-white relative p-4 grid items-center">
           <div className="absolute mx-4 h-7 w-1 bg-rarity-epic"></div>
@@ -41,7 +41,7 @@ export default async function ShopAllHeroes() {
                     src={hero.image_url}
                     alt={hero.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 320px"
                   />
                   <div className="inset-0 absolute bg-black/30 group-hover:bg-transparent transition-all duration-200"></div>
                 </div>
@@ -68,6 +68,6 @@ export default async function ShopAllHeroes() {
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 }
