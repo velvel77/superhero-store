@@ -7,6 +7,12 @@ import ShopHeader from "@/components/ui/shop-header";
 type RankingFilter = "" | "S" | "A" | "B" | "C" | "D" | "E" | "F";
 type AvailabilityFilter = "" | "available" | "unavailable";
 
+export const metadata = {
+	title: "Superhero Store - Superheroes",
+	description: "Browse our selecion of superheroes.",
+}
+
+
 type SearchParams = Promise<{
 	page?: string;
 	q?: string;

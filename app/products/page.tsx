@@ -7,6 +7,11 @@ import ShopHeader from "@/components/ui/shop-header";
 type RarityFilter = "" | "COMMON" | "RARE" | "EPIC" | "LEGENDARY";
 type StatusFilter = "" | "out" | "low" | "in";
 
+export const metadata = {
+	title: "Superhero Store - Gear and products",
+	description: "Browse our selecion of gear and products.",
+}
+
 type SearchParams = Promise<{
 	page?: string;
 	q?: string;
@@ -333,11 +338,10 @@ export default async function ProductsPage({
 							<Link
 								href={makeHref(Math.max(1, page - 1))}
 								aria-disabled={page === 1}
-								className={`min-w-11 border px-4 py-3 text-xs font-black uppercase tracking-[0.14em] ${
-									page === 1
+								className={`min-w-11 border px-4 py-3 text-xs font-black uppercase tracking-[0.14em] ${page === 1
 										? "pointer-events-none border-ui-border bg-basic-700 text-basic-400 opacity-40"
 										: "border-ui-border bg-basic-700 text-basic-100"
-								}`}
+									}`}
 							>
 								Prev
 							</Link>
@@ -349,11 +353,10 @@ export default async function ProductsPage({
 								<Link
 									key={pageNumber}
 									href={makeHref(pageNumber)}
-									className={`min-w-11 border px-4 py-3 text-center text-xs font-black uppercase tracking-[0.14em] ${
-										page === pageNumber
+									className={`min-w-11 border px-4 py-3 text-center text-xs font-black uppercase tracking-[0.14em] ${page === pageNumber
 											? "border-secondary-500 bg-secondary-500/15 text-basic-100"
 											: "border-ui-border bg-basic-700 text-basic-100"
-									}`}
+										}`}
 								>
 									{pageNumber}
 								</Link>
@@ -362,11 +365,10 @@ export default async function ProductsPage({
 							<Link
 								href={makeHref(Math.min(totalPages, page + 1))}
 								aria-disabled={page === totalPages}
-								className={`min-w-11 border px-4 py-3 text-xs font-black uppercase tracking-[0.14em] ${
-									page === totalPages
+								className={`min-w-11 border px-4 py-3 text-xs font-black uppercase tracking-[0.14em] ${page === totalPages
 										? "pointer-events-none border-ui-border bg-basic-700 text-basic-400 opacity-40"
 										: "border-ui-border bg-basic-700 text-basic-100"
-								}`}
+									}`}
 							>
 								Next
 							</Link>
