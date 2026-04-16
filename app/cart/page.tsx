@@ -1,3 +1,4 @@
+import { Undo2, Zap } from "lucide-react";
 import Link from "next/link";
 import CartList from "@/components/ui/cart-list";
 import PlaceOrderButton from "@/components/ui/place-order-button";
@@ -24,12 +25,20 @@ export default async function CartPage() {
           </h1>
           <hr className="w-[90%] border-t border-ui-border-strong my-4" />
           {cart.length === 0 ? (
-            <>
+            <div className="flex flex-col gap-2 py-5">
               <p className="text-secondary-500 tracking-tight font-black italic my-auto">
                 Your cart is empty.
               </p>
-              <Link href="/shop"></Link>
-            </>
+              <Link
+                href="/shop"
+                className="group inline-flex h-14 shrink-0 items-center justify-center gap-3 border-2 border-ui-border bg-secondary-500 px-4 text-basic-100 no-underline"
+              >
+                <Undo2 className="size-6 shrink-0 transition-transform duration-150 group-hover:translate-x-1" />
+                <span className="whitespace-nowrap text-base font-bold uppercase italic leading-none mr-4">
+                  Go back
+                </span>
+              </Link>
+            </div>
           ) : (
             <>
               <CartList />
