@@ -70,17 +70,14 @@ export default function ShopHeader() {
 
 					{/* ICONS */}
 					<section className="flex gap-2 pl-2">
-						<Heart className="size-4 icon-hover" />
-						<div className="relative">
-							<ShoppingBag className="size-4 icon-hover" />
-							<CartCount />
-						</div>
-						<User className="size-4 icon-hover" />
 						<Link href="/">
 							<Heart className="size-4 icon-hover" />
 						</Link>
 						<Link href="/cart">
-							<ShoppingBag className="size-4 icon-hover" />
+							<div className="relative">
+								<ShoppingBag className="size-4 icon-hover" />
+								<CartCount />
+							</div>
 						</Link>
 						<Link href="/register">
 							<User className="size-4 icon-hover" />
