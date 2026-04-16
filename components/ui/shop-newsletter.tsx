@@ -4,8 +4,23 @@ export default function ShopNewsLetter() {
   return (
     <section
       id="newsletter-section"
-      className="scroll-mt-18 diagonal-stripes flex justify-between border-b-2 border-ui-border bg-secondary-500 px-4 py-16"
+      className="scroll-mt-18 overflow-clip diagonal-stripes relative flex justify-between border-b-2 border-ui-border bg-secondary-500 px-4 py-16"
     >
+      <div className="absolute -left-20 -top-20 w-80 h-80 opacity-10 animate-rotate">
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <line
+              key={i}
+              x1="100"
+              y1="100"
+              x2={100 + 100 * Math.cos((i * Math.PI * 2) / 16)}
+              y2={100 + 100 * Math.sin((i * Math.PI * 2) / 16)}
+              stroke="white"
+              strokeWidth="4"
+            />
+          ))}
+        </svg>
+      </div>
       <div className="flex justify-between w-full max-w-260 mx-auto">
         <div className="flex items-center gap-2">
           <Zap className="text-basic-100 border border-basic-100 p-2 size-10 rounded-sm" />

@@ -9,7 +9,22 @@ const stats = [
 
 export default function ShopBanner() {
   return (
-    <section className="relative flex items-center border-b-2 border-ui-border h-140">
+    <section className="relative overflow-clip flex items-center border-b-2 border-ui-border h-140">
+      <div className="absolute -right-20 z-10 -top-20 w-80 h-80 opacity-10 animate-rotate">
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <line
+              key={i}
+              x1="100"
+              y1="100"
+              x2={100 + 100 * Math.cos((i * Math.PI * 2) / 16)}
+              y2={100 + 100 * Math.sin((i * Math.PI * 2) / 16)}
+              stroke="yellow"
+              strokeWidth="4"
+            />
+          ))}
+        </svg>
+      </div>
       <Image
         className="absolute w-full object-cover bg-cover h-140"
         src={'/hero-landing.jpg'}
