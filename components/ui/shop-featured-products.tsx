@@ -17,11 +17,11 @@ const [featured, ...rest] = items;
 
 export default function ShopFeaturedProducts() {
   return (
-    <section className="p-4 pb-16 diagonal-stripes ">
+    <section id="featured-products-section" className="scroll-mt-18 p-4 pb-16 diagonal-stripes ">
       <div className="mx-auto max-w-260 w-full">
         <header className="p-4 py-8 relative grid items-center">
           <div className="absolute h-7 w-1 bg-secondary-500"></div>
-          <h2 className="text-basic-100 font-bold uppercase italic">Trending Gear</h2>
+          <h2 className="text-basic-100 font-bold uppercase italic">Featured products</h2>
           <small className="text-basic-300">Most requested by active heroes</small>
         </header>
 
