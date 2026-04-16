@@ -2,6 +2,8 @@
 
 import { cookies } from "next/headers";
 
+const apiUrl = process.env.API_URL;
+
 export type CartItem = {
     id: number;
     name: string;
@@ -106,7 +108,7 @@ export async function placeOrder(): Promise<{ success: boolean; orderId?: number
             id: i.id,
         }));
 
-        const response = await fetch("http://localhost:5001/orders", {
+        const response = await fetch(`${apiUrl}/orders`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
