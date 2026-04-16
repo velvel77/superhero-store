@@ -115,7 +115,7 @@ export default async function ProductTable({
 									{product.price} kr
 								</td>
 								<td className={`${tdStyle} text-basic-100`}>
-									<AddToCartButton item={{ ...product, id: String(product.id), quantity: 1 }} />
+									<AddToCartButton item={{ ...product, id: product.id, quantity: 1, type: "product"}} />
 								</td>
 
                 <td

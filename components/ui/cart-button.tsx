@@ -1,6 +1,6 @@
 "use client";
 
-import { CartItem } from "@/app/cart/actions";
+import type { CartItem } from "@/app/cart/actions";
 import { useCart } from "@/context/CartContext";
 
 export default function CartButton({ item }: { item: CartItem }) {
