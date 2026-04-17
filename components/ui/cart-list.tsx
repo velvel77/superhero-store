@@ -30,8 +30,8 @@ export default function CartList() {
     );
   }
   return (
-    <div>
-      <span>Total items:{totalItems}</span>
+    <div className="flex flex-col">
+      <span>Total items: {totalItems}</span>
 
       {items.map((item) => (
         <div key={`${item.type}-${item.id}`}>
