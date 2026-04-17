@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { ProductActions } from "@/components/ui/delete-actions";
 import { getProducts } from "@/lib/queries/products";
 import { getSearchParamsAsString } from "@/utils/getSearchParams";
+import AddToCartButton from "./cart-button";
 import ProductTablePagination from "./product-table-pagination";
 
 const thStyle = "p-4 text-sm font-semibold text-basic-300";
@@ -107,6 +108,15 @@ export default async function ProductTable({
                   {product.price} kr
                 </td>
                 <td className={`${tdStyle} text-basic-100`}>{product.stock}</td>
+								<td className={`${tdStyle} text-basic-100`}>
+									{product.rarity}
+								</td>
+								<td className={`${tdStyle} text-basic-100`}>
+									{product.price} kr
+								</td>
+								<td className={`${tdStyle} text-basic-100`}>
+									<AddToCartButton item={{ ...product, id: product.id, quantity: 1, type: "product"}} />
+								</td>
 
                 <td
                   className={`${tdStyle} ${getColourFromAvailabilityStatus(

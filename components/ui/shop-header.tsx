@@ -1,5 +1,6 @@
 import { Heart, Menu, Search, ShoppingBag, User, Zap } from 'lucide-react';
 import Link from 'next/link';
+import CartCount from './cart-count';
 
 export default function ShopHeader() {
   return (
@@ -72,7 +73,10 @@ export default function ShopHeader() {
               <Heart className="size-4 icon-hover" />
             </Link>
             <Link aria-label="Go to cart" href="/cart">
-              <ShoppingBag className="size-4 icon-hover" />
+              <div className="relative">
+                <ShoppingBag className="size-4 icon-hover" />
+                <CartCount />
+              </div>
             </Link>
             <Link aria-label="Go to account settings" href="/register">
               <User className="size-4 icon-hover" />

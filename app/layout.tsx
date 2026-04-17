@@ -4,6 +4,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { ToastListener } from "@/components/toast-listener";
+import CartProviderWrapper from "@/components/ui/cart-provider-wrapper";
 import { Providers } from "@/lib/providers";
 
 const inter = Inter({
@@ -26,10 +27,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased `}>
         <Toaster position="top-center" />
-		<Suspense fallback={null}>
-        	<ToastListener />
-		</Suspense>
-        <Providers>{children}</Providers>
+        <Suspense fallback={null}>
+          <ToastListener />
+        </Suspense>
+        <CartProviderWrapper>
+          <Providers>{children}</Providers>
+        </CartProviderWrapper>
       </body>
     </html>
   );

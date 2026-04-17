@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import masks from '@/public/masks.jpg';
-import suits from '@/public/suits.jpg';
-import weapons from '@/public/weapons.jpg';
-import tech from '@/public/tech.jpg';
+import masks from '@/public/gear1.jpg';
+import suits from '@/public/gear2.jpg';
+import weapons from '@/public/gear3.jpg';
+import tech from '@/public/gear4.jpg';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
