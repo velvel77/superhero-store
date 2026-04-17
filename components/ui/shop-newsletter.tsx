@@ -1,6 +1,26 @@
+"use client";
+import { FormState, subscribeNewsletter } from '@/app/contact/action';
 import { Zap, Send } from 'lucide-react';
+import Form from 'next/form';
+import { useActionState, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+
+const initialState: FormState = {};
 
 export default function ShopNewsLetter() {
+
+  const [state, action, pending] = useActionState(
+    subscribeNewsletter,
+    initialState,
+  );
+
+  useEffect(() => {
+    if (state.success)
+      toast.success("You're subscribed to our newsletter!");
+    if (state.error) toast.error(state.error);
+  }, [state]);
+
+
   return (
     <section
       id="newsletter-section"
@@ -13,8 +33,8 @@ export default function ShopNewsLetter() {
               key={i}
               x1="100"
               y1="100"
-              x2={100 + 100 * Math.cos((i * Math.PI * 2) / 16)}
-              y2={100 + 100 * Math.sin((i * Math.PI * 2) / 16)}
+              x2={Math.round(100 + 100 * Math.cos((i * Math.PI * 2) / 16))}
+              y2={Math.round(100 + 100 * Math.sin((i * Math.PI * 2) / 16))}
               stroke="white"
               strokeWidth="4"
             />
@@ -31,12 +51,13 @@ export default function ShopNewsLetter() {
             </p>
           </div>
         </div>
-        <form className="flex border-2 border-ui-border/80" action="">
+        <Form className="flex border-2 border-ui-border/80" action={action}>
           <label htmlFor="email-field" className="sr-only">
             Sign up to our newsletter via email
           </label>
           <input
             id="email-field"
+            name="email"
             className="outline-0 p-2 text-sm text-basic-100 placeholder:text-basic-200"
             required
             type="email"
@@ -44,11 +65,21 @@ export default function ShopNewsLetter() {
           />
           <button
             className="p-2 flex items-center gap-2 hover:bg-basic-200 bg-basic-100 text-secondary-500"
-            type="submit"
+            type="submit" disabled={pending}
           >
-            <Send className="size-3" /> <span className="text-sm font-bold italic">Enlist</span>
+            <span className="text-sm font-bold italic">
+              <Send className="size-3" />
+              {pending ? "Enlisting..." : "Enlist"}
+            </span>
           </button>
-        </form>
+          <Toaster
+            position="bottom-center"
+            toastOptions={{
+              className:
+                "bg-basic-800 text-basic-100 border border-ui-border",
+            }}
+          />
+        </Form>
       </div>
     </section>
   );
