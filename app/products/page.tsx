@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
+// import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { getProducts, getProductsCount } from "@/lib/queries/products";
 import ShopHeader from "@/components/ui/shop-header";
@@ -59,11 +59,11 @@ export default async function ProductsPage({
 }: {
 	searchParams: SearchParams;
 }) {
-	const session = await getServerSession();
+	// const session = await getServerSession();
 
-	if (!session) {
-		redirect("/login");
-	}
+	// if (!session) {
+	// 	redirect("/login");
+	// }
 
 	const params = await searchParams;
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+// import { getServerSession } from "next-auth";
+// import { redirect } from "next/navigation";
 import { getSuperheroes, getSuperheroesCount } from "@/lib/queries/superheroes";
 import ShopHeader from "@/components/ui/shop-header";
 
@@ -84,11 +84,11 @@ export default async function SuperheroesPage({
 }: {
 	searchParams: SearchParams;
 }) {
-	const session = await getServerSession();
+	// const session = await getServerSession();
 
-	if (!session) {
-		redirect("/login");
-	}
+	// if (!session) {
+	// 	redirect("/login");
+	// }
 
 	const params = await searchParams;
 
