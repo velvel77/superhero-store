@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function ShopFooter() {
   return (
-    <footer id="footer-section" className="scroll-mt-18 p-4 bg-basic-700 benday-dots">
+    <footer id="footer-section" className="scroll-mt-18 border-t border-ui-border p-4 bg-basic-700 benday-dots">
       <section className="flex pb-8 mx-auto max-w-260">
         <div>
           <div className="flex gap-1 py-2 text-basic-100">
