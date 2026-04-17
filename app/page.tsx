@@ -17,6 +17,11 @@ const skipLinks = [
   { id: 7, link: '#footer-section', description: 'Go to footer' },
 ];
 
+export const metadata = {
+  title: "Superhero Store",
+  description: "Browse through our selection of superheroes and gear.",
+}
+
 export default async function Shop() {
   return (
     <>
