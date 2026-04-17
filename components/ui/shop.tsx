@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import type { ShopProduct } from '@/lib/queries/products';
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import type { ShopProduct } from "@/lib/queries/products";
 
 type Superhero = {
   id: number;
@@ -23,22 +24,36 @@ type Superhero = {
   image_url: string | null;
   is_available: boolean;
   joined_at: string;
-  ranking: 'S' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | null;
+  ranking: "S" | "A" | "B" | "C" | "D" | "E" | "F" | null;
+};
+
+type StockFilter = "all" | "in" | "low" | "out";
+type AvailabilityFilter = "all" | "available" | "unavailable";
+type ContentFilter = "all" | "products" | "superheroes";
+type PowerTier = "street" | "city" | "planetary" | "cosmic";
+
+type InitialSearchParams = {
+  q?: string;
+  page?: string;
+  type?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  stock?: string;
+  availability?: string;
+  categories?: string;
+  rarities?: string;
+  tiers?: string;
 };
 
 type Props = {
   products: ShopProduct[];
   superheroes: Superhero[];
+  initialSearchParams: InitialSearchParams;
 };
-
-type StockFilter = 'all' | 'in' | 'low' | 'out';
-type AvailabilityFilter = 'all' | 'available' | 'unavailable';
-type ContentFilter = 'all' | 'products' | 'superheroes';
-type PowerTier = 'street' | 'city' | 'planetary' | 'cosmic';
 
 type CatalogItem =
   | {
-      type: 'product';
+      type: "product";
       id: number;
       name: string;
       description: string | null;
@@ -48,7 +63,7 @@ type CatalogItem =
       product: ShopProduct;
     }
   | {
-      type: 'superhero';
+      type: "superhero";
       id: number;
       name: string;
       description: string | null;
@@ -61,16 +76,20 @@ type CatalogItem =
 const ITEMS_PER_PAGE = 6;
 
 function formatPrice(value: number | null) {
-  if (value == null) return 'N/A';
+  if (value == null) return "N/A";
 
-  return `$${value.toLocaleString('en-US', {
+  return `$${value.toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
 }
 
 function getProductScore(product: ShopProduct) {
-  return (product.stats.POWER ?? 0) + (product.stats.DURABILITY ?? 0) + (product.stats.SPECIAL ?? 0);
+  return (
+    (product.stats.POWER ?? 0) +
+    (product.stats.DURABILITY ?? 0) +
+    (product.stats.SPECIAL ?? 0)
+  );
 }
 
 function getHeroScore(hero: Superhero) {
@@ -89,57 +108,82 @@ function getHeroScore(hero: Superhero) {
 function getProductPowerTier(product: ShopProduct): PowerTier {
   const score = getProductScore(product);
 
-  if (score >= 24) return 'cosmic';
-  if (score >= 19) return 'planetary';
-  if (score >= 13) return 'city';
-  return 'street';
+  if (score >= 24) return "cosmic";
+  if (score >= 19) return "planetary";
+  if (score >= 13) return "city";
+  return "street";
 }
 
 function getHeroPowerTier(hero: Superhero): PowerTier {
   const avg = Math.round(getHeroScore(hero) / 6);
 
-  if (avg >= 80) return 'cosmic';
-  if (avg >= 65) return 'planetary';
-  if (avg >= 45) return 'city';
-  return 'street';
+  if (avg >= 80) return "cosmic";
+  if (avg >= 65) return "planetary";
+  if (avg >= 45) return "city";
+  return "street";
 }
 
-function getRarityBadgeClasses(rarity: ShopProduct['rarity']) {
+function getRarityBadgeClasses(rarity: ShopProduct["rarity"]) {
   switch (rarity) {
-    case 'LEGENDARY':
-      return 'bg-primary-500 text-black';
-    case 'EPIC':
-      return 'bg-rarity-epic text-white';
-    case 'RARE':
-      return 'bg-rarity-rare text-white';
+    case "LEGENDARY":
+      return "bg-primary-500 text-black";
+    case "EPIC":
+      return "bg-rarity-epic text-white";
+    case "RARE":
+      return "bg-rarity-rare text-white";
     default:
-      return 'bg-basic-300 text-black';
+      return "bg-basic-300 text-black";
   }
 }
 
-function getRankingBadgeClasses(ranking: Superhero['ranking']) {
+function getRankingBadgeClasses(ranking: Superhero["ranking"]) {
   switch (ranking) {
-    case 'S':
-      return 'bg-rarity-legendary text-white';
-    case 'A':
-      return 'bg-rarity-epic text-white';
-    case 'B':
-      return 'bg-rarity-rare text-white';
+    case "S":
+      return "bg-rarity-legendary text-white";
+    case "A":
+      return "bg-rarity-epic text-white";
+    case "B":
+      return "bg-rarity-rare text-white";
     default:
-      return 'bg-rarity-uncommon text-black';
+      return "bg-rarity-uncommon text-black";
   }
 }
 
-export default function ShopPageUI({ products, superheroes }: Props) {
+function parseNumber(value: string | undefined, fallback: number) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function parseCsv(value: string | undefined) {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+export default function ShopPageUI({
+  products,
+  superheroes,
+  initialSearchParams,
+}: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const allPrices = useMemo(() => {
     return [
       ...products.map((product) => product.price),
-      ...superheroes.map((hero) => hero.price).filter((price): price is number => price !== null),
+      ...superheroes
+        .map((hero) => hero.price)
+        .filter((price): price is number => price !== null),
     ];
   }, [products, superheroes]);
 
   const productCategories = useMemo(() => {
-    return Array.from(new Set(products.flatMap((product) => product.categories))).sort();
+    return Array.from(
+      new Set(products.flatMap((product) => product.categories)),
+    ).sort();
   }, [products]);
 
   const minDbPrice = useMemo(() => {
@@ -161,24 +205,78 @@ export default function ShopPageUI({ products, superheroes }: Props) {
     return Math.round((availableHeroesCount / superheroes.length) * 100);
   }, [availableHeroesCount, superheroes.length]);
 
-  const [search, setSearch] = useState('');
-  const [contentFilter, setContentFilter] = useState<ContentFilter>('products');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedRarities, setSelectedRarities] = useState<Array<ShopProduct['rarity']>>([]);
-  const [selectedPowerTiers, setSelectedPowerTiers] = useState<PowerTier[]>([]);
-  const [stockFilter, setStockFilter] = useState<StockFilter>('all');
-  const [availabilityFilter, setAvailabilityFilter] = useState<AvailabilityFilter>('all');
-  const [minPrice, setMinPrice] = useState(minDbPrice);
-  const [maxPrice, setMaxPrice] = useState(maxDbPrice);
-  const [page, setPage] = useState(1);
+  const initialContentFilter =
+    initialSearchParams.type === "all" ||
+    initialSearchParams.type === "products" ||
+    initialSearchParams.type === "superheroes"
+      ? initialSearchParams.type
+      : "products";
+
+  const initialStockFilter =
+    initialSearchParams.stock === "all" ||
+    initialSearchParams.stock === "in" ||
+    initialSearchParams.stock === "low" ||
+    initialSearchParams.stock === "out"
+      ? initialSearchParams.stock
+      : "all";
+
+  const initialAvailabilityFilter =
+    initialSearchParams.availability === "all" ||
+    initialSearchParams.availability === "available" ||
+    initialSearchParams.availability === "unavailable"
+      ? initialSearchParams.availability
+      : "all";
+
+  const initialRarities = parseCsv(initialSearchParams.rarities).filter(
+    (item): item is ShopProduct["rarity"] =>
+      item === "COMMON" ||
+      item === "RARE" ||
+      item === "EPIC" ||
+      item === "LEGENDARY",
+  );
+
+  const initialPowerTiers = parseCsv(initialSearchParams.tiers).filter(
+    (item): item is PowerTier =>
+      item === "street" ||
+      item === "city" ||
+      item === "planetary" ||
+      item === "cosmic",
+  );
+
+  const initialCategories = parseCsv(initialSearchParams.categories).filter(
+    (item) => productCategories.includes(item),
+  );
+
+  const [search, setSearch] = useState(initialSearchParams.q ?? "");
+  const [contentFilter, setContentFilter] =
+    useState<ContentFilter>(initialContentFilter);
+  const [selectedCategories, setSelectedCategories] =
+    useState<string[]>(initialCategories);
+  const [selectedRarities, setSelectedRarities] =
+    useState<Array<ShopProduct["rarity"]>>(initialRarities);
+  const [selectedPowerTiers, setSelectedPowerTiers] =
+    useState<PowerTier[]>(initialPowerTiers);
+  const [stockFilter, setStockFilter] =
+    useState<StockFilter>(initialStockFilter);
+  const [availabilityFilter, setAvailabilityFilter] =
+    useState<AvailabilityFilter>(initialAvailabilityFilter);
+  const [minPrice, setMinPrice] = useState(
+    parseNumber(initialSearchParams.minPrice, minDbPrice),
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    parseNumber(initialSearchParams.maxPrice, maxDbPrice),
+  );
+  const [page, setPage] = useState(
+    Math.max(1, parseNumber(initialSearchParams.page, 1)),
+  );
 
   useEffect(() => {
-    setMinPrice(minDbPrice);
-    setMaxPrice(maxDbPrice);
+    setMinPrice((prev) => (Number.isFinite(prev) ? prev : minDbPrice));
+    setMaxPrice((prev) => (Number.isFinite(prev) ? prev : maxDbPrice));
   }, [minDbPrice, maxDbPrice]);
 
   const filteredProducts = useMemo(() => {
-    if (contentFilter === 'superheroes') return [];
+    if (contentFilter === "superheroes") return [];
 
     const q = search.trim().toLowerCase();
 
@@ -187,27 +285,42 @@ export default function ShopPageUI({ products, superheroes }: Props) {
         const matchesSearch =
           !q ||
           product.name.toLowerCase().includes(q) ||
-          (product.description ?? '').toLowerCase().includes(q) ||
-          product.categories.some((category) => category.toLowerCase().includes(q));
+          (product.description ?? "").toLowerCase().includes(q) ||
+          product.categories.some((category) =>
+            category.toLowerCase().includes(q),
+          );
 
         const matchesCategories =
           selectedCategories.length === 0 ||
-          product.categories.some((category) => selectedCategories.includes(category));
+          product.categories.some((category) =>
+            selectedCategories.includes(category),
+          );
 
-        const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes(product.rarity);
+        const matchesRarity =
+          selectedRarities.length === 0 ||
+          selectedRarities.includes(product.rarity);
 
         const matchesPowerTier =
-          selectedPowerTiers.length === 0 || selectedPowerTiers.includes(getProductPowerTier(product));
+          selectedPowerTiers.length === 0 ||
+          selectedPowerTiers.includes(getProductPowerTier(product));
 
         const matchesStock =
-          stockFilter === 'all' ||
-          (stockFilter === 'out' && product.stock === 0) ||
-          (stockFilter === 'low' && product.stock > 0 && product.stock < 10) ||
-          (stockFilter === 'in' && product.stock >= 10);
+          stockFilter === "all" ||
+          (stockFilter === "out" && product.stock === 0) ||
+          (stockFilter === "low" && product.stock > 0 && product.stock < 10) ||
+          (stockFilter === "in" && product.stock >= 10);
 
-        const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+        const matchesPrice =
+          product.price >= minPrice && product.price <= maxPrice;
 
-        return matchesSearch && matchesCategories && matchesRarity && matchesPowerTier && matchesStock && matchesPrice;
+        return (
+          matchesSearch &&
+          matchesCategories &&
+          matchesRarity &&
+          matchesPowerTier &&
+          matchesStock &&
+          matchesPrice
+        );
       })
       .sort((a, b) => {
         const rarityRank = {
@@ -238,7 +351,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
   ]);
 
   const filteredHeroes = useMemo(() => {
-    if (contentFilter === 'products') return [];
+    if (contentFilter === "products") return [];
 
     const q = search.trim().toLowerCase();
 
@@ -249,19 +362,26 @@ export default function ShopPageUI({ products, superheroes }: Props) {
         const matchesSearch =
           !q ||
           hero.name.toLowerCase().includes(q) ||
-          (hero.description ?? '').toLowerCase().includes(q) ||
-          (hero.superpowers ?? '').toLowerCase().includes(q);
+          (hero.description ?? "").toLowerCase().includes(q) ||
+          (hero.superpowers ?? "").toLowerCase().includes(q);
 
-        const matchesPowerTier = selectedPowerTiers.length === 0 || selectedPowerTiers.includes(getHeroPowerTier(hero));
+        const matchesPowerTier =
+          selectedPowerTiers.length === 0 ||
+          selectedPowerTiers.includes(getHeroPowerTier(hero));
 
         const matchesAvailability =
-          availabilityFilter === 'all' ||
-          (availabilityFilter === 'available' && hero.is_available) ||
-          (availabilityFilter === 'unavailable' && !hero.is_available);
+          availabilityFilter === "all" ||
+          (availabilityFilter === "available" && hero.is_available) ||
+          (availabilityFilter === "unavailable" && !hero.is_available);
 
         const matchesPrice = heroPrice >= minPrice && heroPrice <= maxPrice;
 
-        return matchesSearch && matchesPowerTier && matchesAvailability && matchesPrice;
+        return (
+          matchesSearch &&
+          matchesPowerTier &&
+          matchesAvailability &&
+          matchesPrice
+        );
       })
       .sort((a, b) => {
         const rankValue = {
@@ -275,7 +395,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
         };
 
         const rankDiff =
-          (rankValue[b.ranking as keyof typeof rankValue] ?? 0) - (rankValue[a.ranking as keyof typeof rankValue] ?? 0);
+          (rankValue[b.ranking as keyof typeof rankValue] ?? 0) -
+          (rankValue[a.ranking as keyof typeof rankValue] ?? 0);
 
         if (rankDiff !== 0) return rankDiff;
 
@@ -284,11 +405,19 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 
         return (b.price ?? 0) - (a.price ?? 0);
       });
-  }, [superheroes, contentFilter, search, selectedPowerTiers, availabilityFilter, minPrice, maxPrice]);
+  }, [
+    superheroes,
+    contentFilter,
+    search,
+    selectedPowerTiers,
+    availabilityFilter,
+    minPrice,
+    maxPrice,
+  ]);
 
   const catalogItems = useMemo<CatalogItem[]>(() => {
     const productItems: CatalogItem[] = filteredProducts.map((product) => ({
-      type: 'product',
+      type: "product",
       id: product.id,
       name: product.name,
       description: product.description,
@@ -299,7 +428,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
     }));
 
     const heroItems: CatalogItem[] = filteredHeroes.map((hero) => ({
-      type: 'superhero',
+      type: "superhero",
       id: hero.id,
       name: hero.name,
       description: hero.description,
@@ -315,7 +444,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
     });
   }, [filteredProducts, filteredHeroes]);
 
-  const totalPages = Math.max(1, Math.ceil(catalogItems.length / ITEMS_PER_PAGE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(catalogItems.length / ITEMS_PER_PAGE),
+  );
 
   useEffect(() => {
     if (page > totalPages) setPage(totalPages);
@@ -326,14 +458,62 @@ export default function ShopPageUI({ products, superheroes }: Props) {
     return catalogItems.slice(start, start + ITEMS_PER_PAGE);
   }, [catalogItems, page]);
 
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (search.trim()) params.set("q", search.trim());
+    if (contentFilter !== "products") params.set("type", contentFilter);
+    if (selectedCategories.length) {
+      params.set("categories", selectedCategories.join(","));
+    }
+    if (selectedRarities.length) {
+      params.set("rarities", selectedRarities.join(","));
+    }
+    if (selectedPowerTiers.length) {
+      params.set("tiers", selectedPowerTiers.join(","));
+    }
+    if (stockFilter !== "all") params.set("stock", stockFilter);
+    if (availabilityFilter !== "all") {
+      params.set("availability", availabilityFilter);
+    }
+    if (minPrice !== minDbPrice) params.set("minPrice", String(minPrice));
+    if (maxPrice !== maxDbPrice) params.set("maxPrice", String(maxPrice));
+    if (page > 1) params.set("page", String(page));
+
+    const nextQuery = params.toString();
+    const currentQuery = searchParams.toString();
+
+    if (nextQuery !== currentQuery) {
+      router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, {
+        scroll: false,
+      });
+    }
+  }, [
+    search,
+    contentFilter,
+    selectedCategories,
+    selectedRarities,
+    selectedPowerTiers,
+    stockFilter,
+    availabilityFilter,
+    minPrice,
+    maxPrice,
+    page,
+    minDbPrice,
+    maxDbPrice,
+    pathname,
+    router,
+    searchParams,
+  ]);
+
   function resetFilters() {
-    setSearch('');
-    setContentFilter('products');
+    setSearch("");
+    setContentFilter("products");
     setSelectedCategories([]);
     setSelectedRarities([]);
     setSelectedPowerTiers([]);
-    setStockFilter('all');
-    setAvailabilityFilter('all');
+    setStockFilter("all");
+    setAvailabilityFilter("all");
     setMinPrice(minDbPrice);
     setMaxPrice(maxDbPrice);
     setPage(1);
@@ -342,18 +522,28 @@ export default function ShopPageUI({ products, superheroes }: Props) {
   function toggleCategory(category: string) {
     setPage(1);
     setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((item) => item !== category) : [...prev, category],
+      prev.includes(category)
+        ? prev.filter((item) => item !== category)
+        : [...prev, category],
     );
   }
 
-  function toggleRarity(rarity: ShopProduct['rarity']) {
+  function toggleRarity(rarity: ShopProduct["rarity"]) {
     setPage(1);
-    setSelectedRarities((prev) => (prev.includes(rarity) ? prev.filter((item) => item !== rarity) : [...prev, rarity]));
+    setSelectedRarities((prev) =>
+      prev.includes(rarity)
+        ? prev.filter((item) => item !== rarity)
+        : [...prev, rarity],
+    );
   }
 
   function togglePowerTier(tier: PowerTier) {
     setPage(1);
-    setSelectedPowerTiers((prev) => (prev.includes(tier) ? prev.filter((item) => item !== tier) : [...prev, tier]));
+    setSelectedPowerTiers((prev) =>
+      prev.includes(tier)
+        ? prev.filter((item) => item !== tier)
+        : [...prev, tier],
+    );
   }
 
   return (
@@ -368,13 +558,19 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                 </p>
 
                 <h1 className="text-[44px] font-black uppercase italic leading-[0.88] tracking-tight sm:text-[58px]">
-                  <span className="block text-basic-100 [text-shadow:3px_3px_0_rgb(11,15,20)]">Unleash your</span>
-                  <span className="block text-primary-500 [text-shadow:3px_3px_0_rgb(185,28,28)]">Inner legend</span>
+                  <span className="block text-basic-100 [text-shadow:3px_3px_0_rgb(11,15,20)]">
+                    Unleash your
+                  </span>
+                  <span className="block text-primary-500 [text-shadow:3px_3px_0_rgb(185,28,28)]">
+                    Inner legend
+                  </span>
                 </h1>
 
                 <div className="mt-5 flex items-center gap-3">
                   <div className="h-0.75 w-12 bg-secondary-500" />
-                  <p className="text-[11px] text-basic-300">Premium heroic equipment & tactical gear</p>
+                  <p className="text-[11px] text-basic-300">
+                    Premium heroic equipment & tactical gear
+                  </p>
                 </div>
               </div>
 
@@ -400,20 +596,32 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                 <div className="relative z-10 grid w-full max-w-102.5 grid-cols-3 gap-3">
                   <div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
                     <div className="mb-2 text-xs text-secondary-500">◌</div>
-                    <div className="text-[28px] font-black leading-none">{availableHeroesCount}</div>
-                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">Heroes equipped</div>
+                    <div className="text-[28px] font-black leading-none">
+                      {availableHeroesCount}
+                    </div>
+                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">
+                      Heroes equipped
+                    </div>
                   </div>
 
                   <div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
                     <div className="mb-2 text-xs text-secondary-500">✦</div>
-                    <div className="text-[28px] font-black leading-none">{products.length}</div>
-                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">Gear items</div>
+                    <div className="text-[28px] font-black leading-none">
+                      {products.length}
+                    </div>
+                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">
+                      Gear items
+                    </div>
                   </div>
 
                   <div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
                     <div className="mb-2 text-xs text-secondary-500">⚡</div>
-                    <div className="text-[28px] font-black leading-none">{readinessPercent}%</div>
-                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">Hero readiness</div>
+                    <div className="text-[28px] font-black leading-none">
+                      {readinessPercent}%
+                    </div>
+                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">
+                      Hero readiness
+                    </div>
                   </div>
                 </div>
               </div>
@@ -440,8 +648,12 @@ export default function ShopPageUI({ products, superheroes }: Props) {
           <div className="grid gap-8 lg:grid-cols-[250px_1fr]">
             <aside className="pt-2">
               <div className="mb-7">
-                <h3 className="text-[18px] font-black uppercase italic text-basic-100">Filters</h3>
-                <p className="mt-1 text-[.7rem] uppercase tracking-[0.2em] text-basic-400">Refine your search</p>
+                <h3 className="text-[18px] font-black uppercase italic text-basic-100">
+                  Filters
+                </h3>
+                <p className="mt-1 text-[.7rem] uppercase tracking-[0.2em] text-basic-400">
+                  Refine your search
+                </p>
                 <label className="sr-only" htmlFor="product-and-hero-search">
                   Search products or heroes
                 </label>
@@ -459,11 +671,14 @@ export default function ShopPageUI({ products, superheroes }: Props) {
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">Catalog type</h4>
+                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Catalog type
+                </h4>
 
                 <div className="grid grid-cols-3 gap-2">
-                  {(['all', 'products', 'superheroes'] as const).map((item) => (
+                  {(["all", "products", "superheroes"] as const).map((item) => (
                     <button
+                      type="button"
                       key={item}
                       onClick={() => {
                         setContentFilter(item);
@@ -471,18 +686,24 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                       }}
                       className={`border px-2 py-2 text-[10px] font-black uppercase tracking-[0.12em] ${
                         contentFilter === item
-                          ? 'border-secondary-500 bg-secondary-500/10 text-basic-100'
-                          : 'border-ui-border bg-basic-800 text-basic-300'
+                          ? "border-secondary-500 bg-secondary-500/10 text-basic-100"
+                          : "border-ui-border bg-basic-800 text-basic-300"
                       }`}
                     >
-                      {item === 'all' ? 'All' : item === 'products' ? 'Products' : 'Heroes'}
+                      {item === "all"
+                        ? "All"
+                        : item === "products"
+                          ? "Products"
+                          : "Heroes"}
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">Price range</h4>
+                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Price range
+                </h4>
 
                 <div className="space-y-2">
                   <label className="sr-only" htmlFor="price-slider-red">
@@ -519,94 +740,122 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                   />
 
                   <div className="flex items-center justify-between gap-2 pt-1">
-                    <span className="bg-basic-700 px-2 py-1 text-[.7rem] text-basic-300">{formatPrice(minPrice)}</span>
-                    <span className="bg-basic-700 px-2 py-1 text-[.7rem] text-basic-300">{formatPrice(maxPrice)}</span>
+                    <span className="bg-basic-700 px-2 py-1 text-[.7rem] text-basic-300">
+                      {formatPrice(minPrice)}
+                    </span>
+                    <span className="bg-basic-700 px-2 py-1 text-[.7rem] text-basic-300">
+                      {formatPrice(maxPrice)}
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">Affiliation</h4>
+                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Affiliation
+                </h4>
 
                 <div className="flex flex-wrap gap-2">
                   <button
+                    type="button"
                     title="All catalog"
                     onClick={() => {
-                      setContentFilter('all');
+                      setContentFilter("all");
                       setPage(1);
                     }}
                     className={`h-6 w-6 border ${
-                      contentFilter === 'all' ? 'border-basic-100' : 'border-ui-border'
+                      contentFilter === "all"
+                        ? "border-basic-100"
+                        : "border-ui-border"
                     } bg-basic-100`}
                   />
                   <button
+                    type="button"
                     title="Products"
                     onClick={() => {
-                      setContentFilter('products');
+                      setContentFilter("products");
                       setPage(1);
                     }}
                     className={`h-6 w-6 border ${
-                      contentFilter === 'products' ? 'border-basic-100' : 'border-ui-border'
+                      contentFilter === "products"
+                        ? "border-basic-100"
+                        : "border-ui-border"
                     } bg-rarity-rare`}
                   />
                   <button
+                    type="button"
                     title="Superheroes"
                     onClick={() => {
-                      setContentFilter('superheroes');
+                      setContentFilter("superheroes");
                       setPage(1);
                     }}
                     className={`h-6 w-6 border ${
-                      contentFilter === 'superheroes' ? 'border-basic-100' : 'border-ui-border'
+                      contentFilter === "superheroes"
+                        ? "border-basic-100"
+                        : "border-ui-border"
                     } bg-secondary-500`}
                   />
                   <button
+                    type="button"
                     title="Legendary"
-                    onClick={() => toggleRarity('LEGENDARY')}
+                    onClick={() => toggleRarity("LEGENDARY")}
                     className={`h-6 w-6 border ${
-                      selectedRarities.includes('LEGENDARY') ? 'border-basic-100' : 'border-ui-border'
+                      selectedRarities.includes("LEGENDARY")
+                        ? "border-basic-100"
+                        : "border-ui-border"
                     } bg-primary-500`}
                   />
                   <button
+                    type="button"
                     title="Epic"
-                    onClick={() => toggleRarity('EPIC')}
+                    onClick={() => toggleRarity("EPIC")}
                     className={`h-6 w-6 border ${
-                      selectedRarities.includes('EPIC') ? 'border-basic-100' : 'border-ui-border'
+                      selectedRarities.includes("EPIC")
+                        ? "border-basic-100"
+                        : "border-ui-border"
                     } bg-rarity-epic`}
                   />
                   <button
+                    type="button"
                     title="Available heroes"
                     onClick={() => {
-                      setAvailabilityFilter((prev) => (prev === 'available' ? 'all' : 'available'));
+                      setAvailabilityFilter((prev) =>
+                        prev === "available" ? "all" : "available",
+                      );
                       setPage(1);
                     }}
                     className={`h-6 w-6 border ${
-                      availabilityFilter === 'available' ? 'border-basic-100' : 'border-ui-border'
+                      availabilityFilter === "available"
+                        ? "border-basic-100"
+                        : "border-ui-border"
                     } bg-rarity-uncommon`}
                   />
                 </div>
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">Power level</h4>
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Power level
+                </h4>
 
                 <div className="space-y-1">
                   {(
                     [
                       {
-                        label: 'Street Tier',
-                        value: 'street',
+                        label: "Street Tier",
+                        value: "street",
                       },
                       {
-                        label: 'City Tier',
-                        value: 'city',
+                        label: "City Tier",
+                        value: "city",
                       },
                       {
-                        label: 'Planetary',
-                        value: 'planetary',
+                        label: "Planetary",
+                        value: "planetary",
                       },
                       {
-                        label: 'Cosmic',
-                        value: 'cosmic',
+                        label: "Cosmic",
+                        value: "cosmic",
                       },
                     ] as const
                   ).map((item) => (
@@ -627,7 +876,9 @@ export default function ShopPageUI({ products, superheroes }: Props) {
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">Gear type</h4>
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Gear type
+                </h4>
 
                 <div className="space-y-1">
                   {productCategories.map((category) => (
@@ -648,21 +899,23 @@ export default function ShopPageUI({ products, superheroes }: Props) {
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">Stock</h4>
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Stock
+                </h4>
 
                 <fieldset className="space-y-1">
                   <legend className="sr-only">Sort by stock</legend>
                   {(
                     [
-                      { label: 'All', value: 'all' },
-                      { label: 'In Stock', value: 'in' },
+                      { label: "All", value: "all" },
+                      { label: "In Stock", value: "in" },
                       {
-                        label: 'Low Stock',
-                        value: 'low',
+                        label: "Low Stock",
+                        value: "low",
                       },
                       {
-                        label: 'Out of Stock',
-                        value: 'out',
+                        label: "Out of Stock",
+                        value: "out",
                       },
                     ] as const
                   ).map((item) => (
@@ -687,20 +940,22 @@ export default function ShopPageUI({ products, superheroes }: Props) {
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">Hero status</h4>
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
+                  Hero status
+                </h4>
 
                 <fieldset className="space-y-1">
                   <legend className="sr-only">Sort by status</legend>
                   {(
                     [
-                      { label: 'All', value: 'all' },
+                      { label: "All", value: "all" },
                       {
-                        label: 'Available',
-                        value: 'available',
+                        label: "Available",
+                        value: "available",
                       },
                       {
-                        label: 'Unavailable',
-                        value: 'unavailable',
+                        label: "Unavailable",
+                        value: "unavailable",
                       },
                     ] as const
                   ).map((item) => (
@@ -725,6 +980,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
               </div>
 
               <button
+                type="button"
                 onClick={resetFilters}
                 className="w-full border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.16em] text-basic-100 glow-red"
               >
@@ -735,14 +991,18 @@ export default function ShopPageUI({ products, superheroes }: Props) {
             <div>
               {paginatedItems.length === 0 ? (
                 <div className="border border-ui-border bg-basic-800 px-6 py-16 text-center">
-                  <h3 className="text-xl font-black uppercase text-basic-100">No results found</h3>
-                  <p className="mt-2 text-sm text-basic-300">Try another search or widen the filters.</p>
+                  <h3 className="text-xl font-black uppercase text-basic-100">
+                    No results found
+                  </h3>
+                  <p className="mt-2 text-sm text-basic-300">
+                    Try another search or widen the filters.
+                  </p>
                 </div>
               ) : (
                 <>
                   <div className="grid gap-x-4 gap-y-5 sm:grid-cols-2 xl:grid-cols-3">
                     {paginatedItems.map((item) => {
-                      if (item.type === 'product') {
+                      if (item.type === "product") {
                         const product = item.product;
 
                         return (
@@ -769,7 +1029,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                               </div>
 
                               <Image
-                                src={product.image_url || 'https://placehold.co/700x850/111827/ffffff?text=Gear'}
+                                src={
+                                  product.image_url ||
+                                  "https://placehold.co/700x850/111827/ffffff?text=Gear"
+                                }
                                 alt={product.name}
                                 fill
                                 priority
@@ -780,7 +1043,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 
                             <div className="bg-basic-800 px-4 pb-4 pt-3">
                               <p className="mb-1 text-[9px] font-black uppercase tracking-[0.22em] text-secondary-450">
-                                {product.categories[0] || 'Misc'}
+                                {product.categories[0] || "Misc"}
                               </p>
 
                               <h3 className="text-[18px] font-black uppercase leading-tight text-basic-100">
@@ -788,7 +1051,8 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                               </h3>
 
                               <p className="mt-1 h-8 overflow-hidden text-[11px] text-basic-300">
-                                {product.description || 'No description available.'}
+                                {product.description ||
+                                  "No description available."}
                               </p>
 
                               <div className="mt-2 text-[18px] font-black text-primary-500">
@@ -825,7 +1089,10 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                             </div>
 
                             <Image
-                              src={hero.image_url || 'https://placehold.co/700x850/111827/ffffff?text=Hero'}
+                              src={
+                                hero.image_url ||
+                                "https://placehold.co/700x850/111827/ffffff?text=Hero"
+                              }
                               alt={hero.name}
                               fill
                               priority
@@ -844,7 +1111,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                             </h3>
 
                             <p className="mt-1 h-8 overflow-hidden text-[11px] text-basic-300">
-                              {hero.description || 'No description available.'}
+                              {hero.description || "No description available."}
                             </p>
 
                             <div className="mt-2 text-[18px] font-black text-primary-500">
@@ -858,6 +1125,7 @@ export default function ShopPageUI({ products, superheroes }: Props) {
 
                   <div className="mt-6 flex flex-wrap justify-center gap-2">
                     <button
+                      type="button"
                       onClick={() => setPage((prev) => Math.max(1, prev - 1))}
                       disabled={page === 1}
                       className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
@@ -865,22 +1133,28 @@ export default function ShopPageUI({ products, superheroes }: Props) {
                       Prev
                     </button>
 
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
-                      <button
-                        key={pageNumber}
-                        onClick={() => setPage(pageNumber)}
-                        className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
-                          page === pageNumber
-                            ? 'border-secondary-500 bg-secondary-500/15 text-basic-100'
-                            : 'border-ui-border bg-basic-700 text-basic-100'
-                        }`}
-                      >
-                        {pageNumber}
-                      </button>
-                    ))}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (pageNumber) => (
+                        <button
+                          type="button"
+                          key={pageNumber}
+                          onClick={() => setPage(pageNumber)}
+                          className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
+                            page === pageNumber
+                              ? "border-secondary-500 bg-secondary-500/15 text-basic-100"
+                              : "border-ui-border bg-basic-700 text-basic-100"
+                          }`}
+                        >
+                          {pageNumber}
+                        </button>
+                      ),
+                    )}
 
                     <button
-                      onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+                      type="button"
+                      onClick={() =>
+                        setPage((prev) => Math.min(totalPages, prev + 1))
+                      }
                       disabled={page === totalPages}
                       className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
                     >
