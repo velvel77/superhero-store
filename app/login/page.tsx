@@ -5,6 +5,7 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
+
 export default function LoginPage() {
 	const router = useRouter()
 	const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +35,7 @@ export default function LoginPage() {
 		}
 	}
 
-	
+
 
 	return (
 		<div className="min-h-screen bg-basic-900 text-basic-100 flex items-center justify-center relative overflow-hidden">

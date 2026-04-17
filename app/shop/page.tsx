@@ -5,6 +5,11 @@ import { getSuperheroes } from "@/lib/queries/superheroes";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+	title: "Superhero Store - Shop",
+	description: "Browse through our selection of superheroes and gear.",
+}
+
 type SearchParams = Promise<{
 	q?: string;
 	page?: string;

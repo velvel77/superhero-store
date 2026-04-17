@@ -17,11 +17,11 @@ const [featured, ...rest] = items;
 
 export default function ShopFeaturedProducts() {
   return (
-    <section className="p-4 pb-16 diagonal-stripes ">
+    <section id="featured-products-section" className="scroll-mt-18 p-4 pb-16 diagonal-stripes ">
       <div className="mx-auto max-w-260 w-full">
         <header className="p-4 py-8 relative grid items-center">
           <div className="absolute h-7 w-1 bg-secondary-500"></div>
-          <h2 className="text-basic-100 font-bold uppercase italic">Trending Gear</h2>
+          <h2 className="text-basic-100 font-bold uppercase italic">Featured products</h2>
           <small className="text-basic-300">Most requested by active heroes</small>
         </header>
 
@@ -35,9 +35,9 @@ export default function ShopFeaturedProducts() {
             <Image
               className="object-cover w-100 h-140 group-hover:scale-110 transition-all duration-300"
               src={featured.image}
-              alt={featured.description}
-              width={250}
-              height={500}
+              alt=""
+              width={1920}
+              height={1080}
             />
             {/* Rarity */}
             <span
@@ -74,7 +74,7 @@ export default function ShopFeaturedProducts() {
                   <Image
                     className="size-30 group-hover:scale-110 transition-transform duration-300 object-cover"
                     src={item.image}
-                    alt={item.description}
+                    alt=""
                     width={200}
                     height={200}
                   />

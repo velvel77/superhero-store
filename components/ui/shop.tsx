@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useEffect, useMemo, useState } from "react";
 import type { ShopProduct } from "@/lib/queries/products";
 import CartButton from "./cart-button";
@@ -139,13 +141,13 @@ function getRarityBadgeClasses(rarity: ShopProduct["rarity"]) {
 function getRankingBadgeClasses(ranking: Superhero["ranking"]) {
   switch (ranking) {
     case "S":
-      return "bg-primary-500 text-black";
+      return "bg-rarity-legendary text-white";
     case "A":
-      return "bg-secondary-500 text-white";
+      return "bg-rarity-epic text-white";
     case "B":
       return "bg-rarity-rare text-white";
     default:
-      return "bg-basic-300 text-black";
+      return "bg-rarity-uncommon text-black";
   }
 }
 
@@ -549,11 +551,11 @@ export default function ShopPageUI({
   return (
     <div className="min-h-screen bg-basic-900 text-basic-100">
       <section className="border-y border-ui-border bg-basic-800">
-        <div className="mx-auto max-w-[1580px] px-7 py-0 xl:px-8">
+        <div className="mx-auto max-w-395 px-7 py-0 xl:px-8">
           <div className="relative overflow-hidden border-x border-ui-border bg-basic-800 diagonal-stripes">
-            <div className="benday-dots mx-auto grid min-h-[210px] items-center gap-8 px-8 py-10 lg:grid-cols-[1.15fr_0.85fr] xl:px-10">
+            <div className="benday-dots mx-auto grid min-h-52.5 items-center gap-8 px-8 py-10 lg:grid-cols-[1.15fr_0.85fr] xl:px-10">
               <div className="relative">
-                <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.42em] text-secondary-500">
+                <p className="mb-5 text-[.7rem] font-semibold uppercase tracking-[0.42em] text-secondary-500">
                   /// HERO VAULT — GEAR DIVISION ///
                 </p>
 
@@ -567,7 +569,7 @@ export default function ShopPageUI({
                 </h1>
 
                 <div className="mt-5 flex items-center gap-3">
-                  <div className="h-[3px] w-12 bg-secondary-500" />
+                  <div className="h-0.75 w-12 bg-secondary-500" />
                   <p className="text-[11px] text-basic-300">
                     Premium heroic equipment & tactical gear
                   </p>
@@ -575,17 +577,31 @@ export default function ShopPageUI({
               </div>
 
               <div className="relative flex items-start justify-start gap-4 lg:justify-end">
-                <div className="absolute -right-5 -top-[30px] hidden h-52 w-52 opacity-50 lg:block">
-                  <div className="h-full w-full rounded-full bg-[repeating-conic-gradient(from_0deg,rgba(220,38,38,0.55)_0deg_2deg,transparent_2deg_16deg)]" />
+                <div className="absolute -right-5 -top-7.5 hidden h-52 w-52 opacity-50 lg:block">
+                  <div className="absolute -right-20 z-10 -top-20 w-80 h-80 animate-rotate">
+                    <svg viewBox="0 0 200 200" className="w-full h-full">
+                      {Array.from({ length: 16 }).map((_, i) => (
+                        <line
+                          key={i}
+                          x1="100"
+                          y1="100"
+                          x2={100 + 100 * Math.cos((i * Math.PI * 2) / 16)}
+                          y2={100 + 100 * Math.sin((i * Math.PI * 2) / 16)}
+                          stroke="rgba(220,38,38,0.55)"
+                          strokeWidth="4"
+                        />
+                      ))}
+                    </svg>
+                  </div>
                 </div>
 
-                <div className="relative z-10 grid w-full max-w-[410px] grid-cols-3 gap-3">
+                <div className="relative z-10 grid w-full max-w-102.5 grid-cols-3 gap-3">
                   <div className="border border-ui-border-strong bg-basic-700/90 px-4 py-4">
                     <div className="mb-2 text-xs text-secondary-500">◌</div>
                     <div className="text-[28px] font-black leading-none">
                       {availableHeroesCount}
                     </div>
-                    <div className="mt-2 text-[9px] uppercase tracking-[0.18em] text-basic-400">
+                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">
                       Heroes equipped
                     </div>
                   </div>
@@ -595,7 +611,7 @@ export default function ShopPageUI({
                     <div className="text-[28px] font-black leading-none">
                       {products.length}
                     </div>
-                    <div className="mt-2 text-[9px] uppercase tracking-[0.18em] text-basic-400">
+                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">
                       Gear items
                     </div>
                   </div>
@@ -605,7 +621,7 @@ export default function ShopPageUI({
                     <div className="text-[28px] font-black leading-none">
                       {readinessPercent}%
                     </div>
-                    <div className="mt-2 text-[9px] uppercase tracking-[0.18em] text-basic-400">
+                    <div className="mt-2 text-[.7rem] uppercase tracking-[0.18em] text-basic-400">
                       Hero readiness
                     </div>
                   </div>
@@ -616,17 +632,17 @@ export default function ShopPageUI({
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1580px] px-7 py-0 xl:px-8">
+      <main className="mx-auto max-w-395 px-7 py-0 xl:px-8">
         <div className="border-x border-ui-border bg-basic-900 px-8 py-7 xl:px-10">
           <div className="mb-6 flex flex-col gap-2">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-[3px] bg-secondary-500" />
+              <div className="h-8 w-0.75 bg-secondary-500" />
               <h2 className="text-[28px] font-black uppercase italic tracking-tight text-basic-100">
                 Tactical catalog
               </h2>
             </div>
 
-            <div className="pl-6 text-[10px] uppercase tracking-[0.22em] text-basic-400">
+            <div className="pl-6 text-[.7rem] uppercase tracking-[0.22em] text-basic-400">
               {catalogItems.length} items • sorted by power rating
             </div>
           </div>
@@ -637,11 +653,15 @@ export default function ShopPageUI({
                 <h3 className="text-[18px] font-black uppercase italic text-basic-100">
                   Filters
                 </h3>
-                <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-basic-400">
+                <p className="mt-1 text-[.7rem] uppercase tracking-[0.2em] text-basic-400">
                   Refine your search
                 </p>
-
+                <label className="sr-only" htmlFor="product-and-hero-search">
+                  Search products or heroes
+                </label>
                 <input
+                  id="product-and-hero-search"
+                  type="search"
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
@@ -660,6 +680,7 @@ export default function ShopPageUI({
                 <div className="grid grid-cols-3 gap-2">
                   {(["all", "products", "superheroes"] as const).map((item) => (
                     <button
+                      type="button"
                       key={item}
                       onClick={() => {
                         setContentFilter(item);
@@ -687,7 +708,11 @@ export default function ShopPageUI({
                 </h4>
 
                 <div className="space-y-2">
+                  <label className="sr-only" htmlFor="price-slider-red">
+                    Price range slider
+                  </label>
                   <input
+                    id="price-slider-red"
                     type="range"
                     min={minDbPrice}
                     max={maxDbPrice}
@@ -699,8 +724,11 @@ export default function ShopPageUI({
                     }}
                     className="w-full accent-secondary-500"
                   />
-
+                  <label className="sr-only" htmlFor="price-slider-blue">
+                    Price range slider
+                  </label>
                   <input
+                    id="price-slider-blue"
                     type="range"
                     min={minDbPrice}
                     max={maxDbPrice}
@@ -710,14 +738,14 @@ export default function ShopPageUI({
                       setMaxPrice(Math.max(value, minPrice));
                       setPage(1);
                     }}
-                    className="w-full accent-[var(--color-effect-light-blue)]"
+                    className="w-full accent-effect-light-blue"
                   />
 
                   <div className="flex items-center justify-between gap-2 pt-1">
-                    <span className="bg-basic-700 px-2 py-1 text-[10px] text-basic-300">
+                    <span className="bg-basic-700 px-2 py-1 text-[.7rem] text-basic-300">
                       {formatPrice(minPrice)}
                     </span>
-                    <span className="bg-basic-700 px-2 py-1 text-[10px] text-basic-300">
+                    <span className="bg-basic-700 px-2 py-1 text-[.7rem] text-basic-300">
                       {formatPrice(maxPrice)}
                     </span>
                   </div>
@@ -731,6 +759,7 @@ export default function ShopPageUI({
 
                 <div className="flex flex-wrap gap-2">
                   <button
+                    type="button"
                     title="All catalog"
                     onClick={() => {
                       setContentFilter("all");
@@ -743,6 +772,7 @@ export default function ShopPageUI({
                     } bg-basic-100`}
                   />
                   <button
+                    type="button"
                     title="Products"
                     onClick={() => {
                       setContentFilter("products");
@@ -755,6 +785,7 @@ export default function ShopPageUI({
                     } bg-rarity-rare`}
                   />
                   <button
+                    type="button"
                     title="Superheroes"
                     onClick={() => {
                       setContentFilter("superheroes");
@@ -767,6 +798,7 @@ export default function ShopPageUI({
                     } bg-secondary-500`}
                   />
                   <button
+                    type="button"
                     title="Legendary"
                     onClick={() => toggleRarity("LEGENDARY")}
                     className={`h-6 w-6 border ${
@@ -776,6 +808,7 @@ export default function ShopPageUI({
                     } bg-primary-500`}
                   />
                   <button
+                    type="button"
                     title="Epic"
                     onClick={() => toggleRarity("EPIC")}
                     className={`h-6 w-6 border ${
@@ -785,6 +818,7 @@ export default function ShopPageUI({
                     } bg-rarity-epic`}
                   />
                   <button
+                    type="button"
                     title="Available heroes"
                     onClick={() => {
                       setAvailabilityFilter((prev) =>
@@ -802,11 +836,11 @@ export default function ShopPageUI({
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
                   Power level
                 </h4>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   {(
                     [
                       {
@@ -829,7 +863,7 @@ export default function ShopPageUI({
                   ).map((item) => (
                     <label
                       key={item.value}
-                      className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
+                      className="py-1 flex cursor-pointer items-center gap-2 text-[.7rem] uppercase tracking-[0.08em] text-basic-300"
                     >
                       <input
                         type="checkbox"
@@ -844,15 +878,15 @@ export default function ShopPageUI({
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
                   Gear type
                 </h4>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   {productCategories.map((category) => (
                     <label
                       key={category}
-                      className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
+                      className="py-1 flex cursor-pointer items-center gap-2 text-[.7rem] uppercase tracking-[0.08em] text-basic-300"
                     >
                       <input
                         type="checkbox"
@@ -867,11 +901,12 @@ export default function ShopPageUI({
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
                   Stock
                 </h4>
 
-                <div className="space-y-1.5">
+                <fieldset className="space-y-1">
+                  <legend className="sr-only">Sort by stock</legend>
                   {(
                     [
                       { label: "All", value: "all" },
@@ -888,7 +923,7 @@ export default function ShopPageUI({
                   ).map((item) => (
                     <label
                       key={item.value}
-                      className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
+                      className="py-1 flex cursor-pointer items-center gap-2 text-[.7rem] uppercase tracking-[0.08em] text-basic-300"
                     >
                       <input
                         type="radio"
@@ -903,15 +938,16 @@ export default function ShopPageUI({
                       <span>{item.label}</span>
                     </label>
                   ))}
-                </div>
+                </fieldset>
               </div>
 
               <div className="mb-7">
-                <h4 className="mb-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100">
+                <h4 className="mb-3 text-[.7rem] font-black uppercase tracking-[0.14em] text-basic-100">
                   Hero status
                 </h4>
 
-                <div className="space-y-1.5">
+                <fieldset className="space-y-1">
+                  <legend className="sr-only">Sort by status</legend>
                   {(
                     [
                       { label: "All", value: "all" },
@@ -927,7 +963,7 @@ export default function ShopPageUI({
                   ).map((item) => (
                     <label
                       key={item.value}
-                      className="flex cursor-pointer items-center gap-2 text-[11px] uppercase tracking-[0.08em] text-basic-300"
+                      className="flex py-1 cursor-pointer items-center gap-2 text-[.7rem] uppercase tracking-[0.08em] text-basic-300"
                     >
                       <input
                         type="radio"
@@ -942,10 +978,11 @@ export default function ShopPageUI({
                       <span>{item.label}</span>
                     </label>
                   ))}
-                </div>
+                </fieldset>
               </div>
 
               <button
+                type="button"
                 onClick={resetFilters}
                 className="w-full border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.16em] text-basic-100 glow-red"
               >
@@ -993,18 +1030,21 @@ export default function ShopPageUI({
                                 ) : null}
                               </div>
 
-                              <img
+                              <Image
                                 src={
                                   product.image_url ||
                                   "https://placehold.co/700x850/111827/ffffff?text=Gear"
                                 }
                                 alt={product.name}
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 100vw, 700px"
                                 className="h-full w-full object-cover"
                               />
                             </div>
 
                             <div className="bg-basic-800 px-4 pb-4 pt-3">
-                              <p className="mb-1 text-[9px] font-black uppercase tracking-[0.22em] text-secondary-500">
+                              <p className="mb-1 text-[9px] font-black uppercase tracking-[0.22em] text-secondary-450">
                                 {product.categories[0] || "Misc"}
                               </p>
 
@@ -1049,7 +1089,7 @@ export default function ShopPageUI({
                             <div className="absolute left-2 top-2 z-10 flex gap-2">
                               {hero.ranking ? (
                                 <span
-                                  className={`px-2 py-1 text-[9px] font-black uppercase tracking-[0.12em] ${getRankingBadgeClasses(
+                                  className={`px-2 py-1 text-[.7rem] rounded-sm text-shadow-black font-black uppercase tracking-[0.12em] ${getRankingBadgeClasses(
                                     hero.ranking,
                                   )}`}
                                 >
@@ -1057,23 +1097,26 @@ export default function ShopPageUI({
                                 </span>
                               ) : null}
 
-                              <span className="bg-secondary-500 px-2 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-white">
+                              <span className="bg-secondary-500 rounded-sm px-2 py-1 text-[.7rem] font-black uppercase tracking-[0.12em] text-white">
                                 HERO
                               </span>
                             </div>
 
-                            <img
+                            <Image
                               src={
                                 hero.image_url ||
                                 "https://placehold.co/700x850/111827/ffffff?text=Hero"
                               }
                               alt={hero.name}
+                              fill
+                              priority
+                              sizes="(max-width: 768px) 100vw, 700px"
                               className="h-full w-full object-cover"
                             />
                           </div>
 
                           <div className="bg-basic-800 px-4 pb-4 pt-3">
-                            <p className="mb-1 text-[9px] font-black uppercase tracking-[0.22em] text-secondary-500">
+                            <p className="mb-1 text-[9px] font-black uppercase tracking-[0.22em] text-secondary-450">
                               Superhero
                             </p>
 
@@ -1096,9 +1139,10 @@ export default function ShopPageUI({
 
                   <div className="mt-6 flex flex-wrap justify-center gap-2">
                     <button
+                      type="button"
                       onClick={() => setPage((prev) => Math.max(1, prev - 1))}
                       disabled={page === 1}
-                      className="min-w-[44px] border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
+                      className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       Prev
                     </button>
@@ -1106,9 +1150,10 @@ export default function ShopPageUI({
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                       (pageNumber) => (
                         <button
+                          type="button"
                           key={pageNumber}
                           onClick={() => setPage(pageNumber)}
-                          className={`min-w-[44px] border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
+                          className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
                             page === pageNumber
                               ? "border-secondary-500 bg-secondary-500/15 text-basic-100"
                               : "border-ui-border bg-basic-700 text-basic-100"
@@ -1120,11 +1165,12 @@ export default function ShopPageUI({
                     )}
 
                     <button
+                      type="button"
                       onClick={() =>
                         setPage((prev) => Math.min(totalPages, prev + 1))
                       }
                       disabled={page === totalPages}
-                      className="min-w-[44px] border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
+                      className="min-w-11 border border-ui-border bg-basic-700 px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] text-basic-100 disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       Next
                     </button>
@@ -1134,7 +1180,7 @@ export default function ShopPageUI({
             </div>
           </div>
         </div>
-      </section>
+      </main>
     </div>
   );
 }

@@ -1,12 +1,22 @@
 import Superhero from "@/components/ui/shop-superhero";
 import { notFound } from "next/navigation";
-import { getRelatedProducts } from "@/lib/queries/products";
+import { getProductById, getRelatedProducts } from "@/lib/queries/products";
+import { getSuperheroById } from "@/lib/queries/superheroes";
 
 type Props = {
 	params: Promise<{
 		id: string;
 	}>;
 };
+
+export async function generateMetadata({ params }: PageProps<"/superheroes/[id]">) {
+	const { id } = await params;
+	const hero = await getSuperheroById(Number(id));
+	return {
+		title: `Superhero Store - ${hero.name}`,
+		description: hero.description
+	}
+}
 
 export default async function SuperheroPage({ params }: Props) {
 	const { id } = await params;

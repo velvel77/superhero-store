@@ -7,7 +7,12 @@ import Sidebar from "@/components/ui/sidebar";
 import { getProductsCount } from "@/lib/queries/products";
 import { getSearchParamsAsString } from "@/utils/getSearchParams";
 
-export default async function Home(params: PageProps<"/">) {
+export const metadata = {
+  title: "Superhero Store - Admin",
+  description: "Manage your superhero store inventory",
+}
+
+export default async function AdminPage(params: PageProps<"/">) {
   const searchParams = await params.searchParams;
 
   const q = getSearchParamsAsString(searchParams.q ?? "");

@@ -1,33 +1,30 @@
 // import heroes from '@/data/heroes.json';
-import Image from "next/image";
-import Link from "next/link";
-import type { Hero } from "@/app/types";
+import Image from 'next/image';
+import Link from 'next/link';
+import type { Hero } from '@/app/types';
 
 export default async function ShopAllHeroes() {
   const apiUrl = process.env.API_URL;
 
   if (!apiUrl) {
-    throw new Error("API_URL is not set");
+    throw new Error('API_URL is not set');
   }
 
   const data = await fetch(`${apiUrl}/superheroes`);
 
-
   if (!data.ok) {
     const body = await data.text();
-    throw new Error(
-      `Failed to fetch superheroes: ${data.status} ${data.statusText}. Body: ${body}`
-    );
+    throw new Error(`Failed to fetch superheroes: ${data.status} ${data.statusText}. Body: ${body}`);
   }
-  
+
   const heroes = await data.json();
 
   return (
-    <section className="diagonal-stripes py-8">
+    <main id="all-superheroes-section" className="scroll-mt-18 diagonal-stripes py-8">
       <div className="max-w-260 mx-auto px-4">
         <div className="text-base-white relative p-4 grid items-center">
           <div className="absolute mx-4 h-7 w-1 bg-rarity-epic"></div>
-          <h2 className="px-4">All Heroes</h2>
+          <h2 className="px-4 italic font-bold uppercase">All Heroes</h2>
           <small className="px-4 text-basic-300">Browse selection</small>
         </div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 rounded-md px-2">
@@ -44,33 +41,33 @@ export default async function ShopAllHeroes() {
                     src={hero.image_url}
                     alt={hero.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 320px"
                   />
                   <div className="inset-0 absolute bg-black/30 group-hover:bg-transparent transition-all duration-200"></div>
                 </div>
                 {/* Status */}
                 <span
-                  className={`text-xs ${hero.is_available ? "text-rarity-uncommon" : "text-secondary-500"} backdrop-blur-2xl px-2 rounded-sm absolute top-2 right-2 text-shadow-sm text-shadow-black`}
+                  className={`text-xs ${hero.is_available ? 'text-rarity-uncommon' : 'text-secondary-500'} backdrop-blur-2xl px-2 rounded-sm absolute top-2 right-2 text-shadow-sm text-shadow-black`}
                 >
-                  {hero.is_available ? "Available" : "Unavailable"}
+                  {hero.is_available ? 'Available' : 'Unavailable'}
                 </span>
               </div>
               <div className="flex flex-col p-2">
-                <span className="text-2xl italic group-hover:tracking-widest transition-all duration-200 group-hover:text-shadow-rarity-epic font-bold text-shadow-secondary-600 text-shadow-sm">
+                <span className="uppercase text-[.7rem] text-secondary-450 tracking-wider">Superhero</span>
+                <span className="text-2xl py-2 italic group-hover:tracking-widest transition-all duration-200 group-hover:text-shadow-rarity-epic font-bold text-shadow-secondary-600 text-shadow-sm">
                   {hero.name}
                 </span>
+                <span className="text-basic-400 ">{hero.description}</span>
                 <div className="py-4 mb-4">
                   {/* Hourly fee */}
-                  <span className="text-primary-500 text-2xl">
-                    {hero.price}
-                  </span>{" "}
-                  <span className="text-[.5rem]"> / hour</span>
+                  <span className="text-primary-500 text-2xl font-bold">${hero.price}</span>{' '}
+                  <span className="text-[.7rem]"> / hour</span>
                 </div>
               </div>
             </Link>
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 }
