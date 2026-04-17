@@ -150,7 +150,8 @@ export default async function SuperheroesPage({
 							Superheroes
 						</h1>
 						<p className="mt-2 text-sm text-basic-300">
-							Welcome {session.user?.name}
+							Welcome superhero!
+							{/* Welcome {session.user?.name} */}
 						</p>
 					</div>
 
@@ -287,9 +288,10 @@ export default async function SuperheroesPage({
 							Signed in as
 						</p>
 						<p className="mt-1 truncate text-sm font-bold text-basic-100">
-							{session.user?.email ??
+							superhero
+							{/* {session.user?.email ??
 								session.user?.name ??
-								"Unknown user"}
+								"Unknown user"} */}
 						</p>
 					</div>
 				</div>
