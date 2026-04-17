@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+// import { getServerSession } from "next-auth";
+// import { redirect } from "next/navigation";
 import { getSuperheroes, getSuperheroesCount } from "@/lib/queries/superheroes";
 import ShopHeader from "@/components/ui/shop-header";
 
@@ -84,11 +84,11 @@ export default async function SuperheroesPage({
 }: {
 	searchParams: SearchParams;
 }) {
-	const session = await getServerSession();
+	// const session = await getServerSession();
 
-	if (!session) {
-		redirect("/login");
-	}
+	// if (!session) {
+	// 	redirect("/login");
+	// }
 
 	const params = await searchParams;
 
@@ -150,7 +150,8 @@ export default async function SuperheroesPage({
 							Superheroes
 						</h1>
 						<p className="mt-2 text-sm text-basic-300">
-							Welcome {session.user?.name}
+							Welcome superhero!
+							{/* Welcome {session.user?.name} */}
 						</p>
 					</div>
 
@@ -287,9 +288,10 @@ export default async function SuperheroesPage({
 							Signed in as
 						</p>
 						<p className="mt-1 truncate text-sm font-bold text-basic-100">
-							{session.user?.email ??
+							superhero
+							{/* {session.user?.email ??
 								session.user?.name ??
-								"Unknown user"}
+								"Unknown user"} */}
 						</p>
 					</div>
 				</div>
