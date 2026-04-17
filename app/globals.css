@@ -11,6 +11,7 @@
   /* ================= SECONDARY (RED / ACTION) ================= */
   --color-secondary-100: #ffe3e3;
   --color-secondary-200: #ffc9c9;
+  --color-secondary-450: #e54848; /* Needed for WCAG contrast */
   --color-secondary-500: #dc2626; /* strong red, maybe change to this #e62e2e */
   --color-secondary-600: #b91c1c;
 
@@ -32,7 +33,7 @@
   --color-warning-500: #ff4d4f;
 
   /* ================= BORDER (DARK THEME) ================= */
-  --color-ui-border: #232833;
+  --color-ui-border: #a0a5b3;
   /* subtle default border */
   --color-ui-border-strong: #2e3440;
   /* stronger borders (cards, sections) */
@@ -41,7 +42,7 @@
   --color-rarity-uncommon: #1eff00;
   --color-rarity-rare: #0070dd;
   --color-rarity-epic: #a335ee;
-  --color-rarity-legendary: #ff8000;
+  --color-rarity-legendary: #e07000;
 
   /* ================= EFFECTS / OVERLAYS ================= */
   --color-pattern-benday: #f5f2eb0f;
@@ -59,6 +60,19 @@ body {
 
 button {
   cursor: pointer;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility animate-rotate {
+  animation: spin 30s linear infinite;
 }
 
 @utility icon-hover {
@@ -154,7 +168,8 @@ button {
 }
 
 @utility policy {
-  background-color: var(--color-effect-gray);
+  background-color: var(--color-overlay-gray-soft);
+  border: 1px solid var(--color-basic-400);
   border-radius: 4px;
   padding: 8px;
   gap: 8px;

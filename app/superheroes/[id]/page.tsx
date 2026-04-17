@@ -1,34 +1,47 @@
-import type { Hero } from "@/app/types";
 import Superhero from "@/components/ui/shop-superhero";
+import { notFound } from "next/navigation";
+import { getProductById, getRelatedProducts } from "@/lib/queries/products";
+import { getSuperheroById } from "@/lib/queries/superheroes";
 
-export default async function Product({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const apiUrl = process.env.API_URL;
+type Props = {
+	params: Promise<{
+		id: string;
+	}>;
+};
 
-  if (!apiUrl) {
-    throw new Error("API_URL is not set");
-  }
+export async function generateMetadata({ params }: PageProps<"/superheroes/[id]">) {
+	const { id } = await params;
+	const hero = await getSuperheroById(Number(id));
+	return {
+		title: `Superhero Store - ${hero.name}`,
+		description: hero.description
+	}
+}
 
-  // test comment
-  const data = await fetch(`${apiUrl}/superheroes`);
+export default async function SuperheroPage({ params }: Props) {
+	const { id } = await params;
+	const apiUrl = process.env.API_URL;
 
-  if(!data.ok) {
-    const body = await data.text();
-    throw new Error(
-      `Failed to fetch superheroes: ${data.status} ${data.statusText}. Body ${body}`
-    )
-  }
+	if (!apiUrl) {
+		throw new Error("API_URL is not set");
+	}
 
-  const heroes = await data.json();
+	const [heroRes, relatedProducts] = await Promise.all([
+		fetch(`${apiUrl}/superheroes/${id}`, {
+			cache: "no-store",
+		}),
+		getRelatedProducts(3),
+	]);
 
-  const hero = heroes.find((h: Hero) => h.id === Number(id));
-  if (!hero) {
-    return <div>Hero not found</div>;
-  }
+	if (!heroRes.ok) {
+		notFound();
+	}
 
-  return <Superhero hero={hero} />;
+	const hero = await heroRes.json();
+
+	if (!hero) {
+		notFound();
+	}
+
+	return <Superhero hero={hero} relatedProducts={relatedProducts} />;
 }
