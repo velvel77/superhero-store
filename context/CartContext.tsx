@@ -1,11 +1,11 @@
 "use client";
 import { createContext, useContext, useState } from "react";
-import type {
+import {
   addToCart,
-  CartItem,
   decreaseQuantityAction,
   removeFromCart,
 } from "@/app/cart/actions";
+import type { CartItem } from "@/app/cart/actions";
 
 export interface CartContextType {
   items: CartItem[];
