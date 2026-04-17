@@ -18,9 +18,9 @@ const skipLinks = [
 ];
 
 export const metadata = {
-  title: "Superhero Store",
-  description: "Browse through our selection of superheroes and gear.",
-}
+  title: 'Superhero Store',
+  description: 'Browse through our selection of superheroes and gear.',
+};
 
 export default async function Shop() {
   return (
@@ -29,7 +29,7 @@ export default async function Shop() {
         <a
           key={section.id}
           href={`${section.link}`}
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 bg-black text-white px-4 py-2 rounded"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-24 focus:left-4 focus:z-50 bg-black text-white px-4 py-2 rounded"
         >
           {section.description}
         </a>
