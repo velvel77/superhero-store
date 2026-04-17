@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 
+
 export default function WelcomePage() {
 	const { data: session } = useSession();
 
