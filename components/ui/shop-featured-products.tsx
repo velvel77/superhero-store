@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import placeholder from "@/public/placeholder.png";
+import placeholder from "@/public/placeholder.jpg";
 
 // import gloves from "@/public/gloves.jpg";
 // import mask from "@/public/mask.jpg";
