@@ -10,7 +10,7 @@ export default function CartButton({ item }: { item: CartItem }) {
   return inCart ? (
     <button
       type="button"
-      className="flex gap-2 py-1 px-3 bg-secondary-500 relative z-10"
+      className="group inline-flex h-10 shrink-0 items-center justify-center gap-3 border-2 border-ui-border bg-secondary-500 px-4 text-basic-100 no-underline relative z-10"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -23,7 +23,7 @@ export default function CartButton({ item }: { item: CartItem }) {
   ) : (
     <button
       type="button"
-      className="flex gap-2 py-1 px-3 bg-secondary-500 relative z-10"
+      className="group inline-flex h-10 shrink-0 items-center justify-center gap-3 border-2 border-ui-border bg-secondary-500 px-4 text-basic-100 no-underline relative z-10"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
