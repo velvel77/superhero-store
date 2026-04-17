@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 
@@ -22,17 +21,7 @@ export default function LoginPage() {
 	}
 
 	async function handleLogin() {
-		const res = await signIn("credentials", {
-			email: form.email,
-			password: form.password,
-			redirect: false,
-		});
-
-		if (res?.error) {
-			alert(res.error);
-		} else {
-			router.push("/welcome");
-		}
+		router.push("/welcome");
 	}
 
 
@@ -56,6 +45,10 @@ export default function LoginPage() {
 				<h2 className="text-3xl font-extrabold mb-2">Welcome Back</h2>
 				<p className="text-basic-300 mb-6">
 					Access your gear and unleash your power
+				</p>
+				<p className="text-sm text-yellow-300 mb-6">
+					Authentication is temporarily disabled. Continue to enter the
+					store without signing in.
 				</p>
 
 				{/* Email */}
