@@ -18,8 +18,8 @@ export default function ShopBanner() {
               key={i}
               x1="100"
               y1="100"
-              x2={100 + 100 * Math.cos((i * Math.PI * 2) / 16)}
-              y2={100 + 100 * Math.sin((i * Math.PI * 2) / 16)}
+              x2={Math.round(100 + 100 * Math.cos((i * Math.PI * 2) / 16))}
+              y2={Math.round(100 + 100 * Math.sin((i * Math.PI * 2) / 16))}
               stroke="yellow"
               strokeWidth="4"
             />

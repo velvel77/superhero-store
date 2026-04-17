@@ -53,25 +53,25 @@ type Props = {
 
 type CatalogItem =
   | {
-      type: "product";
-      id: number;
-      name: string;
-      description: string | null;
-      price: number | null;
-      image_url: string | null;
-      score: number;
-      product: ShopProduct;
-    }
+    type: "product";
+    id: number;
+    name: string;
+    description: string | null;
+    price: number | null;
+    image_url: string | null;
+    score: number;
+    product: ShopProduct;
+  }
   | {
-      type: "superhero";
-      id: number;
-      name: string;
-      description: string | null;
-      price: number | null;
-      image_url: string | null;
-      score: number;
-      hero: Superhero;
-    };
+    type: "superhero";
+    id: number;
+    name: string;
+    description: string | null;
+    price: number | null;
+    image_url: string | null;
+    score: number;
+    hero: Superhero;
+  };
 
 const ITEMS_PER_PAGE = 6;
 
@@ -207,23 +207,23 @@ export default function ShopPageUI({
 
   const initialContentFilter =
     initialSearchParams.type === "all" ||
-    initialSearchParams.type === "products" ||
-    initialSearchParams.type === "superheroes"
+      initialSearchParams.type === "products" ||
+      initialSearchParams.type === "superheroes"
       ? initialSearchParams.type
       : "products";
 
   const initialStockFilter =
     initialSearchParams.stock === "all" ||
-    initialSearchParams.stock === "in" ||
-    initialSearchParams.stock === "low" ||
-    initialSearchParams.stock === "out"
+      initialSearchParams.stock === "in" ||
+      initialSearchParams.stock === "low" ||
+      initialSearchParams.stock === "out"
       ? initialSearchParams.stock
       : "all";
 
   const initialAvailabilityFilter =
     initialSearchParams.availability === "all" ||
-    initialSearchParams.availability === "available" ||
-    initialSearchParams.availability === "unavailable"
+      initialSearchParams.availability === "available" ||
+      initialSearchParams.availability === "unavailable"
       ? initialSearchParams.availability
       : "all";
 
@@ -583,8 +583,8 @@ export default function ShopPageUI({
                           key={i}
                           x1="100"
                           y1="100"
-                          x2={100 + 100 * Math.cos((i * Math.PI * 2) / 16)}
-                          y2={100 + 100 * Math.sin((i * Math.PI * 2) / 16)}
+                          x2={Math.round(100 + 100 * Math.cos((i * Math.PI * 2) / 16))}
+                          y2={Math.round(100 + 100 * Math.sin((i * Math.PI * 2) / 16))}
                           stroke="rgba(220,38,38,0.55)"
                           strokeWidth="4"
                         />
@@ -684,11 +684,10 @@ export default function ShopPageUI({
                         setContentFilter(item);
                         setPage(1);
                       }}
-                      className={`border px-2 py-2 text-[10px] font-black uppercase tracking-[0.12em] ${
-                        contentFilter === item
+                      className={`border px-2 py-2 text-[10px] font-black uppercase tracking-[0.12em] ${contentFilter === item
                           ? "border-secondary-500 bg-secondary-500/10 text-basic-100"
                           : "border-ui-border bg-basic-800 text-basic-300"
-                      }`}
+                        }`}
                     >
                       {item === "all"
                         ? "All"
@@ -763,11 +762,10 @@ export default function ShopPageUI({
                       setContentFilter("all");
                       setPage(1);
                     }}
-                    className={`h-6 w-6 border ${
-                      contentFilter === "all"
+                    className={`h-6 w-6 border ${contentFilter === "all"
                         ? "border-basic-100"
                         : "border-ui-border"
-                    } bg-basic-100`}
+                      } bg-basic-100`}
                   />
                   <button
                     type="button"
@@ -776,11 +774,10 @@ export default function ShopPageUI({
                       setContentFilter("products");
                       setPage(1);
                     }}
-                    className={`h-6 w-6 border ${
-                      contentFilter === "products"
+                    className={`h-6 w-6 border ${contentFilter === "products"
                         ? "border-basic-100"
                         : "border-ui-border"
-                    } bg-rarity-rare`}
+                      } bg-rarity-rare`}
                   />
                   <button
                     type="button"
@@ -789,31 +786,28 @@ export default function ShopPageUI({
                       setContentFilter("superheroes");
                       setPage(1);
                     }}
-                    className={`h-6 w-6 border ${
-                      contentFilter === "superheroes"
+                    className={`h-6 w-6 border ${contentFilter === "superheroes"
                         ? "border-basic-100"
                         : "border-ui-border"
-                    } bg-secondary-500`}
+                      } bg-secondary-500`}
                   />
                   <button
                     type="button"
                     title="Legendary"
                     onClick={() => toggleRarity("LEGENDARY")}
-                    className={`h-6 w-6 border ${
-                      selectedRarities.includes("LEGENDARY")
+                    className={`h-6 w-6 border ${selectedRarities.includes("LEGENDARY")
                         ? "border-basic-100"
                         : "border-ui-border"
-                    } bg-primary-500`}
+                      } bg-primary-500`}
                   />
                   <button
                     type="button"
                     title="Epic"
                     onClick={() => toggleRarity("EPIC")}
-                    className={`h-6 w-6 border ${
-                      selectedRarities.includes("EPIC")
+                    className={`h-6 w-6 border ${selectedRarities.includes("EPIC")
                         ? "border-basic-100"
                         : "border-ui-border"
-                    } bg-rarity-epic`}
+                      } bg-rarity-epic`}
                   />
                   <button
                     type="button"
@@ -824,11 +818,10 @@ export default function ShopPageUI({
                       );
                       setPage(1);
                     }}
-                    className={`h-6 w-6 border ${
-                      availabilityFilter === "available"
+                    className={`h-6 w-6 border ${availabilityFilter === "available"
                         ? "border-basic-100"
                         : "border-ui-border"
-                    } bg-rarity-uncommon`}
+                      } bg-rarity-uncommon`}
                   />
                 </div>
               </div>
@@ -1139,11 +1132,10 @@ export default function ShopPageUI({
                           type="button"
                           key={pageNumber}
                           onClick={() => setPage(pageNumber)}
-                          className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${
-                            page === pageNumber
+                          className={`min-w-11 border px-4 py-3 text-[11px] font-black uppercase tracking-[0.14em] ${page === pageNumber
                               ? "border-secondary-500 bg-secondary-500/15 text-basic-100"
                               : "border-ui-border bg-basic-700 text-basic-100"
-                          }`}
+                            }`}
                         >
                           {pageNumber}
                         </button>
