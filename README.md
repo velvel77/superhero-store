@@ -1,105 +1,257 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 [TITEL]
 
-This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![Resend](https://img.shields.io/badge/Resend-000000?style=for-the-badge&logo=resend&logoColor=white)
+![Lovable](https://img.shields.io/badge/Lovable-FF3B6B?style=for-the-badge&logo=lovable&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-Data in the json for the server is from [dummyjson.com](https://dummyjson.com/docs/products) but modified to fit the needs of this project. Most of the endpoints mirrors those in that documentation.
+[sammanfattning för projektet]
+Detta projekt är under ständig utveckling via ett **Agile Scrum** ramverk, där all planering kan följas på tillhörande Github Projects.
 
-## Getting Started
+---
 
-First, install the dependencies:
+## 📑 Innehåll
+- 📖 [Om projektet](#-om-projektet)
+- ✨ [Funktioner](#-funktioner)
+- 🛠 [Teknologier](#-teknologier)
+- 📸 [UI](#-UI)
+- ⚙️ [Installation](#-installation)
+- 🚀 [Användning](#-användning)
+- 📂 [Projektstruktur](#-projektstruktur)
+- 📈 [Arbetsflöde](#-arbetsflöde)
+- 🗓 [Sprintplan](#-sprintplan)
+- 🤝 [Bidra](#-bidra)
+- 📚 [Lärdomar](#-lärdomar)
+- 📜 [Licens](#-licens)
+- ✍️ [Kontakt](#-kontakt)
 
+---
+
+## 📖 Om projektet
+[syfte med projektet och vad vi ämnat att åstadkomma]
+---
+
+## ✨ Funktioner
+- ✅ Startsida med huvudfunktioner
+- ✅ 
+- ✅ 
+- ✅ 
+- ✅ 
+
+---
+
+## 📸 UI
+
+UX/UI:
+
+
+
+**App:**
+
+
+
+---
+
+## 🛠 Teknologier
+- [Next.js](https://nextjs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Git](https://git-scm.com/)
+- [WAVE](https://wave.webaim.org/)
+
+---
+## ✅ Förutsättningar
+**Följande krävs inför installation:**
+
+- Node.js
+- PostgreSQL
+- npm
+
+## ⚙️ Installation
 ```bash
+
+# Klona repo
+git clone https://github.com/velvel77/superhero-store
+
+# Gå in i projektmappen
+cd superhero-store
+
+# Installera beroenden
 npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
-```
 
-To start the full development environment (Next.js frontend + JSON Server backend), use:
+# Skapa en ".env"-fil i root-foldern och kopiera över all info från .env.example, ändra utefter egna inställningar
 
-```bash
+# Starta utvecklingsserver
 npm run dev:full
+
+# Appen körs på:
+http://localhost:3000
+
+# Deployment körs på:
+https://superhero-store.onrender.com/
+
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-The JSON server is running on [http://localhost:4000](http://localhost:4000). Here you can see the API endpoints and test them.
+## 🚀 Användning
+* Bläddra produkter
+* Sök efter specifika produkter
+* Filtrera produkter
+* Se detaljer för produkter
+* Lägg till produkter i varukorg
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-## JSON Server Setup
+## 📂 Projektstruktur
 
-This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
+```
+SUPERHERO-STORE/
+├── .next/
+├── api/
+│   ├── dist/
+│   ├── node_modules/
+│   ├── routes/
+│   ├── db.ts
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── server.ts
+│   └── tsconfig.json
+├── app/
+│   ├── admin/
+│   │   └── page.tsx
+│   ├── api/
+│   │   ├── auth/
+│   │   ├── image/
+│   │   ├── products/
+│   │   │   └── route.ts
+│   │   └── send/
+│   │       └── route.ts
+│   ├── cart/
+│   ├── contact/
+│   │   ├── action.ts
+│   │   └── page.tsx
+│   ├── login/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── products/
+│   │   ├── [id]/
+│   │   ├── add-product/
+│   │   ├── edit/
+│   │   └── page.tsx
+│   ├── register/
+│   ├── shop/
+│   │   └── page.tsx
+│   ├── superheroes/
+│   │   ├── [id]/
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── welcome/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── icon.svg
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── types.ts
+├── components/
+│   ├── ui/
+│   └── toast-listener.tsx
+├── context/
+│   └── CartContext.tsx
+├── data/
+├── lib/
+├── node_modules/
+├── public/
+├── server/
+├── supabase/
+│   ├── .temp/
+│   ├── .gitignore
+│   └── config.toml
+├── types/
+├── utils/
+├── .env
+├── .env.example
+├── .gitignore
+├── azure-pipelines.yml
+├── biome.json
+├── checklist.md
+├── gruppkontrakt.md
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── README.md
+└── tsconfig.json
+```
 
-### Configuration
+---
 
-The server configuration files are located in the `server/` directory:
+## 📈 Arbetsflöde
 
--   `server/products.json`: The database file containing the product data.
--   `server/middleware.js`: Custom middleware for the server.
+* 👥 Grupprojekt i fyra agila sprintar (SCRUM)
+* 🛠️ Daily standups
+* 📋 Planering och uppgiftshantering via GitHub Projects
+* 🎨 Design och prototyper skapade i Loveable
+* 🌱 Feature branches
+* 🔍 PR + kodgranskning
 
-### Scripts
+---
 
-The following scripts are available in `package.json`:
+## 🗓 Sprintplan
 
--   `npm run mock-server`: Starts the json-server on port 4000.
--   `npm run dev:full`: Runs both the Next.js development server and the json-server concurrently.
+### Sprint 1 - Grundläggande struktur
 
-## API Endpoints
+*
+*
 
-The mock server (running on port 4000) provides the following endpoints:
+### Sprint 2 - Grundläggande struktur
 
-### Resources
-- `GET /products`: Get all products
-- `GET /products/:id`: Get a single product by ID
-- `GET /categories`: Get all categories
-- `GET /categories/:id`: Get a category by ID
-- `GET /categories?slug=:slug`: Get a category by slug
+*
+*
 
-### Create Product
-- `POST /products`: Create a new product
+---
 
-**Required Fields:**
-- `title`: String
-- `price`: Number
-- `description`: String
-- `thumbnail`: URL String
-- `categoryId`: Number (ID of an existing category)
-- `brand`: String
+## 🤝 Bidra
 
-**Auto-generated Fields:**
-- `id`: Sequential ID
-- `sku`: Generated SKU (format: CAT-BRA-TIT-ID)
-- `meta`: Creation and update timestamps
+Vill du bidra?
 
-### Pagination & Sorting (json-server 0.17.4)
-See [json-server documentation](https://github.com/typicode/json-server/tree/v0.17.4) for more information.
+1. Forka projektet
+2. Skapa en feature-branch (`git checkout feature/my-feature`)
+3. Commit & push
+4. Skicka en Pull Request
 
-#### Pagination
-Use `_page` and `_limit` to paginate data:
-- `GET /products?_page=1&_limit=10` (First page, 10 items)
-- `GET /products?_page=2&_limit=10` (Second page, 10 items)
+---
 
-The response will include the `Link` header with `first`, `prev`, `next`, and `last` links.
-Our custom middleware also adds `X-Total-Count` header and wraps the response to include pagination metadata (total, limit, page, pages).
+## 📚 Lärdomar
 
-#### Sorting
-Use `_sort` and `_order` to sort data:
-- `GET /products?_sort=price&_order=asc` (Sort by price, ascending)
-- `GET /products?_sort=price&_order=desc` (Sort by price, descending)
-- `GET /products?_sort=price,title&_order=desc,asc` (Sort by multiple fields)
+* Skillnaden mellan Server & Client Components i Next.js
+* 
+* 
+* 
+* Att agera både utvecklare, produktägare och SCRUM master i grupparbete
+* Arbetsflöde via Github Projects
 
-#### Filtering
-- `GET /products?price_gte=10&price_lte=50` (Price between 10 and 50)
-- `GET /products?q=mascara` (Full-text search)
+---
 
-## Learn More
+## 📜 Licens
 
-To learn more about Next.js, take a look at the following resources:
+Copyright (c) 2026 Velvet Paul, Henrietta Jeansson Alalehto, Mattias Alm and Jessica Fredin
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+## ✍️ Kontakt
+
+https://www.linkedin.com/in/velvetpaul/
