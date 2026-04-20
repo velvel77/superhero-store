@@ -1,14 +1,15 @@
 # 📝 [TITEL]
 
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
-![Resend](https://img.shields.io/badge/Resend-000000?style=for-the-badge&logo=resend&logoColor=white)
-![Lovable](https://img.shields.io/badge/Lovable-FF3B6B?style=for-the-badge&logo=lovable&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js)
+![Express](https://img.shields.io/badge/Express-black?logo=express)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white)
+![Resend](https://img.shields.io/badge/Resend-black?logo=resend)
+![Lovable](https://img.shields.io/badge/Lovable-FF3B6B?logo=lovable&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)
+![MIT](https://img.shields.io/badge/License-MIT-yellow)
 
 [sammanfattning för projektet]
 Detta projekt är under ständig utveckling via ett **Agile Scrum** ramverk, där all planering kan följas på tillhörande Github Projects.
