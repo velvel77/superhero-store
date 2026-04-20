@@ -217,6 +217,16 @@ SUPERHERO-STORE/
 *
 *
 
+### Sprint 3 - Grundläggande struktur
+
+*
+*
+
+### Sprint 4 - Grundläggande struktur
+
+*
+*
+
 ---
 
 ## 🤝 Bidra
