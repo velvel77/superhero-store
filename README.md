@@ -1,4 +1,4 @@
-# 📝 [TITEL]
+# 📝 Superhero Store
 
 ![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js)
 ![Express](https://img.shields.io/badge/Express-black?logo=express)
