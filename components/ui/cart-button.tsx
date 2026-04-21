@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { ShoppingCart, Trash2 } from "lucide-react";
-import type { CartItem } from "@/app/cart/actions";
-import { useCart } from "@/context/CartContext";
+import { ShoppingCart, Trash2 } from 'lucide-react';
+import type { CartItem } from '@/app/cart/actions';
+import { useCart } from '@/context/CartContext';
 
 export default function CartButton({ item }: { item: CartItem }) {
   const { items, addItem, removeItem } = useCart();
-  const inCart = items.some((i) => i.id === item.id && i.type === "product");
+  const inCart = items.some((i) => i.id === item.id && i.type === 'product');
   return inCart ? (
     <button
       type="button"
@@ -28,7 +28,6 @@ export default function CartButton({ item }: { item: CartItem }) {
         e.preventDefault();
         e.stopPropagation();
         addItem(item);
-
       }}
     >
       <ShoppingCart />

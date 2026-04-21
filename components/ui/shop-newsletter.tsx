@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { FormState, subscribeNewsletter } from '@/app/contact/action';
 import { Zap, Send } from 'lucide-react';
 import Form from 'next/form';
@@ -8,23 +8,17 @@ import toast, { Toaster } from 'react-hot-toast';
 const initialState: FormState = {};
 
 export default function ShopNewsLetter() {
-
-  const [state, action, pending] = useActionState(
-    subscribeNewsletter,
-    initialState,
-  );
+  const [state, action, pending] = useActionState(subscribeNewsletter, initialState);
 
   useEffect(() => {
-    if (state.success)
-      toast.success("You're subscribed to our newsletter!");
+    if (state.success) toast.success("You're subscribed to our newsletter!");
     if (state.error) toast.error(state.error);
   }, [state]);
-
 
   return (
     <section
       id="newsletter-section"
-      className="scroll-mt-18 overflow-clip diagonal-stripes relative flex justify-between border-b-2 border-ui-border bg-secondary-500 px-4 py-16"
+      className="scroll-mt-18 overflow-clip diagonal-stripes relative flex justify-between border-y-2 border-ui-border bg-secondary-500 px-4 py-16"
     >
       <div className="absolute -left-20 -top-20 w-80 h-80 opacity-10 animate-rotate">
         <svg viewBox="0 0 200 200" className="w-full h-full">
@@ -51,7 +45,7 @@ export default function ShopNewsLetter() {
             </p>
           </div>
         </div>
-        <Form className="flex border-2 border-ui-border/80" action={action}>
+        <Form className="flex border rounded-sm border-ui-border/80" action={action}>
           <label htmlFor="email-field" className="sr-only">
             Sign up to our newsletter via email
           </label>
@@ -64,19 +58,21 @@ export default function ShopNewsLetter() {
             placeholder="hero@email.com"
           />
           <button
-            className="p-2 flex items-center gap-2 hover:bg-basic-200 bg-basic-100 text-secondary-500"
-            type="submit" disabled={pending}
+            className="p-2 flex w-20 group items-center gap-2 bg-basic-100 text-secondary-500"
+            type="submit"
+            disabled={pending}
           >
-            <span className="text-sm font-bold italic">
-              <Send className="size-3" />
-              {pending ? "Enlisting..." : "Enlist"}
-            </span>
+            <div className="text-sm font-bold flex items-center gap-2">
+              <Send className="size-3 group-hover:rotate-45 transition-all duration-200" />
+              <span className="group-hover:tracking-widest italic transition-all duration-200">
+                {pending ? 'Enlisting...' : 'Enlist'}
+              </span>
+            </div>
           </button>
           <Toaster
             position="bottom-center"
             toastOptions={{
-              className:
-                "bg-basic-800 text-basic-100 border border-ui-border",
+              className: 'bg-basic-800 text-basic-100 border border-ui-border',
             }}
           />
         </Form>

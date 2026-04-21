@@ -83,7 +83,7 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
       <ShopHeader />
 
       <div className="max-w-260 mx-auto px-4">
-        <Link className="uppercase text-[.5rem]" href={'/shop'}>
+        <Link className="uppercase text-[.7rem]" href={'/shop'}>
           {`< Back to catalog`}
         </Link>
 
@@ -92,13 +92,12 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
             {/* Left panel */}
             <div className="relative flex-1">
               <div className="relative overflow-clip h-full min-h-125">
-                <div className="benday-dots absolute z-10 inset-0"></div>
                 <Image
                   className="w-full object-cover border-2 border-basic-400/20 rounded-sm"
                   src={product.image_url ? product.image_url : placeholder}
                   alt={product.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
                 />
               </div>
 
@@ -118,7 +117,7 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
 
                 <div className="py-4 mb-4 border-b border-basic-400/20">
                   <span className="text-primary-500 text-2xl">${product.price}</span>{' '}
-                  <span className="text-[.5rem]"> / item</span>
+                  <span className="text-[.7rem]"> / item</span>
                   <div className="flex gap-4 py-4">
                     <span
                       className={`p-2 rounded-sm text-shadow-black text-2xl px-4 ${
@@ -131,11 +130,17 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
                               : 'bg-rarity-uncommon'
                       }`}
                     >
-                      {product.rarity}
+                      {product.rarity === 'LEGENDARY'
+                        ? 'S'
+                        : product.rarity === 'EPIC'
+                          ? 'A'
+                          : product.rarity === 'RARE'
+                            ? 'B'
+                            : 'A'}
                     </span>
 
                     <div className="flex flex-col">
-                      <span className="text-sm text-basic-400">Item rarity</span>
+                      <span className="text-sm text-basic-400">Item Rarity</span>
                       <span>
                         {product.rarity === 'LEGENDARY'
                           ? 'Legendary'
@@ -151,7 +156,7 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
               </div>
 
               <div>
-                <p className="text-[.8rem] text-basic-400">{product.description || 'No description available.'}</p>
+                <p className="text-basic-100">{product.description || 'No description available.'}</p>
 
                 {/* Product details */}
                 <section className="p-4 bg-pattern-benday my-4 rounded-sm border border-basic-400">
@@ -163,7 +168,6 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
                   <div className="flex flex-col gap-1 text-sm">
                     <span>Categories: {product.categories.length ? product.categories.join(', ') : 'Misc'}</span>
                     <span>Stock: {product.stock}</span>
-                    <span>Rarity: {product.rarity}</span>
                   </div>
                 </section>
 
@@ -224,7 +228,7 @@ export default function ShopProduct({ product, relatedProducts }: Props) {
                   <Truck className="text-secondary-500" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">Free shipping</span>
-                    <span className="text-basic-400">Orders over $500</span>
+                    <span className="text-basic-400">Orders over $1500</span>
                   </div>
                 </div>
 

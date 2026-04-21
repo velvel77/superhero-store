@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { CircleMinus, CirclePlus, Trash2 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { addToCart, type CartItem, removeFromCart } from "@/app/cart/actions";
-import { useCart } from "@/context/CartContext";
+import { CircleMinus, CirclePlus, Trash2 } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { addToCart, type CartItem, removeFromCart } from '@/app/cart/actions';
+import { useCart } from '@/context/CartContext';
 
 export default function CartList() {
-  const { items, removeItem, increaseQuantity, decreaseQuantity, totalItems } =
-    useCart();
+  const { items, removeItem, increaseQuantity, decreaseQuantity, totalItems } = useCart();
   async function increase(item: CartItem) {
     await addToCart(item);
   }
@@ -36,28 +35,23 @@ export default function CartList() {
       {items.map((item) => (
         <div
           key={`${item.type}-${item.id}`}
-          className="w-[92%] grid grid-cols-2 p-5 overflow-hidden"
+          className="flex flex-col sm:flex-row items-center p-4 w-full overflow-hidden border-t border-ui-border"
         >
           <section className="relative h-48 w-48 overflow-hidden">
             <Image
-              src={
-                item.image_url ||
-                "https://placehold.co/300x300/111827/ffffff?text=Item"
-              }
+              src={item.image_url || 'https://placehold.co/300x300/111827/ffffff?text=Item'}
               alt={item.name}
               fill
               className="h-24 w-24 object-cover"
-              sizes="182px"
             />
           </section>
-          <section className="ml-auto">
-            <div className="flex flex-col min-w-64 w-64 items-end space-y-3 text-right">
-              <h6 className="text-2xl font-black uppercase tracking-tight">
-                {item.name}
-              </h6>
+          <section className="sm:ml-auto p-2">
+            <div className="flex flex-col min-w-64 w-64 sm:items-end items-center space-y-3 sm:text-right">
+              <h6 className="text-2xl font-black uppercase">{item.name}</h6>
               <span className="">{item.price * item.quantity} kr</span>
               <div className="inline-flex">
                 <button
+                  className="hover:text-secondary-500 transition-all duration-200"
                   type="button"
                   onClick={() => decreaseQuantity(item.id, item.type)}
                 >
@@ -65,6 +59,7 @@ export default function CartList() {
                 </button>
                 <span className="px-3">{item.quantity}</span>
                 <button
+                  className="hover:text-secondary-500 transition-all duration-200"
                   type="button"
                   onClick={() => increaseQuantity(item.id, item.type)}
                 >
@@ -72,12 +67,12 @@ export default function CartList() {
                 </button>
               </div>
               <button
-                className="group inline-flex h-10 shrink-0 items-center justify-center gap-3 border-2 border-ui-border bg-secondary-500 px-4 text-basic-100 no-underline relative z-10"
+                className="group transition-all duration-200 hover:text-secondary-500 hover:border-secondary-500 hover:bg-basic-100 inline-flex h-10 shrink-0 items-center justify-center gap-3 border-2 border-ui-border bg-secondary-500 px-4 text-basic-100 no-underline relative z-10"
                 type="button"
                 onClick={() => removeItem(item.id, item.type)}
               >
                 <Trash2 />
-                Remove
+                <span>Remove</span>
               </button>
             </div>
           </section>
