@@ -55,6 +55,15 @@ Vi hade i uppdrag att bygga en webbshop med valfri inriktning (vi valde superhjÃ
 ## ğŸ“¸ UI
 
 UX/UI:
+<img width="1168" height="1274" alt="image" src="https://github.com/user-attachments/assets/3f1253d6-62d0-4bd6-9375-373247f3b54b" />
+<img width="1108" height="427" alt="image" src="https://github.com/user-attachments/assets/1a9c5a86-da85-499e-857e-eb028137c7c5" />
+<img width="955" height="751" alt="image" src="https://github.com/user-attachments/assets/8895c2b2-6216-4ffc-828e-ecd6f35616b1" />
+<img width="1207" height="937" alt="image" src="https://github.com/user-attachments/assets/1f638b91-711a-4e87-8ace-f7d73446b080" />
+<img width="1060" height="1271" alt="image" src="https://github.com/user-attachments/assets/dca58b1c-08a9-483c-9eda-2a3d92c5d72e" />
+<img width="1034" height="837" alt="image" src="https://github.com/user-attachments/assets/3e63d555-6b43-4713-bcf0-3b6464cd9cb2" />
+<img width="1088" height="1192" alt="image" src="https://github.com/user-attachments/assets/d6b15405-b6d4-4d8a-806c-0df8476c9cf7" />
+<img width="515" height="953" alt="image" src="https://github.com/user-attachments/assets/468b9c6e-002c-474b-87a1-0a57eb3d038f" />
+<img width="1082" height="1265" alt="image" src="https://github.com/user-attachments/assets/9e4b50f1-9863-445d-b60b-445ff4cbada8" />
 
 **App:**
 
