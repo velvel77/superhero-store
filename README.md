@@ -11,12 +11,12 @@
 ![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)
 ![MIT](https://img.shields.io/badge/License-MIT-yellow)
 
-[sammanfattning för projektet]
 Detta projekt är under ständig utveckling via ett **Agile Scrum** ramverk, där all planering kan följas på tillhörande Github Projects.
 
 ---
 
 ## 📑 Innehåll
+
 - 📖 [Om projektet](#-om-projektet)
 - ✨ [Funktioner](#-funktioner)
 - 🛠 [Teknologier](#-teknologier)
@@ -34,15 +34,21 @@ Detta projekt är under ständig utveckling via ett **Agile Scrum** ramverk, dä
 ---
 
 ## 📖 Om projektet
-[syfte med projektet och vad vi ämnat att åstadkomma]
----
+
+Vi hade i uppdrag att bygga en webbshop med valfri inriktning (vi valde superhjältar med tillbehör) som tillägg till ett tidigare projekt där vi redan byggt en admindashboard. I tillhörande MVP så skulle det finnas en readme, produktsida, detaljsida, sök & filter, paginering samt en varukorg, samtliga har implementerats.
 
 ## ✨ Funktioner
+
 - ✅ Startsida med huvudfunktioner
-- ✅ 
-- ✅ 
-- ✅ 
-- ✅ 
+- ✅ Produktsida
+- ✅ Detaljsida
+- ✅ Shopsida
+- ✅ Sökfunktion
+- ✅ Paginering
+- ✅ Filtrering
+- ✅ Kundvagn
+- ✅ Registrering
+- ✅ Login
 
 ---
 
@@ -50,22 +56,29 @@ Detta projekt är under ständig utveckling via ett **Agile Scrum** ramverk, dä
 
 UX/UI:
 
-
-
 **App:**
-
-
 
 ---
 
 ## 🛠 Teknologier
+
 - [Next.js](https://nextjs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Git](https://git-scm.com/)
+- [Github](https://github.com/)
 - [WAVE](https://wave.webaim.org/)
+- [Resend](https://resend.com/)
+- [Supabase](https://supabase.com/)
+- [Azure-DevOps](https://azure.microsoft.com/en-us/products/devops)
+- [Tailwind](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/)
+- [Lovable](https://lovable.dev/)
 
 ---
+
 ## ✅ Förutsättningar
+
 **Följande krävs inför installation:**
 
 - Node.js
@@ -73,6 +86,7 @@ UX/UI:
 - npm
 
 ## ⚙️ Installation
+
 ```bash
 
 # Klona repo
@@ -101,11 +115,12 @@ https://superhero-store.onrender.com/
 ---
 
 ## 🚀 Användning
-* Bläddra produkter
-* Sök efter specifika produkter
-* Filtrera produkter
-* Se detaljer för produkter
-* Lägg till produkter i varukorg
+
+- Bläddra produkter
+- Sök efter specifika produkter
+- Filtrera produkter
+- Se detaljer för produkter
+- Lägg till produkter i varukorg
 
 ---
 
@@ -196,12 +211,12 @@ SUPERHERO-STORE/
 
 ## 📈 Arbetsflöde
 
-* 👥 Grupprojekt i fyra agila sprintar (SCRUM)
-* 🛠️ Daily standups
-* 📋 Planering och uppgiftshantering via GitHub Projects
-* 🎨 Design och prototyper skapade i Loveable
-* 🌱 Feature branches
-* 🔍 PR + kodgranskning
+- 👥 Grupprojekt i fyra agila sprintar (SCRUM)
+- 🛠️ Daily standups
+- 📋 Planering och uppgiftshantering via GitHub Projects
+- 🎨 Design och prototyper skapade i Loveable
+- 🌱 Feature branches
+- 🔍 PR + kodgranskning
 
 ---
 
@@ -209,25 +224,23 @@ SUPERHERO-STORE/
 
 ### Sprint 1 - Grundläggande struktur
 
-*
-*
+-
+-
 
 ### Sprint 2 - Grundläggande struktur
 
-*
-*
+-
+-
 
 ### Sprint 3 - Grundläggande struktur
 
-*
-*
+-
+-
 
 ### Sprint 4 - Grundläggande struktur
 
-*
-*
-
----
+-
+- ***
 
 ## 🤝 Bidra
 
@@ -242,12 +255,12 @@ Vill du bidra?
 
 ## 📚 Lärdomar
 
-* Skillnaden mellan Server & Client Components i Next.js
-* 
-* 
-* 
-* Att agera både utvecklare, produktägare och SCRUM master i grupparbete
-* Arbetsflöde via Github Projects
+- Skillnaden mellan Server & Client Components i Next.js
+- Integration med resend
+- Wave och WCAG
+- Ibland behöver man sova på saken
+- Att agera både utvecklare, produktägare och SCRUM master i grupparbete
+- Arbetsflöde via Github Projects
 
 ---
 
@@ -266,3 +279,4 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 ## ✍️ Kontakt
 
 https://www.linkedin.com/in/velvetpaul/
+https://www.linkedin.com/in/mattias-alm/
