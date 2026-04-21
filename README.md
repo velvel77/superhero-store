@@ -278,5 +278,5 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## ✍️ Kontakt
 
-https://www.linkedin.com/in/velvetpaul/
-https://www.linkedin.com/in/mattias-alm/
+- https://www.linkedin.com/in/velvetpaul/
+- https://www.linkedin.com/in/mattias-alm/
