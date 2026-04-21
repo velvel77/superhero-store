@@ -11,6 +11,10 @@
 ![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)
 ![MIT](https://img.shields.io/badge/License-MIT-yellow)
 
+Med ambitionen "Gemensam utveckling, gott samarbete och att lära sig nya tekniker - på egen hand och av varandra", har vi
+tagit fram en webbshop som kan vara bra att hålla nära till hands. Just därför ligger den just nu på {URL Render}, redo för din bokning av superhjälten du behöver!
+
+Vi hade i uppdrag att bygga en webbshop med valfri inriktning (vi valde superhjältar med tillbehör) som tillägg till ett tidigare projekt där vi redan byggt en admindashboard. I tillhörande MVP så skulle det finnas en readme, produktsida, detaljsida, sök & filter, paginering samt en varukorg, samtliga har implementerats.
 Detta projekt är under ständig utveckling via ett **Agile Scrum** ramverk, där all planering kan följas på tillhörande Github Projects.
 
 ---
