@@ -30,12 +30,12 @@ export default async function ShopAllHeroes() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 rounded-md px-2">
           {heroes.map((hero: Hero) => (
             <Link
-              className=" group hover:glow-epic rounded-sm hover:cursor-pointer border border-primary-400"
+              className="group hover:glow-epic rounded-sm hover:cursor-pointer bg-basic-800 border border-primary-400"
               href={`/superheroes/${hero.id}`}
               key={hero.id}
             >
               <div className="relative mb-2">
-                <div className="relative h-100 overflow-clip border-b border-primary-400 group-hover:glow-epic group-hover:border-rarity-epic rounded-sm">
+                <div className="relative h-100 overflow-clip rounded-sm">
                   <Image
                     className="w-full object-cover group-hover:scale-105 transition-all duration-200 rounded-sm"
                     src={hero.image_url}

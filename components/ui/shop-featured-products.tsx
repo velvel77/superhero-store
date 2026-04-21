@@ -1,40 +1,35 @@
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import placeholder from "@/public/placeholder.jpg";
-
-// import gloves from "@/public/gloves.jpg";
-// import mask from "@/public/mask.jpg";
-// import outfit from "@/public/outfit.jpg";
-// import shield from "@/public/shield.jpg";
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import placeholder from '@/public/placeholder.jpg';
 
 const items = [
   {
     id: 1,
     image: placeholder,
-    rarity: "Legendary",
-    description: "Shadow ops tactical suit",
+    rarity: 'Legendary',
+    description: 'Shadow ops tactical suit',
     price: 2450,
   },
   {
     id: 2,
     image: placeholder,
-    rarity: "Epic",
-    description: "Plasma surge gauntlets",
+    rarity: 'Epic',
+    description: 'Plasma surge gauntlets',
     price: 1890,
   },
   {
     id: 3,
     image: placeholder,
-    rarity: "Rare",
-    description: "Phantom visor MK-IV",
+    rarity: 'Rare',
+    description: 'Phantom visor MK-IV',
     price: 1250,
   },
   {
     id: 4,
     image: placeholder,
-    rarity: "Legendary",
-    description: "Liberty defender shield",
+    rarity: 'Legendary',
+    description: 'Liberty defender shield',
     price: 3200,
   },
 ];
@@ -43,25 +38,18 @@ const [featured, ...rest] = items;
 
 export default function ShopFeaturedProducts() {
   return (
-    <section
-      id="featured-products-section"
-      className="scroll-mt-18 p-4 pb-16 diagonal-stripes "
-    >
+    <section id="featured-products-section" className="scroll-mt-18 p-4 pb-16 diagonal-stripes ">
       <div className="mx-auto max-w-260 w-full">
         <header className="p-4 py-8 relative grid items-center">
           <div className="absolute h-7 w-1 bg-secondary-500"></div>
-          <h2 className="text-basic-100 font-bold uppercase italic">
-            Featured products
-          </h2>
-          <small className="text-basic-300">
-            Most requested by active heroes
-          </small>
+          <h2 className="text-basic-100 font-bold uppercase italic">Featured products</h2>
+          <small className="text-basic-300">Most requested by active heroes</small>
         </header>
 
         <div className="flex gap-4">
           {/* Featured */}
           <Link
-            href={"/"}
+            href={'/shop'}
             key={featured.id}
             className="group overflow-clip relative w-auto border-2 glow-red border-ui-border font-bold"
           >
@@ -76,26 +64,22 @@ export default function ShopFeaturedProducts() {
             <span
               className={`absolute text-[.7rem] border-ui-border border rounded-sm px-2 top-2 left-2 
               ${
-                featured.rarity === "Legendary"
-                  ? "bg-rarity-legendary text-basic-900"
-                  : featured.rarity === "Epic"
-                    ? "bg-rarity-epic"
-                    : featured.rarity === "Rare"
-                      ? "bg-rarity-rare"
-                      : "bg-rarity-uncommon text-basic-900"
+                featured.rarity === 'Legendary'
+                  ? 'bg-rarity-legendary text-basic-900'
+                  : featured.rarity === 'Epic'
+                    ? 'bg-rarity-epic'
+                    : featured.rarity === 'Rare'
+                      ? 'bg-rarity-rare'
+                      : 'bg-rarity-uncommon text-basic-900'
               }`}
             >
               {featured.rarity}
             </span>
             <div className="absolute flex flex-col p-4 bottom-0 left-0">
               {/* Description */}
-              <span className="uppercase text-sm italic">
-                {featured.description}
-              </span>
+              <span className="uppercase text-sm italic">{featured.description}</span>
               {/* Price */}
-              <span className="text-sm text-primary-500">
-                ${featured.price}
-              </span>
+              <span className="text-sm text-primary-500">${featured.price}</span>
             </div>
           </Link>
 
@@ -103,7 +87,7 @@ export default function ShopFeaturedProducts() {
           <div className="w-fit flex flex-col gap-4">
             {rest.map((item) => (
               <Link
-                href={"/"}
+                href={'/shop'}
                 key={item.id}
                 className="flex glow-red group items-center benday-dots w-120 border-2 bg-basic-600 border-ui-border font-bold"
               >
@@ -121,25 +105,21 @@ export default function ShopFeaturedProducts() {
                   <span
                     className={`w-fit text-[.7rem] border-ui-border border rounded-sm px-2 my-2 
               ${
-                item.rarity === "Legendary"
-                  ? "bg-rarity-legendary text-basic-900"
-                  : item.rarity === "Epic"
-                    ? "bg-rarity-epic"
-                    : item.rarity === "Rare"
-                      ? "bg-rarity-rare"
-                      : "bg-rarity-uncommon text-basic-900"
+                item.rarity === 'Legendary'
+                  ? 'bg-rarity-legendary text-basic-900'
+                  : item.rarity === 'Epic'
+                    ? 'bg-rarity-epic'
+                    : item.rarity === 'Rare'
+                      ? 'bg-rarity-rare'
+                      : 'bg-rarity-uncommon text-basic-900'
               }`}
                   >
                     {item.rarity}
                   </span>
                   {/* Description */}
-                  <span className="uppercase text-sm italic">
-                    {item.description}
-                  </span>
+                  <span className="uppercase text-sm italic">{item.description}</span>
                   {/* Price */}
-                  <span className="text-sm text-primary-500">
-                    ${item.price}
-                  </span>
+                  <span className="text-sm text-primary-500">${item.price}</span>
                 </div>
                 <ArrowRight className="mr-4 group-hover:text-secondary-500 size-6 ml-auto" />
               </Link>

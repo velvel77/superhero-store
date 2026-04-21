@@ -15,37 +15,37 @@ export default function ShopHeader() {
         <nav>
           <ul className="gap-2 uppercase text-xs p-2 font-bold hidden lg:flex">
             <li>
-              <Link className="text-secondary-500 link-hover" href={'/products'}>
+              <Link className="text-secondary-500 link-hover" href={'/shop'}>
                 All Gear
               </Link>
             </li>
             <li>
-              <Link className="link-hover" href={'/products'}>
+              <Link className="link-hover" href={'/shop'}>
                 Suits
               </Link>
             </li>
             <li>
-              <Link className="link-hover" href={'/products'}>
+              <Link className="link-hover" href={'/shop'}>
                 Weapons
               </Link>
             </li>
             <li>
-              <Link className="link-hover" href={'/products'}>
+              <Link className="link-hover" href={'/shop'}>
                 Masks
               </Link>
             </li>
             <li>
-              <Link className="link-hover" href={'/products'}>
+              <Link className="link-hover" href={'/shop'}>
                 Capes
               </Link>
             </li>
             <li>
-              <Link className="link-hover" href={'/products'}>
+              <Link className="link-hover" href={'/shop'}>
                 Boots
               </Link>
             </li>
             <li>
-              <Link className="link-hover" href={'/products'}>
+              <Link className="link-hover" href={'/shop'}>
                 Tech
               </Link>
             </li>

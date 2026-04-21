@@ -1,8 +1,4 @@
 import Image from 'next/image';
-import masks from '@/public/gear1.jpg';
-import suits from '@/public/gear2.jpg';
-import weapons from '@/public/gear3.jpg';
-import tech from '@/public/gear4.jpg';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -10,28 +6,28 @@ const categories = [
   {
     name: 'MASKS & VISORS',
     count: 124,
-    image: masks,
+    image: '/gear4.jpg',
     accent: 'border-secondary-500 glow-red',
     textColor: 'text-secondary-500',
   },
   {
     name: 'TACTICAL SUITS',
     count: 89,
-    image: suits,
+    image: '/gear1.jpg',
     accent: 'border-effect-light-blue glow-blue',
     textColor: 'text-effect-light-blue',
   },
   {
     name: 'WEAPONS',
     count: 156,
-    image: weapons,
+    image: '/gear3.jpg',
     accent: 'border-secondary-500 glow-red',
     textColor: 'text-secondary-500',
   },
   {
     name: 'TECH & GADGETS',
     count: 203,
-    image: tech,
+    image: '/gear2.jpg',
     accent: 'border-primary-500 glow-yellow',
     textColor: 'text-primary-500',
   },
@@ -52,10 +48,10 @@ export default async function ShopCategories() {
             <Link
               className={`group relative overflow-hidden aspect-square grid border-2 ${item.accent}`}
               key={item.name}
-              href={'/'}
+              href={'/shop'}
             >
               <Image
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                className="object-cover h-full group-hover:scale-110 transition-transform duration-500"
                 src={item.image}
                 alt={item.name}
                 width={500}

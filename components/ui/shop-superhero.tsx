@@ -8,7 +8,6 @@ import type { Hero } from '@/app/types';
 import ShopFooter from '@/components/ui/shop-footer';
 import ShopHeader from '@/components/ui/shop-header';
 import type { RelatedProduct } from '@/lib/queries/products';
-import placeholder from '@/public/superhero.jpg';
 import StatBar from './statbar';
 
 type Props = {
@@ -40,7 +39,7 @@ export default function Superhero({ hero, relatedProducts }: Props) {
     <div>
       <ShopHeader />
       <div className="max-w-260 mx-auto px-4">
-        <Link className="uppercase text-[.7rem]" href={'/'}>
+        <Link className="uppercase text-[.7rem]" href={'/shop'}>
           {`< Back to catalog`}
         </Link>
         <div className="flex flex-col">
@@ -48,11 +47,9 @@ export default function Superhero({ hero, relatedProducts }: Props) {
             {/* Left panel */}
             <div className="relative flex-1">
               <div className="relative overflow-clip lg:max-h-none lg:aspect-auto h-full max-h-175 aspect-3/4 mx-auto ">
-                {/* Benday dots overlay on image*/}
-                <div className="benday-dots absolute z-10 inset-0"></div>
                 <Image
                   className="w-full object-cover border-2 border-basic-400/20 rounded-sm"
-                  src={hero.image_url || placeholder}
+                  src={hero.image_url || '/superhero.jpg'}
                   alt={hero.name}
                   fill
                   priority
@@ -109,7 +106,7 @@ export default function Superhero({ hero, relatedProducts }: Props) {
               </div>
               <div>
                 <p id="hero-description" className=" text-basic-100">
-                  {hero.description}
+                  {hero.description || 'No description available.'}
                 </p>
                 {/* Superpowers */}
                 <section className="p-4 bg-pattern-benday my-4 rounded-sm border border-basic-400">
@@ -177,14 +174,14 @@ export default function Superhero({ hero, relatedProducts }: Props) {
                   <Truck className="text-secondary-500" />
                   <div className="flex flex-col">
                     <span className="italic font-bold uppercase">Free shipping</span>
-                    <span className="text-basic-400">Orders over $500</span>
+                    <span className="text-basic-400">All heroes are capable of delivering themselves</span>
                   </div>
                 </div>
 
                 <div>
                   <RotateCcw className="text-secondary-500" />
                   <div className="flex flex-col">
-                    <span className="italic font-bold uppercase">30-day returns</span>
+                    <span className="italic font-bold uppercase">10-minute returns</span>
                     <span className="text-basic-400">No questions asked</span>
                   </div>
                 </div>
@@ -216,7 +213,7 @@ export default function Superhero({ hero, relatedProducts }: Props) {
 
                       <Image
                         className="object-cover"
-                        src={product.image_url ? product.image_url : placeholder}
+                        src={product.image_url || '/superhero.jpg'}
                         alt={product.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

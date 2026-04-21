@@ -29,7 +29,7 @@ export default function ShopTestimonials() {
   return (
     <section
       id="testimonials-section"
-      className="scroll-mt-18 bg-basic-700 border-y-2 border-ui-border benday-dots px-4 py-16"
+      className="scroll-mt-18 bg-basic-700 border-t-2 border-ui-border benday-dots px-4 py-16"
     >
       <div className="w-full max-w-260 mx-auto">
         <header className="p-4 relative grid items-center">
