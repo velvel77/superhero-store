@@ -51,6 +51,7 @@ Vi hade i uppdrag att bygga en webbshop med valfri inriktning (vi valde superhj�
 - ✅ Paginering
 - ✅ Filtrering
 - ✅ Kundvagn
+- ✅ Tredjeparts mejlservice
 - ✅ Registrering
 - ✅ Login
 
