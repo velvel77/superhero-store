@@ -69,6 +69,8 @@ UX/UI:
 <img width="1088" height="1192" alt="image" src="https://github.com/user-attachments/assets/d6b15405-b6d4-4d8a-806c-0df8476c9cf7" />
 <img width="515" height="953" alt="image" src="https://github.com/user-attachments/assets/468b9c6e-002c-474b-87a1-0a57eb3d038f" />
 <img width="1082" height="1265" alt="image" src="https://github.com/user-attachments/assets/9e4b50f1-9863-445d-b60b-445ff4cbada8" />
+<img width="803" height="858" alt="Skärmavbild 2026-04-21 kl  13 24 33" src="https://github.com/user-attachments/assets/50ccad44-9e82-4acc-9294-a0a77f463088" />
+
 
 **App:**
 
